@@ -1,0 +1,3 @@
+qrcode==6.1
+Pillow==7.1.2
+minio==5.0.10

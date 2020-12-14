@@ -1,0 +1,37 @@
+docker-mirror-scripted-api-atoms-base:
+  image: docker:19.03.8
+  services:
+    - docker:19.03.8-dind
+  only:
+    - /^(master.*)$/
+  stage:
+    mirror-bases
+#  needs:
+#    - job: build-scripted-api-atoms-base
+  variables:
+    SRC_IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms-base"
+    IMAGE_NAME: "piximos/scripted-api-atoms-base"
+    IMG_TAG: "latest"
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
+    - ./ci-cd/cd/mirror-image.sh
+
+docker-mirror-scripted-task-atoms-base:
+  image: docker:19.03.8
+  services:
+    - docker:19.03.8-dind
+  only:
+    - /^(master.*)$/
+  stage:
+    mirror-bases
+#  needs:
+#    - job: build-scripted-task-atoms-base
+  variables:
+    SRC_IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms-base"
+    IMAGE_NAME: "piximos/scripted-task-atoms-base"
+    IMG_TAG: "latest"
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
+    - ./ci-cd/cd/mirror-image.sh
