@@ -5,7 +5,7 @@ docker-mirror-saa-qr-code-s3:
   only:
     - /^(master.*)$/
   stage:
-    build-scripted-api-atoms
+    mirror-scripted-api-atoms
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms/qr-code-generator-s3"
     IMG_TAG: "latest"
@@ -23,7 +23,7 @@ docker-mirror-saa-qr-code-fs:
   only:
     - /^(master.*)$/
   stage:
-    build-scripted-api-atoms
+    mirror-scripted-api-atoms
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms/qr-code-generator-fs"
     IMG_TAG: "latest"
@@ -41,7 +41,7 @@ docker-mirror-saa-reset-code-maker:
   only:
     - /^(master.*)$/
   stage:
-    build-scripted-api-atoms
+    mirror-scripted-api-atoms
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms/reset-code-maker"
     IMG_TAG: "latest"
