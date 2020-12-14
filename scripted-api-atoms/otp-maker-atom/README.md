@@ -29,12 +29,12 @@ In order for the image to run, you need to specify the following environment var
     * _Type_ : **String**
     * _Default_ : `"atom"`
     * _Description_ : The prefix of redis keys.
-* `SA_RESET_CODE_TTL`
+* `SA_OPT_TTL`
     * _Required_ : **False**
     * _Type_ : **Integer**
     * _Default_ : `900`
     * _Description_ : Max liveliness of a reset code in seconds.
-* `SA_RESET_CODE_FORMAT`
+* `SA_OPT_FORMAT`
     * _Required_ : **False**
     * _Type_ : **Enumeration**
     * _Possible values_ : **Enumeration**
@@ -45,22 +45,22 @@ In order for the image to run, you need to specify the following environment var
         * **_numeric_** : Only numbers
     * _Default_ : `"aplpha-numeric-cased"`
     * _Description_ : The content type of the reset codes
-* `SA_RESET_CODE_LENGTH`
+* `SA_OPT_LENGTH`
     * _Required_ : **False**
     * _Type_ : **Integer**
     * _Default_ : `6`
     * _Description_ : The length of the reset code
-* `SA_RESET_CODE_SPLIT`
+* `SA_OPT_SPLIT`
     * _Required_ : **False**
     * _Type_ : **Boolean**
     * _Default_ : `true`
     * _Description_ : Whether to split the reset code into parts.
-* `SA_RESET_CODE_SPLIT_EVERY`
+* `SA_OPT_SPLIT_EVERY`
     * _Required_ : **False**
     * _Type_ : **Integer**
     * _Default_ : `3`
     * _Description_ : Splits the reset code into parts
-* `SA_RESET_CODE_SPLITTER`
+* `SA_OPT_SPLITTER`
     * _Required_ : **False**
     * _Type_ : **String**
     * _Default_ : `"-"`

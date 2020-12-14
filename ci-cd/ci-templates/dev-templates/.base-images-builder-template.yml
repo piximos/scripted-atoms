@@ -9,7 +9,7 @@ build-dev-scripted-api-atoms-base:
       - scripted-api-atoms/scripted-api-atoms-base/*
       - scripted-api-atoms/qr-code-s3-atom/*
       - scripted-api-atoms/qr-code-fs-atom/*
-      - scripted-api-atoms/reset-code-maker-atom/*
+      - scripted-api-atoms/otp-maker-atom/*
   stage:
     build-bases
   variables:

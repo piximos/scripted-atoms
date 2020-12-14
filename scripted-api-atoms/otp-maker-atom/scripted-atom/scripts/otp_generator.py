@@ -2,14 +2,14 @@ import os
 import rstr
 
 
-class ResetCodeGenerator:
+class OPTGenerator:
 
     def __init__(self):
-        self.code_format: str = os.getenv('SA_RESET_CODE_FORMAT')
-        self.code_length: int = int(os.getenv('SA_RESET_CODE_LENGTH'))
-        self.code_split_every: int = int(os.getenv('SA_RESET_CODE_SPLIT_EVERY'))
-        self.code_splitter: str = os.getenv('SA_RESET_CODE_SPLITTER')
-        self.code_split: bool = os.getenv('SA_RESET_CODE_SPLIT') == "true"
+        self.code_format: str = os.getenv('SA_OPT_FORMAT')
+        self.code_length: int = int(os.getenv('SA_OPT_LENGTH'))
+        self.code_split_every: int = int(os.getenv('SA_OPT_SPLIT_EVERY'))
+        self.code_splitter: str = os.getenv('SA_OPT_SPLITTER')
+        self.code_split: bool = os.getenv('SA_OPT_SPLIT') == "true"
 
     def generate_code(self):
         code = self.get_regex_from_schema()

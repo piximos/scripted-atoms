@@ -38,7 +38,7 @@ build-saa-qr-code-fs:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
     - ./ci-cd/scripts/build-image.sh
 
-build-saa-reset-code-maker:
+build-saa-otp-maker:
   image: docker:19.03.8
   services:
     - docker:19.03.8-dind
@@ -47,11 +47,11 @@ build-saa-reset-code-maker:
   stage:
     build-scripted-api-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms/reset-code-maker"
+    IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms/otp-maker"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
-    DOCKER_IMAGE_PATH: "./scripted-api-atoms/reset-code-maker-atom/Dockerfile"
-    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/reset-code-maker-atom/."
+    DOCKER_IMAGE_PATH: "./scripted-api-atoms/otp-maker-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/otp-maker-atom/."
   needs:
     - build-scripted-api-atoms-base
   script:

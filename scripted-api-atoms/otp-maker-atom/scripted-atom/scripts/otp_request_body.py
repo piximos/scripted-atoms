@@ -3,6 +3,6 @@ from typing import Optional
 import os
 
 
-class ResetCode(BaseModel):
+class OPT(BaseModel):
     user_id: str
-    ttl: Optional[int] = os.getenv('SA_RESET_CODE_TTL')
+    ttl: Optional[int] = os.getenv('SA_OPT_TTL')
