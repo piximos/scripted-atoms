@@ -9,7 +9,7 @@ docker-mirror-saa-qr-code-s3:
   needs:
     - build-saa-qr-code-s3
   variables:
-    IMAGE_NAME: "piximos/scripted-api-atoms/qr-code-generator-s3"
+    IMAGE_NAME: "piximos/scripted-api-atom-qr-code-generator-s3"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-s3-atom/Dockerfile"
@@ -29,7 +29,7 @@ docker-mirror-saa-qr-code-fs:
   needs:
     - build-saa-qr-code-fs
   variables:
-    IMAGE_NAME: "piximos/scripted-api-atoms/qr-code-generator-fs"
+    IMAGE_NAME: "piximos/scripted-api-atom-qr-code-generator-fs"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-fs-atom/Dockerfile"
@@ -49,7 +49,7 @@ docker-mirror-saa-reset-code-maker:
   needs:
     - build-saa-reset-code-maker
   variables:
-    IMAGE_NAME: "piximos/scripted-api-atoms/reset-code-maker"
+    IMAGE_NAME: "piximos/scripted-api-atom-reset-code-maker"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/reset-code-maker-atom/Dockerfile"
