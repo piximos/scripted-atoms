@@ -14,7 +14,7 @@ build-scripted-api-atoms-base:
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/scripted-api-atoms-base/."
   script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - ./ci-cd/ci/build-image.sh
+    - ./ci-cd/scripts/build-image.sh
 
 build-scripted-task-atoms-base:
   image: docker:19.03.8
@@ -32,4 +32,4 @@ build-scripted-task-atoms-base:
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
   script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - ./ci-cd/ci/build-image.sh
+    - ./ci-cd/scripts/build-image.sh
