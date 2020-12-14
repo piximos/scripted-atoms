@@ -18,7 +18,7 @@ build-dev-saa-qr-code-s3:
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-s3-atom/."
   script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - ./ci-cd/ci/build-image.sh
+    - ./ci-cd/scripts/build-image.sh
   needs:
     - build-dev-scripted-api-atoms-base
 
@@ -43,7 +43,7 @@ build-dev-saa-qr-code-fs:
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-fs-atom/."
   script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - ./ci-cd/ci/build-image.sh
+    - ./ci-cd/scripts/build-image.sh
   needs:
     - build-dev-scripted-api-atoms-base
 
@@ -67,6 +67,6 @@ build-dev-saa-reset-code-maker:
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/reset-code-maker-atom/."
   script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - ./ci-cd/ci/build-image.sh
+    - ./ci-cd/scripts/build-image.sh
   needs:
     -  build-dev-scripted-api-atoms-base
