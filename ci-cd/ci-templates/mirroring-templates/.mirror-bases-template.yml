@@ -9,7 +9,7 @@ docker-mirror-scripted-api-atoms-base:
   needs:
     - job: build-scripted-api-atoms-base
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms-base"
+    IMAGE_NAME: "piximos/scripted-api-atoms-base"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
@@ -29,7 +29,7 @@ docker-mirror-scripted-task-atoms-base:
   needs:
     - job: build-scripted-task-atoms-base
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms-base"
+    IMAGE_NAME: "piximos/scripted-api-atoms-base"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
