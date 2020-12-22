@@ -1,0 +1,18 @@
+docker-mirror-sta-s3-file-sync:
+  tags:
+    - soyoustart1
+  only:
+    - /^(master.*)$/
+  stage:
+    mirror-scripted-task-atoms
+  needs:
+    - build-saa-qr-code-s3
+  variables:
+    IMAGE_NAME: "piximos/scripted-task-atom-s3-file-sync"
+    IMG_TAG: "latest"
+    DOCKER_REGISTRY: ${CI_REGISTRY}
+    DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
+  script:
+    - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
+    - ./ci-cd/scripts/build-public-image.sh

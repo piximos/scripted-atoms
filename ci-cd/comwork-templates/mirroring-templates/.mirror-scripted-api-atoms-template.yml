@@ -1,7 +1,6 @@
 docker-mirror-saa-qr-code-s3:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     - /^(master.*)$/
   stage:
@@ -19,9 +18,8 @@ docker-mirror-saa-qr-code-s3:
     - ./ci-cd/scripts/build-public-image.sh
 
 docker-mirror-saa-qr-code-fs:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     - /^(master.*)$/
   stage:
@@ -39,9 +37,8 @@ docker-mirror-saa-qr-code-fs:
     - ./ci-cd/scripts/build-public-image.sh
 
 docker-mirror-saa-otp-maker:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     - /^(master.*)$/
   stage:
@@ -59,9 +56,8 @@ docker-mirror-saa-otp-maker:
     - ./ci-cd/scripts/build-public-image.sh
 
 docker-mirror-saa-s3-unzipper:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     - /^(master.*)$/
   stage:
