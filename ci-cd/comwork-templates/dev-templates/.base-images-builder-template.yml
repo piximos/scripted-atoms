@@ -1,7 +1,6 @@
 build-dev-scripted-api-atoms-base:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     refs:
       - /^(develop.*)|(dev.*)$/
@@ -24,9 +23,8 @@ build-dev-scripted-api-atoms-base:
     - ./ci-cd/scripts/build-image.sh
 
 build-dev-scripted-task-atoms-base:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     refs:
       - /^(develop.*)|(dev.*)$/

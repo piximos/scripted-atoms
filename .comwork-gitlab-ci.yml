@@ -1,0 +1,23 @@
+include:
+  - local: /ci-cd/comwork-templates/.base-images-builder-template.yml
+  - local: /ci-cd/comwork-templates/.scripted-api-atoms-builder-template.yml
+  # Dev environment templates
+  - local: /ci-cd/comwork-templates/dev-templates/.base-images-builder-template.yml
+  - local: /ci-cd/comwork-templates/dev-templates/.scripted-api-atoms-builder-template.yml
+  - local: /ci-cd/comwork-templates/dev-templates/.scripted-task-atoms-builder-template.yml
+  # Mirroring templates
+  - local: /ci-cd/comwork-templates/mirroring-templates/.mirror-bases-template.yml
+  - local: /ci-cd/comwork-templates/mirroring-templates/.mirror-scripted-api-atoms-template.yml
+  - local: /ci-cd/comwork-templates/mirroring-templates/.mirror-scripted-task-atoms-template.yml
+
+stages:
+  - build-bases
+  - build-scripted-api-atoms
+  - build-scripted-task-atoms
+  - mirror-bases
+  - mirror-scripted-api-atoms
+  - mirror-scripted-task-atoms
+  - clean-dev-data
+
+variables:
+  VERSION: "0.0.1"

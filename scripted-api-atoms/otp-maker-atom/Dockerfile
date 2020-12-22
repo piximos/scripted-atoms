@@ -15,10 +15,9 @@ ENV SA_OPT_SPLIT true
 ENV SA_OPT_SPLITTER "-"
 ENV SA_OPT_SPLIT_EVERY 3
 
-COPY config-validator.py /validators/config-validator.py
-
 COPY additional-requirements.txt additional-requirements.txt
 RUN pip install --no-cache-dir -r additional-requirements.txt
 
+COPY config-validator.py /validators/config-validator.py
 COPY scripted-atom /scripted-atom
 

@@ -1,7 +1,6 @@
 build-saa-qr-code-s3:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     - /^(master.*)$/
   stage:
@@ -19,9 +18,8 @@ build-saa-qr-code-s3:
     - ./ci-cd/scripts/build-image.sh
 
 build-saa-qr-code-fs:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     - /^(master.*)$/
   stage:
@@ -39,9 +37,8 @@ build-saa-qr-code-fs:
     - ./ci-cd/scripts/build-image.sh
 
 build-saa-otp-maker:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     - /^(master.*)$/
   stage:

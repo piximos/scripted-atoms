@@ -16,8 +16,8 @@ class QrGenerator:
         qr = qrcode.QRCode(
             version=3,
             error_correction=qrcode.constants.ERROR_CORRECT_H,
-            box_size=10,
-            border=4,
+            box_size=25,
+            border=3,
         )
         qr.add_data(data)
         qr.make(fit=True)

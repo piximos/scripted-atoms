@@ -1,7 +1,6 @@
 build-dev-saa-qr-code-s3:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     refs:
       - /^(develop.*)|(dev.*)$/
@@ -24,9 +23,8 @@ build-dev-saa-qr-code-s3:
 
 
 build-dev-saa-qr-code-fs:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     refs:
       - /^(develop.*)|(dev.*)$/
@@ -48,9 +46,8 @@ build-dev-saa-qr-code-fs:
     - build-dev-scripted-api-atoms-base
 
 build-dev-saa-otp-maker:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     refs:
       - /^(develop.*)|(dev.*)$/
@@ -69,12 +66,11 @@ build-dev-saa-otp-maker:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
     - ./ci-cd/scripts/build-image.sh
   needs:
-    -  build-dev-scripted-api-atoms-base
+    - build-dev-scripted-api-atoms-base
 
 build-dev-saa-s3-unzipper:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
+  tags:
+    - soyoustart1
   only:
     refs:
       - /^(develop.*)|(dev.*)$/
@@ -93,4 +89,4 @@ build-dev-saa-s3-unzipper:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
     - ./ci-cd/scripts/build-image.sh
   needs:
-    -  build-dev-scripted-api-atoms-base
+    - build-dev-scripted-api-atoms-base
