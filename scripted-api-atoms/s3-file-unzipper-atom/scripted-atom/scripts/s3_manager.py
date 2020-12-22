@@ -13,6 +13,15 @@ class S3Manager:
         self.minioClient = Minio(self.endpoint, access_key=self.accessKey,
                                  secret_key=self.secretKey)
 
+    def check_file_exists(self, zip_file_path: str):
+        found: bool = False
+        try:
+            self.minioClient.stat_object(self.bucketName, zip_file_path)
+            found = True
+        except Exception:
+            print("File was not found.")
+        return found
+
     def get_zip_file(self, zip_file_path: str, zip_file_destination: str):
         try:
             object_data = self.minioClient.get_object(self.bucketName, zip_file_path)
