@@ -17,3 +17,23 @@ docker-mirror-sta-s3-file-sync:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+
+docker-mirror-sta-uptime-tracker:
+  image: docker:19.03.8
+  services:
+    - docker:19.03.8-dind
+  only:
+    - /^(master.*)$/
+  stage:
+    mirror-scripted-task-atoms
+  needs:
+    - build-saa-qr-code-s3
+  variables:
+    IMAGE_NAME: "piximos/scripted-task-atom-uptime-tracker"
+    IMG_TAG: "latest"
+    DOCKER_REGISTRY: ${CI_REGISTRY}
+    DOCKER_IMAGE_PATH: "./scripted-task-atoms/uptime-tracker-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/uptime-tracker-atom/."
+  script:
+    - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
+    - ./ci-cd/scripts/build-public-image.sh
