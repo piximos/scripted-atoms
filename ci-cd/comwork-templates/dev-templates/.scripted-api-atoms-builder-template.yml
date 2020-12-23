@@ -16,7 +16,7 @@ build-dev-saa-qr-code-s3:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-s3-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-s3-atom/."
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - build-dev-scripted-api-atoms-base
@@ -40,7 +40,7 @@ build-dev-saa-qr-code-fs:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-fs-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-fs-atom/."
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - build-dev-scripted-api-atoms-base
@@ -63,7 +63,7 @@ build-dev-saa-otp-maker:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/otp-maker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/otp-maker-atom/."
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - build-dev-scripted-api-atoms-base
@@ -86,7 +86,7 @@ build-dev-saa-s3-unzipper:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/s3-file-unzipper-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/s3-file-unzipper-atom/."
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - build-dev-scripted-api-atoms-base
