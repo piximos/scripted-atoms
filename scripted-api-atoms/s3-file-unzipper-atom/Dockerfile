@@ -14,5 +14,6 @@ RUN mkdir "$TMP_DIR"
 COPY additional-requirements.txt additional-requirements.txt
 RUN pip install --no-cache-dir -r additional-requirements.txt
 
+COPY config-validator.py /validators/config-validator.py
 COPY scripted-atom /scripted-atom
 

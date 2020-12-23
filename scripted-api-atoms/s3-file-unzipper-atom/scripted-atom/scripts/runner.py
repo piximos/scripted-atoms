@@ -18,7 +18,8 @@ class Runner:
         zip_file_content_folder = zip_file_destination.replace(self.get_file_name_from_path(body.zip_file_path), '')
         if self.s3manager.check_file_exists(body.zip_file_path):
             self.s3manager.get_zip_file(body.zip_file_path, zip_file_destination)
-            self.unzipper.unzip_file(zip_file_destination, zip_file_content_folder)
+            self.unzipper.unzip_file(zip_file_destination, zip_file_destination.replace('.zip', ''))
+            print("Copying files to S3")
             for r, d, f in os.walk(zip_file_destination.replace('.zip', '')):
                 for file in f:
                     self.s3manager.upload_file(file_path=os.path.join(r, file),
@@ -27,7 +28,7 @@ class Runner:
                                                s3_root_path=self.clean_destination_s3_path(body.eventual_content_path))
 
             os.remove(zip_file_destination)
-            shutil.rmtree(zip_file_content_folder)
+            shutil.rmtree(zip_file_destination.replace('.zip', ''))
         else:
             raise HTTPException(status_code=404, detail="File not found under S3.")
 
