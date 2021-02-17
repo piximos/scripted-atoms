@@ -22,3 +22,17 @@ stages:
 
 variables:
   VERSION: "0.0.1"
+
+build-sta-uptime-tracker:
+  tags:
+    - soyoustart1
+  only:
+    - /^(master)$/
+  stage:
+    clean-dev-data
+  script:
+    - ./ci-cd/scripts/clean-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
