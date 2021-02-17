@@ -32,5 +32,6 @@ clean-images:
     - build-saa-s3-unzipper
   artifacts:
     paths:
-      - ./output.txt
+      - ./build-artifacts/output.txt
+      - ./build-artifacts/build-log.txt
     expire_in: 7 days

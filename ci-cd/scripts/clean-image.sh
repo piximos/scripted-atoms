@@ -2,7 +2,7 @@
 
 set -x # echo on
 
-cat ./output.txt
+cat ./build-artifacts/output.txt
 
 #docker pull "${CI_REGISTRY}/${SRC_IMAGE_NAME}:${IMG_TAG}"
 #docker tag "${CI_REGISTRY}/${SRC_IMAGE_NAME}:${IMG_TAG}" "${IMAGE_NAME}:${IMG_TAG}"

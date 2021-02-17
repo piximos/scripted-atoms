@@ -13,16 +13,22 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
   echo "Building image : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
   docker build --cache-from "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
     -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
-    -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
-  docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
-  echo "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" >>./output.txt
+    -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
+    >>./build-artifacts/output.txt
+  docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
+    >>./build-artifacts/output.txt
+  echo "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" >>./build-artifacts/output.txt
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
-      echo "Building public image : ${DOCKER_REGISTRY}/${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
-      sed -e "s/registry.gitlab.com\/piximos\/scripted-atoms\//piximos\//g" -i "${DOCKER_IMAGE_PATH}"
-      docker build --cache-from "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" -t "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
-      docker push "${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
+    echo "Building public image : ${DOCKER_REGISTRY}/${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
+    sed -e "s/registry.gitlab.com\/piximos\/scripted-atoms\//piximos\//g" -i "${DOCKER_IMAGE_PATH}"
+    docker build --cache-from "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
+      -t "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
+      -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
+      >>./build-artifacts/output.txt
+    docker push "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
+      >>./build-artifacts/output.txt
 
-      echo "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" >> ./output.txt
+    echo "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" >>./build-artifacts/output.txt
   fi
 done
