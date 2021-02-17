@@ -15,6 +15,10 @@ build-scripted-api-atoms-base:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 build-scripted-task-atoms-base:
   tags:
@@ -33,3 +37,7 @@ build-scripted-task-atoms-base:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days

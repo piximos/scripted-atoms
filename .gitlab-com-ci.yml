@@ -17,7 +17,7 @@ stages:
   - mirror-bases
   - mirror-scripted-api-atoms
   - mirror-scripted-task-atoms
-  - clean-dev-data
+  - clean-build-data
 
 variables:
   VERSION: "0.0.1"

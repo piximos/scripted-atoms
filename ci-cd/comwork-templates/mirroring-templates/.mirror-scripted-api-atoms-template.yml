@@ -16,6 +16,10 @@ docker-mirror-saa-qr-code-s3:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 docker-mirror-saa-qr-code-fs:
   tags:
@@ -35,6 +39,10 @@ docker-mirror-saa-qr-code-fs:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 docker-mirror-saa-otp-maker:
   tags:
@@ -54,6 +62,10 @@ docker-mirror-saa-otp-maker:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 docker-mirror-saa-s3-unzipper:
   tags:
@@ -73,3 +85,7 @@ docker-mirror-saa-s3-unzipper:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days

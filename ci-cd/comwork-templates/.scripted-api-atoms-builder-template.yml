@@ -17,6 +17,10 @@ build-saa-qr-code-s3:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 build-saa-qr-code-fs:
   tags:
@@ -37,6 +41,10 @@ build-saa-qr-code-fs:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 build-saa-otp-maker:
   tags:
@@ -57,3 +65,7 @@ build-saa-otp-maker:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days

@@ -16,6 +16,10 @@ docker-mirror-scripted-api-atoms-base:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 docker-mirror-scripted-task-atoms-base:
   tags:
@@ -35,3 +39,7 @@ docker-mirror-scripted-task-atoms-base:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days

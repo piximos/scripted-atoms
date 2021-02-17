@@ -16,6 +16,10 @@ docker-mirror-sta-s3-file-sync:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
 
 docker-mirror-sta-uptime-tracker:
   tags:
@@ -35,3 +39,7 @@ docker-mirror-sta-uptime-tracker:
   script:
     - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - ./ci-cd/scripts/build-public-image.sh
+  artifacts:
+    paths:
+      - ./output.txt
+    expire_in: 7 days
