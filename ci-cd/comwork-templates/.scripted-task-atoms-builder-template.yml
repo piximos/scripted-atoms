@@ -23,8 +23,8 @@ build-sta-s3-file-sync:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days
 
 build-sta-uptime-tracker:
@@ -52,7 +52,7 @@ build-sta-uptime-tracker:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days
 

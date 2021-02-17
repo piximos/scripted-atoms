@@ -17,7 +17,7 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
     >>./build-log.txt
   docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
     >>./build-log.txt
-  echo "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" >>./build-artifacts/output.txt
+  echo "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" >>./output.txt
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
     echo "Building public image : ${DOCKER_REGISTRY}/${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
@@ -29,6 +29,6 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
     docker push "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
       >>./build-log.txt
 
-    echo "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" >>./build-artifacts/output.txt
+    echo "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" >>./output.txt
   fi
 done

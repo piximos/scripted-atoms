@@ -24,8 +24,8 @@ build-scripted-api-atoms-base:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days
 
 build-scripted-task-atoms-base:
@@ -51,6 +51,6 @@ build-scripted-task-atoms-base:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days

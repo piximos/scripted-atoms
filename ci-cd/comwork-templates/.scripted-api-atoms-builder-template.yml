@@ -23,8 +23,8 @@ build-saa-qr-code-s3:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days
 
 build-saa-qr-code-fs:
@@ -52,8 +52,8 @@ build-saa-qr-code-fs:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days
 
 build-saa-otp-maker:
@@ -81,8 +81,8 @@ build-saa-otp-maker:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days
 
 build-saa-s3-unzipper:
