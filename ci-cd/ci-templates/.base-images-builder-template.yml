@@ -3,7 +3,7 @@ build-scripted-api-atoms-base:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-bases
   variables:
@@ -21,7 +21,7 @@ build-scripted-task-atoms-base:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-bases
   variables:

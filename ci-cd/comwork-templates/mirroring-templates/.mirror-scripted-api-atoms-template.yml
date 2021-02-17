@@ -2,7 +2,7 @@ docker-mirror-saa-qr-code-s3:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-api-atoms
   needs:
@@ -21,7 +21,7 @@ docker-mirror-saa-qr-code-fs:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-api-atoms
   needs:
@@ -40,7 +40,7 @@ docker-mirror-saa-otp-maker:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-api-atoms
   needs:
@@ -59,7 +59,7 @@ docker-mirror-saa-s3-unzipper:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-api-atoms
   needs:

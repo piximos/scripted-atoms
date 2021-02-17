@@ -2,7 +2,7 @@ docker-mirror-sta-s3-file-sync:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-task-atoms
   needs:
@@ -21,7 +21,7 @@ docker-mirror-sta-uptime-tracker:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-task-atoms
   needs:

@@ -3,7 +3,7 @@ build-sta-s3-file-sync:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-scripted-task-atoms
   variables:
@@ -23,7 +23,7 @@ build-sta-uptime-tracker:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-scripted-task-atoms
   variables:

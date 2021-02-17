@@ -2,7 +2,7 @@ docker-mirror-scripted-api-atoms-base:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-bases
   needs:
@@ -21,7 +21,7 @@ docker-mirror-scripted-task-atoms-base:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-bases
   needs:

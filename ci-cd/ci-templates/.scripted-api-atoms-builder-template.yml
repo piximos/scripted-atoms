@@ -3,7 +3,7 @@ build-saa-qr-code-s3:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-scripted-api-atoms
   variables:
@@ -23,7 +23,7 @@ build-saa-qr-code-fs:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-scripted-api-atoms
   variables:
@@ -43,7 +43,7 @@ build-saa-otp-maker:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-scripted-api-atoms
   variables:

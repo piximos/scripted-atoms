@@ -2,11 +2,12 @@ build-scripted-api-atoms-base:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-bases
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms-base"
+    BUILD_VERSION: "true"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
@@ -19,11 +20,12 @@ build-scripted-task-atoms-base:
   tags:
     - soyoustart1
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     build-bases
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms-base"
+    BUILD_VERSION: "true"
     IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"

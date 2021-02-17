@@ -3,7 +3,7 @@ docker-mirror-scripted-api-atoms-base:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-bases
   needs:
@@ -23,7 +23,7 @@ docker-mirror-scripted-task-atoms-base:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-bases
   needs:

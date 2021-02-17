@@ -3,7 +3,7 @@ docker-mirror-sta-s3-file-sync:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-task-atoms
   needs:
@@ -23,7 +23,7 @@ docker-mirror-sta-uptime-tracker:
   services:
     - docker:19.03.8-dind
   only:
-    - /^(master.*)$/
+    - /^(master)$/
   stage:
     mirror-scripted-task-atoms
   needs:
