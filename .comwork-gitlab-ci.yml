@@ -23,7 +23,7 @@ stages:
 variables:
   VERSION: "0.0.1"
 
-build-sta-uptime-tracker:
+clean-images:
   tags:
     - soyoustart1
   only:
