@@ -2,22 +2,11 @@ include:
   - local: /ci-cd/comwork-templates/.base-images-builder-template.yml
   - local: /ci-cd/comwork-templates/.scripted-api-atoms-builder-template.yml
   - local: /ci-cd/comwork-templates/.scripted-task-atoms-builder-template.yml
-  # Dev environment templates
-  - local: /ci-cd/comwork-templates/dev-templates/.base-images-builder-template.yml
-  - local: /ci-cd/comwork-templates/dev-templates/.scripted-api-atoms-builder-template.yml
-  - local: /ci-cd/comwork-templates/dev-templates/.scripted-task-atoms-builder-template.yml
-  # Mirroring templates
-  - local: /ci-cd/comwork-templates/mirroring-templates/.mirror-bases-template.yml
-  - local: /ci-cd/comwork-templates/mirroring-templates/.mirror-scripted-api-atoms-template.yml
-  - local: /ci-cd/comwork-templates/mirroring-templates/.mirror-scripted-task-atoms-template.yml
 
 stages:
   - build-bases
   - build-scripted-api-atoms
   - build-scripted-task-atoms
-  - mirror-bases
-  - mirror-scripted-api-atoms
-  - mirror-scripted-task-atoms
   - clean-dev-data
 
 variables:
@@ -40,14 +29,7 @@ clean-images:
     - build-saa-qr-code-s3
     - build-saa-qr-code-fs
     - build-saa-otp-maker
-    - docker-mirror-scripted-api-atoms-base
-    - docker-mirror-scripted-task-atoms-base
-    - docker-mirror-saa-qr-code-s3
-    - docker-mirror-saa-qr-code-fs
-    - docker-mirror-saa-otp-maker
-    - docker-mirror-saa-s3-unzipper
-    - docker-mirror-sta-s3-file-sync
-    - docker-mirror-sta-uptime-tracker
+    - build-saa-s3-unzipper
   artifacts:
     paths:
       - ./output.txt

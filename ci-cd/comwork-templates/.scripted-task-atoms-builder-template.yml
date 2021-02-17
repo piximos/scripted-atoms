@@ -1,14 +1,18 @@
 build-sta-s3-file-sync:
   tags:
     - soyoustart1
-  only:
-    - /^(master)$/
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/s3-file-sync-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-s3-file-sync"
   stage:
     build-scripted-task-atoms
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms/qr-code-generator-s3"
-    BUILD_VERSION: "true"
-    IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
@@ -25,14 +29,18 @@ build-sta-s3-file-sync:
 build-sta-uptime-tracker:
   tags:
     - soyoustart1
-  only:
-    - /^(master)$/
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/uptime-tracker-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-uptime-tracker"
   stage:
     build-scripted-task-atoms
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms/uptime-tracker"
-    BUILD_VERSION: "true"
-    IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/uptime-tracker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/uptime-tracker-atom/."
