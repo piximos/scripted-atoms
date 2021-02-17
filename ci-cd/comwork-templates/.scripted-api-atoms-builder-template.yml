@@ -110,6 +110,6 @@ build-saa-s3-unzipper:
     - ./ci-cd/scripts/build-image.sh
   artifacts:
     paths:
-      - ./build-artifacts/output.txt
-      - ./build-artifacts/build-log.txt
+      - ./output.txt
+      - ./build-log.txt
     expire_in: 7 days
