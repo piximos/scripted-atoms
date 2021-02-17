@@ -32,7 +32,7 @@ build-sta-uptime-tracker:
     clean-dev-data
   script:
     - ./ci-cd/scripts/clean-image.sh
-  dependencies:
+  needs:
     - build-scripted-api-atoms-base
     - build-scripted-task-atoms-base
     - build-sta-s3-file-sync
