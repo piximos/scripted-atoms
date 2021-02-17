@@ -1,8 +1,6 @@
 build-scripted-api-atoms-base:
   tags:
     - soyoustart1
-  only:
-    - /^(master)$/
   stage:
     build-bases
   rules:
@@ -30,8 +28,6 @@ build-scripted-api-atoms-base:
 build-scripted-task-atoms-base:
   tags:
     - soyoustart1
-  only:
-    - /^(master)$/
   stage:
     build-bases
   rules:
