@@ -21,11 +21,6 @@ build-sta-s3-file-sync:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
-  artifacts:
-    paths:
-      - ./output.txt
-      - ./build-log.txt
-    expire_in: 7 days
 
 build-sta-uptime-tracker:
   tags:
@@ -50,9 +45,4 @@ build-sta-uptime-tracker:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
-  artifacts:
-    paths:
-      - ./output.txt
-      - ./build-log.txt
-    expire_in: 7 days
 

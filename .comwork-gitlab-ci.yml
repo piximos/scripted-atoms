@@ -30,8 +30,3 @@ clean-images:
     - build-saa-qr-code-fs
     - build-saa-otp-maker
     - build-saa-s3-unzipper
-  artifacts:
-    paths:
-      - ./output.txt
-      - ./build-log.txt
-    expire_in: 7 days

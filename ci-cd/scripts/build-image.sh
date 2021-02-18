@@ -14,10 +14,9 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
   docker build --cache-from "${DOCKER_REGISTRY}/${IMAGE_NAME}:latest" \
     -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
     -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
-    >>./build-log.txt
+    > /dev/null
   docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
-    >>./build-log.txt
-  echo "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" >>./output.txt
+    > /dev/null
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
     echo "Building public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
@@ -25,10 +24,8 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
     docker build --cache-from "${PUBLIC_IMAGE_NAME}:latest" \
       -t "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
       -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
-      >>./build-log.txt
+      > /dev/null
     docker push "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
-      >>./build-log.txt
-
-    echo "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" >>./output.txt
+      > /dev/null
   fi
 done

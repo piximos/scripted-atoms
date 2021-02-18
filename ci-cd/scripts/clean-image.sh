@@ -2,10 +2,18 @@
 
 set -x # echo on
 
-cat ./output.txt
+if [[ $CI_COMMIT_REF_NAME != "master" ]]; then
+  IMG_TAGS=("$CI_COMMIT_REF_NAME")
+else
+  IMG_TAGS=("latest" "$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')")
+fi
 
-#docker pull "${CI_REGISTRY}/${SRC_IMAGE_NAME}:${IMG_TAG}"
-#docker tag "${CI_REGISTRY}/${SRC_IMAGE_NAME}:${IMG_TAG}" "${IMAGE_NAME}:${IMG_TAG}"
-#docker rmi "${IMAGE_NAME}:${IMG_TAG}"
-#version="$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
-#docker rmi "${DOCKER_REGISTRY}/${IMAGE_NAME}:${version}" 2>/dev/null
+for IMG_TAG in "${IMG_TAGS[@]}"; do
+  docker images \
+  | grep -E '^(registry\.gitlab\.com\/)?piximos' \
+  | grep "scripted" \
+  | grep "atom" \
+  | grep "$IMG_TAG" \
+  | 'NR>1 {img_name=sprintf("%s:%s",$1,$2); print img_name}' \
+  | xargs docker rmi
+done
