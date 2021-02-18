@@ -14,7 +14,7 @@ variables:
 
 clean-images:
   tags:
-    - soyoustart1
+    - piximos
   only:
     - /^(master)$/
   stage:
