@@ -1,6 +1,6 @@
 build-sta-s3-file-sync:
   tags:
-    - soyoustart1
+    - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
       changes:
@@ -24,7 +24,7 @@ build-sta-s3-file-sync:
 
 build-sta-uptime-tracker:
   tags:
-    - soyoustart1
+    - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
       changes:

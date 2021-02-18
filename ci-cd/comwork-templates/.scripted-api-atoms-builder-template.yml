@@ -1,6 +1,6 @@
 build-saa-qr-code-s3:
   tags:
-    - soyoustart1
+    - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
       changes:
@@ -24,7 +24,7 @@ build-saa-qr-code-s3:
 
 build-saa-qr-code-fs:
   tags:
-    - soyoustart1
+    - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
       changes:
@@ -48,7 +48,7 @@ build-saa-qr-code-fs:
 
 build-saa-otp-maker:
   tags:
-    - soyoustart1
+    - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
       changes:
@@ -72,7 +72,7 @@ build-saa-otp-maker:
 
 build-saa-s3-unzipper:
   tags:
-    - soyoustart1
+    - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
       changes:
