@@ -9,6 +9,9 @@ build-sta-s3-file-sync:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
         PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-s3-file-sync"
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/s3-file-sync-atom/*
   stage:
     build-scripted-task-atoms
   variables:
@@ -33,6 +36,9 @@ build-sta-uptime-tracker:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
         PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-uptime-tracker"
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/uptime-tracker-atom/*
   stage:
     build-scripted-task-atoms
   variables:

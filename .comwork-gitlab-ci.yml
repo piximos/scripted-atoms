@@ -4,6 +4,7 @@ include:
   - local: /ci-cd/comwork-templates/.scripted-task-atoms-builder-template.yml
 
 stages:
+  - pre-flight
   - build-bases
   - build-scripted-api-atoms
   - build-scripted-task-atoms
@@ -15,8 +16,6 @@ variables:
 clean-images:
   tags:
     - piximos
-  only:
-    - /^(master)$/
   stage:
     clean-dev-data
   script:
@@ -30,3 +29,12 @@ clean-images:
     - build-saa-qr-code-fs
     - build-saa-otp-maker
     - build-saa-s3-unzipper
+
+validate-branch-name:
+  tags:
+    - piximos
+  allow_failure: false
+  stage:
+    pre-flight
+  script:
+    - ./ci-cd/scripts/validate-commit.sh
