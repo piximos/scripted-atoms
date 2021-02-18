@@ -8,11 +8,18 @@ else
 fi
 
 for IMG_TAG in "${IMG_TAGS[@]}"; do
-  docker images \
-  | grep -E '^(registry\.gitlab\.com\/)?piximos' \
-  | awk 'NR>1 {img_name=sprintf("%s:%s",$1,$2); print img_name}' \
-  | grep "scripted" \
-  | grep "atom" \
-  | grep "$IMG_TAG" \
-  | xargs docker rmi
+  echo "Deleting the following images : \
+    $(docker images |
+    grep -E '^(registry\.gitlab\.com\/)?piximos' |
+    awk 'NR>1 {img_name=sprintf("%s:%s",$1,$2); print img_name}' |
+    grep "scripted" |
+    grep "atom" |
+    grep "$IMG_TAG")"
+  docker images |
+    grep -E '^(registry\.gitlab\.com\/)?piximos' |
+    awk 'NR>1 {img_name=sprintf("%s:%s",$1,$2); print img_name}' |
+    grep "scripted" |
+    grep "atom" |
+    grep "$IMG_TAG" |
+    xargs docker rmi
 done
