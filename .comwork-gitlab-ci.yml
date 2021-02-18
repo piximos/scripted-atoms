@@ -20,15 +20,6 @@ clean-images:
     clean-dev-data
   script:
     - ./ci-cd/scripts/clean-image.sh
-  needs:
-    - build-scripted-api-atoms-base
-    - build-scripted-task-atoms-base
-    - build-sta-s3-file-sync
-    - build-sta-uptime-tracker
-    - build-saa-qr-code-s3
-    - build-saa-qr-code-fs
-    - build-saa-otp-maker
-    - build-saa-s3-unzipper
 
 validate-branch-name:
   tags:
