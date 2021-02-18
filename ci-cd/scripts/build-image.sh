@@ -15,8 +15,10 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
     -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
     -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
     > /dev/null
+  echo "Pushing image : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
   docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
     > /dev/null
+  echo "Pushed image : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
     echo "Building public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
@@ -25,7 +27,9 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
       -t "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
       -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
       > /dev/null
+    echo "Pushing public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
     docker push "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
       > /dev/null
+    echo "Pushed public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
   fi
 done
