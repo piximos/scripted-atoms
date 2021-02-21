@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from .scripts.request_body import RequestBody
-from .scripts.runner import Runner
+from scripts.request_body import RequestBody
+from scripts.runner import Runner
 
 atom = FastAPI()
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+python /base-config-validator.py
+
 if [ -f "/validators/config-validator.py" ]; then
   python /validators/config-validator.py
   ret=$?
@@ -8,4 +10,4 @@ if [ -f "/validators/config-validator.py" ]; then
   fi
 fi
 
-uvicorn app:atom --host 0.0.0.0 --port "$ATOM_PORT"
+python -u /scripted-atom/app.py

@@ -1,7 +1,7 @@
 import os
 
 
-def RepresentsInt(s):
+def represents_int(s):
     try:
         int(s)
         return True
@@ -17,7 +17,7 @@ if not os.getenv('ST_IS_SLEEPER_SCRIPT') or (
 
 # Validating 'ST_SLEEP_DURATION'
 if os.getenv('ST_IS_SLEEPER_SCRIPT') == "true" and (
-        not os.getenv('ST_SLEEP_DURATION') or not RepresentsInt(os.getenv('ST_SLEEP_DURATION'))):
+        not os.getenv('ST_SLEEP_DURATION') or not represents_int(os.getenv('ST_SLEEP_DURATION'))):
     print("Invalid 'ST_SLEEP_DURATION'. Must be a valid int.")
     exit(1)
 
