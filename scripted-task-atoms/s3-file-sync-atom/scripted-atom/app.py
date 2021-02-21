@@ -1,4 +1,4 @@
-from scripts.runner import Runner
+from .scripts.runner import Runner
 from time import sleep
 import os
 

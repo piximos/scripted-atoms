@@ -1,4 +1,4 @@
-from scripts.uptime import Uptime
+from .scripts.uptime import Uptime
 from time import sleep
 import os
 

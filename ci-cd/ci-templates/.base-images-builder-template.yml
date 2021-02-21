@@ -1,35 +1,56 @@
 build-scripted-api-atoms-base:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
-  only:
-    - /^(master)$/
+  tags:
+    - piximos
   stage:
     build-bases
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+      changes:
+        - scripted-api-atoms/scripted-api-atoms-base/*
+        - scripted-api-atoms/qr-code-s3-atom/*
+        - scripted-api-atoms/qr-code-fs-atom/*
+        - scripted-api-atoms/otp-maker-atom/*
+        - scripted-api-atoms/s3-file-unzipper-atom/*
+        - scripted-api-atoms/thumbnail-generator-s3-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        PUBLIC_IMAGE_NAME: "piximos/scripted-api-atoms-base"
+      changes:
+        - scripted-api-atoms/scripted-api-atoms-base/*
+        - scripted-api-atoms/qr-code-s3-atom/*
+        - scripted-api-atoms/qr-code-fs-atom/*
+        - scripted-api-atoms/otp-maker-atom/*
+        - scripted-api-atoms/s3-file-unzipper-atom/*
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms-base"
-    IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/scripted-api-atoms-base/."
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-scripted-task-atoms-base:
-  image: docker:19.03.8
-  services:
-    - docker:19.03.8-dind
-  only:
-    - /^(master)$/
+  tags:
+    - piximos
   stage:
     build-bases
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/s3-file-sync-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        PUBLIC_IMAGE_NAME: "piximos/scripted-task-atoms-base"
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/s3-file-sync-atom/*
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms-base"
-    IMG_TAG: "latest"
     DOCKER_REGISTRY: ${CI_REGISTRY}
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
   script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh

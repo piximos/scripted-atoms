@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from scripts.redis_client import RedisClient
-from scripts.opt_request_body import OPT
+from .scripts.redis_client import RedisClient
+from .scripts.opt_request_body import OPT
 
 atom = FastAPI()
 redis_client = RedisClient()
