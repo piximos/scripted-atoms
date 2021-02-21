@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from scripts.qr_request_body import QR
-from scripts.qr_generator import QrGenerator
+from .scripts.qr_request_body import QR
+from .scripts.qr_generator import QrGenerator
 
 atom = FastAPI()
 
