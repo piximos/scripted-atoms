@@ -1,7 +1,7 @@
 import os
 
 
-def RepresentsInt(s):
+def represents_int(s):
     try:
         int(s)
         return True

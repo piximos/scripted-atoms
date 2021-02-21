@@ -7,7 +7,7 @@ authentication_types = [
 ]
 
 
-def RepresentsInt(s):
+def represents_int(s):
     try:
         int(s)
         return True
@@ -23,7 +23,7 @@ if not os.getenv('ST_IS_SLEEPER_SCRIPT') or (
 
 # Validating 'ST_SLEEP_DURATION'
 if os.getenv('ST_IS_SLEEPER_SCRIPT') == "true" and (
-        not os.getenv('ST_SLEEP_DURATION') or not RepresentsInt(os.getenv('ST_SLEEP_DURATION'))):
+        not os.getenv('ST_SLEEP_DURATION') or not represents_int(os.getenv('ST_SLEEP_DURATION'))):
     print("Invalid 'ST_SLEEP_DURATION'. Must be a valid int.")
     exit(1)
 
@@ -78,6 +78,6 @@ if os.getenv('ST_PING_AUTHENTICATION') == "user-password":
               "Must be a valid string when 'ST_PING_AUTHENTICATION' is set to 'user-password'.")
 
 # Validating 'ST_PING_EXPECTED_RESPONSE'
-if not os.getenv('ST_PING_EXPECTED_RESPONSE') or not RepresentsInt(os.getenv('ST_PING_EXPECTED_RESPONSE')):
+if not os.getenv('ST_PING_EXPECTED_RESPONSE') or not represents_int(os.getenv('ST_PING_EXPECTED_RESPONSE')):
     print("Invalid 'ST_PING_EXPECTED_RESPONSE'. Must be a valid int.")
     exit(1)

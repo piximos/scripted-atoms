@@ -2,7 +2,7 @@ import os
 import re
 
 
-def RepresentsInt(s):
+def represents_int(s):
     try:
         int(s)
         return True
