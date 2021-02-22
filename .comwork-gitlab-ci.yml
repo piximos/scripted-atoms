@@ -14,10 +14,6 @@ variables:
   VERSION: "0.0.1"
 
 clean-images:
-  only:
-    changes:
-      - scripted-api-atoms/*
-      - scripted-task-atoms/*
   tags:
     - piximos
   stage:
