@@ -9,11 +9,12 @@ class S3Manager:
         self.accessKey = os.getenv('ST_BUCKET_ACCESS_KEY')
         self.secretKey = os.getenv('ST_BUCKET_SECRET_KEY')
         self.bucketName = os.getenv('ST_BUCKET_NAME')
+        self.bucketRegion = os.getenv('ST_BUCKET_REGION')
         self.backup_destination: str = os.getenv('ST_S3_LOCATION')
         if self.backup_destination.startswith("/"):
             self.backup_destination = self.backup_destination[1:]
 
-        self.minioClient = Minio(self.endpoint, access_key=self.accessKey,
+        self.minioClient = Minio(self.endpoint, access_key=self.accessKey, region=self.bucketRegion,
                                  secret_key=self.secretKey)
 
     def upload_file(self, file_path: str, file_name: str):
