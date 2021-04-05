@@ -1,0 +1,19 @@
+{
+  "variables": [
+    {
+      "name": "S3_LOCATION",
+      "desc": "URL for the s3 storage.",
+      "required": true
+    },
+    {
+      "name": "S3_ACCESS_KEY",
+      "desc": "Access key for the S3 storage.",
+      "required": true
+    },
+    {
+      "name": "S3_SECRET_KEY",
+      "desc": "Secret Key for the S3 storage.",
+      "required": true
+    }
+  ]
+}
