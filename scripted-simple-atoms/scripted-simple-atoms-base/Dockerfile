@@ -1,4 +1,5 @@
 FROM alpine
+
 MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
 
 ENV ENV_TEMPLATE_PATH "/env-variables-template.json"

@@ -1,0 +1,66 @@
+{
+  "variables": [
+    {
+      "name": "S3_URI",
+      "desc": "URL for the s3 storage.",
+      "required": true
+    },
+    {
+      "name": "S3_ACCESS_KEY",
+      "desc": "Access key for the S3 storage.",
+      "required": true
+    },
+    {
+      "name": "S3_SECRET_KEY",
+      "desc": "Secret Key for the S3 storage.",
+      "required": true
+    },
+    {
+      "name": "S3_BUCKET_NAME",
+      "desc": "The name of the S3 bucket.",
+      "required": true
+    },
+    {
+      "name": "ZIP_FOLDERS",
+      "desc": "Whether or not to compress folders and upload them as a single ZIP file.",
+      "required": false,
+      "values": [
+        "true",
+        "false"
+      ]
+    },
+    {
+      "name": "FILE_SRC",
+      "desc": "File source under container volume mount.",
+      "required": true
+    },
+    {
+      "name": "DESTINATION_FOLDER",
+      "desc": "File destination folder under s3 bucket",
+      "required": true
+    },
+    {
+      "name": "FILE_DEST_NAME",
+      "desc": "File name under s3 bucket",
+      "required": true
+    },
+    {
+      "name": "FOLDER_ADD_TIMESTAMP",
+      "desc": "Whether or not to add a timestamp to the filename",
+      "required": true,
+      "values": [
+        "true",
+        "false"
+      ]
+    },
+    {
+      "name": "FOLDER_TIMESTAMP_POSITION",
+      "desc": "Whether to add the timestamp as 'prefix' or a 'suffix'",
+      "required": true,
+      "values": [
+        "prefix",
+        "suffix"
+      ]
+    }
+  ]
+}
