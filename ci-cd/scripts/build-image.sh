@@ -16,11 +16,9 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
   echo "Building image for private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
   docker build --cache-from "${DOCKER_REGISTRY}/${IMAGE_NAME}:latest" \
     -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
-    -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
-    > /dev/null
+    -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
   echo "Pushing image to private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
-  docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
-    > /dev/null
+  docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
   echo "Pushed image to private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
@@ -28,11 +26,9 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
     sed -e "s/registry.gitlab.com\/piximos\/scripted-atoms\//piximos\//g" -i "${DOCKER_IMAGE_PATH}"
     docker build --cache-from "${PUBLIC_IMAGE_NAME}:latest" \
       -t "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
-      -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}" \
-      > /dev/null
+      -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
     echo "Pushing public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
-    docker push "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
-      > /dev/null
+    docker push "${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
     echo "Pushed public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
   fi
 done
