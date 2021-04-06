@@ -21,3 +21,27 @@ build-ssa-s3-file-backup:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
+
+build-ssa-git-tagger:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/git-tagger-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        PUBLIC_IMAGE_NAME: "piximos/scripted-simple-atom-git-tagger-atom"
+  stage:
+    build-scripted-simple-atoms
+  variables:
+    IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms/git-tagger-atom"
+    DOCKER_REGISTRY: ${CI_REGISTRY}
+    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/git-tagger-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/git-tagger-atom/."
+  needs:
+    - build-scripted-simple-atoms-base
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - ./ci-cd/scripts/build-image.sh

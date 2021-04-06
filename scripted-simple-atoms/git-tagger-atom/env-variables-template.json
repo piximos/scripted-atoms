@@ -1,0 +1,62 @@
+{
+  "variables": [
+    {
+      "name": "REPO_URI",
+      "desc": "The repo URI.",
+      "required": true
+    },
+    {
+      "name": "REPO_SCHEMA",
+      "desc": "The repo URL schema.",
+      "required": true,
+      "values": [
+        "http",
+        "https"
+      ]
+    },
+    {
+      "name": "REPO_USER",
+      "desc": "The repo robot user.",
+      "required": true
+    },
+    {
+      "name": "REPO_TOKEN",
+      "desc": "The robot user token.",
+      "required": true
+    },
+    {
+      "name": "TAG_BUMP_MESSAGE_PREFIX",
+      "desc": "Message to start the tag commit message with.",
+      "required": true
+    },
+    {
+      "name": "ATOM_ROBOT_USERNAME",
+      "desc": "The robot username inside git configurations.",
+      "required": true
+    },
+    {
+      "name": "ATOM_ROBOT_EMAIL",
+      "desc": "The robot email inside git configurations.",
+      "required": true
+    },
+    {
+      "name": "TAG_DELIMITER",
+      "desc": "Tag delimiter between minor and major versions.",
+      "required": true,
+      "values": [
+        "-",
+        "_",
+        "."
+      ]
+    },
+    {
+      "name": "BUMP_TYPE",
+      "desc": "Whether to bump the minor or the major versions.",
+      "required": true,
+      "values": [
+        "minor",
+        "major"
+      ]
+    }
+  ]
+}
