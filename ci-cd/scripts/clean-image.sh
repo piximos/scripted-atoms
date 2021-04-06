@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMG_TAGS+=("<none>")
-if [[ $CI_COMMIT_REF_NAME != "master" ]]; then
+if [[ $CI_COMMIT_REF_NAME != "stable-release" ]]; then
   IMG_TAGS+=("$CI_COMMIT_REF_NAME")
 else
   IMG_TAGS+=("$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')")
