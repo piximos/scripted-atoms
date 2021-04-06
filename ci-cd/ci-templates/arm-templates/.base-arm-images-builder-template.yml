@@ -14,7 +14,6 @@ build-arm-scripted-api-atoms-base:
         - scripted-api-atoms/thumbnail-generator-s3-atom/*
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
         PUBLIC_IMAGE_NAME: "piximos/scripted-api-atoms-base"
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-api-atoms-base"
@@ -39,7 +38,6 @@ build-arm-scripted-task-atoms-base:
         - scripted-task-atoms/s3-file-sync-atom/*
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
         PUBLIC_IMAGE_NAME: "piximos/scripted-task-atoms-base"
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms-base"
@@ -66,7 +64,6 @@ build-arm-scripted-simple-atoms-base:
         - scripted-simple-atoms/git-mirror-atom/*
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
         PUBLIC_IMAGE_NAME: "piximos/scripted-simple-atoms-base"
   variables:
     IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms-base"

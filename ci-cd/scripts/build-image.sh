@@ -12,7 +12,7 @@ else
 fi
 
 for IMG_TAG in "${IMG_TAGS[@]}"; do
-
+  if [[ $BUILD_FOR_PRIVATE_REGISTRY = "true" ]]; then
   echo "Building image for private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
   docker build --cache-from "${DOCKER_REGISTRY}/${IMAGE_NAME}:latest" \
     -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
@@ -20,6 +20,7 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
   echo "Pushing image to private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
   docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
   echo "Pushed image to private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
+  fi
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
     echo "Building public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
