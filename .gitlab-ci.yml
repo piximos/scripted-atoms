@@ -1,9 +1,9 @@
 include:
   - local: /ci-cd/ci-templates/.base-images-builder-template.yml
-#  - local: /ci-cd/ci-templates/arm-templates/.base-arm-images-builder-template.yml
   - local: /ci-cd/ci-templates/.scripted-api-atoms-builder-template.yml
   - local: /ci-cd/ci-templates/.scripted-simple-atoms-builder-template.yml
   - local: /ci-cd/ci-templates/.scripted-task-atoms-builder-template.yml
+  - local: /ci-cd/ci-templates/.git-sync-template.yml
 
 stages:
   - pre-flight
@@ -12,6 +12,7 @@ stages:
   - build-scripted-simple-atoms
   - build-scripted-api-atoms
   - build-scripted-task-atoms
+  - git-sync
   - clean-dev-data
 
 before_script:
