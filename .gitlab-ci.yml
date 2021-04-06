@@ -1,9 +1,9 @@
 include:
-  - local: /ci-cd/ci-templates/.base-images-builder-template.yml
-  - local: /ci-cd/ci-templates/arm-remplates/.base-arm-images-builder-template.yml
-  - local: /ci-cd/ci-templates/.scripted-api-atoms-builder-template.yml
-  - local: /ci-cd/ci-templates/.scripted-simple-atoms-builder-template.yml
-  - local: /ci-cd/ci-templates/.scripted-task-atoms-builder-template.yml
+  - local: ./ci-cd/ci-templates/.base-images-builder-template.yml
+  - local: ./ci-cd/ci-templates/arm-remplates/.base-arm-images-builder-template.yml
+  - local: ./ci-cd/ci-templates/.scripted-api-atoms-builder-template.yml
+  - local: ./ci-cd/ci-templates/.scripted-simple-atoms-builder-template.yml
+  - local: ./ci-cd/ci-templates/.scripted-task-atoms-builder-template.yml
 
 stages:
   - pre-flight
