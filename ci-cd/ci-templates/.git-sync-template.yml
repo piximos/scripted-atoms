@@ -14,3 +14,20 @@ mirror-to-gitlab-com:
     git-sync
   script:
     - ./ci-cd/scripts/mirror-repo.sh
+
+mirror-to-githun-com:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        CURRENT_REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
+        CURRENT_REPO_USER: ${COMWORK_REPO_USER}
+        CURRENT_REPO_TOKEN: ${COMWORK_REPO_TOKEN}
+        REMOTE_REPO_URI: "github.com/piximos/scripted-atoms.git"
+        REMOTE_REPO_USER: ${GITHUB_REPO_USER}
+        REMOTE_REPO_TOKEN: ${GITHUB_REPO_TOKEN}
+  stage:
+    git-sync
+  script:
+    - ./ci-cd/scripts/mirror-repo.sh
