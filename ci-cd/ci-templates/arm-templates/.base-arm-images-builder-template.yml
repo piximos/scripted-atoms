@@ -4,7 +4,7 @@ build-arm-scripted-api-atoms-base:
   stage:
     build-arm-bases
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/qr-code-s3-atom/*
@@ -32,7 +32,7 @@ build-arm-scripted-task-atoms-base:
   stage:
     build-arm-bases
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/s3-file-sync-atom/*
@@ -56,7 +56,7 @@ build-arm-scripted-simple-atoms-base:
   stage:
     build-arm-bases
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/s3-file-backup-atom/*

@@ -22,7 +22,8 @@ before_script:
   - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
 
 variables:
-  BUILD_FOR_PRIVATE_REGISTRY: "false"
+  BUILD_FOR_PRIVATE_REGISTRY: "true"
+  MIRROR: "false"
 
 clean-images:
   tags:

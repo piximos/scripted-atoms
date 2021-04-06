@@ -2,12 +2,14 @@ build-ssa-s3-file-backup:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/s3-file-backup-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-simple-atom-s3-file-backup-atom"
   stage:
     build-scripted-simple-atoms
@@ -25,12 +27,14 @@ build-ssa-git-tagger:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/git-tagger-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-simple-atom-git-tagger-atom"
   stage:
     build-scripted-simple-atoms
@@ -48,12 +52,14 @@ build-ssa-git-mirror:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/git-mirror-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-simple-atom-git-mirror-atom"
   stage:
     build-scripted-simple-atoms

@@ -2,12 +2,14 @@ build-saa-qr-code-s3:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/qr-code-s3-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-qr-code-generator-s3"
   stage:
     build-scripted-api-atoms
@@ -25,12 +27,14 @@ build-saa-qr-code-fs:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/qr-code-fs-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-qr-code-generator-fs"
   stage:
     build-scripted-api-atoms
@@ -48,12 +52,14 @@ build-saa-otp-maker:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/otp-maker-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-otp-maker"
   stage:
     build-scripted-api-atoms
@@ -71,12 +77,14 @@ build-saa-s3-unzipper:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/s3-file-unzipper-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-s3-unzipper"
   stage:
     build-scripted-api-atoms
@@ -94,12 +102,14 @@ build-saa-thumbnail-generator-s3:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/thumbnail-generator-s3-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-thumbnail-generator"
   stage:
     build-scripted-api-atoms

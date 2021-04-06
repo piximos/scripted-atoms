@@ -1,13 +1,11 @@
 #!/bin/bash
 
-MIRROR="false"
 if [[ -z ${BUILD_FOR_PRIVATE_REGISTRY} ]]; then
   BUILD_FOR_PRIVATE_REGISTRY="true"
 fi
-if [[ $CI_COMMIT_REF_NAME != "master" ]]; then
+if [[ $CI_COMMIT_REF_NAME != "stable-release" ]]; then
   IMG_TAGS=("$CI_COMMIT_REF_NAME$IMG_COMPLEMENTARY_TAG")
 else
-  MIRROR="true"
   IMG_TAGS=("latest$IMG_COMPLEMENTARY_TAG" "$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')$IMG_COMPLEMENTARY_TAG")
 fi
 

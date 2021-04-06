@@ -3,7 +3,7 @@
 branch_name=$CI_COMMIT_REF_NAME
 echo "The current branch is : ${branch_name}"
 
-if [[ $CI_COMMIT_REF_NAME =~ [0-9]|dev.*|develop.*|master$ ]] ; then
+if [[ $CI_COMMIT_REF_NAME =~ stable\-release|(dev|develop).*|master$ ]] ; then
     echo "BRANCH NAME :  '$CI_COMMIT_REF_NAME' is valid."
     exit 0
 else

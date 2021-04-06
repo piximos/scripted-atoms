@@ -2,12 +2,14 @@ build-sta-s3-file-sync:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/s3-file-sync-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-s3-file-sync"
   stage:
     build-scripted-task-atoms
@@ -25,12 +27,14 @@ build-sta-uptime-tracker:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/uptime-tracker-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
       variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
         PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-uptime-tracker"
   stage:
     build-scripted-task-atoms
