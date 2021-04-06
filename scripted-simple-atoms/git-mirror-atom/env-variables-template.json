@@ -1,0 +1,62 @@
+{
+  "variables": [
+    {
+      "name": "ORIGIN_REPO_URI",
+      "desc": "The origin repo URI.",
+      "required": true
+    },
+    {
+      "name": "ORIGIN_REPO_SCHEMA",
+      "desc": "The origin repo URL schema.",
+      "required": true,
+      "values": [
+        "http",
+        "https"
+      ]
+    },
+    {
+      "name": "ORIGIN_REPO_USER",
+      "desc": "The origin repo robot user.",
+      "required": true
+    },
+    {
+      "name": "ORIGIN_REPO_TOKEN",
+      "desc": "The origin robot user token.",
+      "required": true
+    },
+    {
+      "name": "REMOTE_REPO_URI",
+      "desc": "The remote repo URI.",
+      "required": true
+    },
+    {
+      "name": "REMOTE_REPO_SCHEMA",
+      "desc": "The remote repo URL schema.",
+      "required": true,
+      "values": [
+        "http",
+        "https"
+      ]
+    },
+    {
+      "name": "REMOTE_REPO_USER",
+      "desc": "The remote repo robot user.",
+      "required": true
+    },
+    {
+      "name": "REMOTE_REPO_TOKEN",
+      "desc": "The remote robot user token.",
+      "required": true
+    },
+    {
+      "name": "ATOM_ROBOT_USERNAME",
+      "desc": "The robot username inside git configurations.",
+      "required": true
+    },
+    {
+      "name": "ATOM_ROBOT_EMAIL",
+      "desc": "The robot email inside git configurations.",
+      "required": true
+    }
+  ]
+}

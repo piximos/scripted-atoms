@@ -55,7 +55,9 @@ build-scripted-simple-atoms-base:
     - if: $CI_COMMIT_REF_NAME =~ /^(develop.*)|(dev.*)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/s3-file-sync-atom/*
+        - scripted-simple-atoms/s3-file-backup-atom/*
+        - scripted-simple-atoms/git-tagger-atom/*
+        - scripted-simple-atoms/git-mirror-atom/*
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
         PUBLIC_IMAGE_NAME: "piximos/scripted-simple-atoms-base"
