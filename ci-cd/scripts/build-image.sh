@@ -24,7 +24,7 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
     echo "Building public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
-    sed -e "s/registry.gitlab.com\/piximos\/scripted-atoms\//piximos\//g" -i "${DOCKER_IMAGE_PATH}"
+    sed -e "s:$CI_REGISTRY/piximos/scripted-atoms/:piximos/:g" -i "${DOCKER_IMAGE_PATH}"
     docker build --cache-from "${PUBLIC_IMAGE_NAME}:latest" \
       -t "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
       -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
