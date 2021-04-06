@@ -19,7 +19,6 @@ build-saa-qr-code-s3:
   needs:
     - build-scripted-api-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-saa-qr-code-fs:
@@ -43,7 +42,6 @@ build-saa-qr-code-fs:
   needs:
     - build-scripted-api-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-saa-otp-maker:
@@ -67,7 +65,6 @@ build-saa-otp-maker:
   needs:
     - build-scripted-api-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-saa-s3-unzipper:
@@ -91,7 +88,6 @@ build-saa-s3-unzipper:
   needs:
     - build-scripted-api-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-saa-thumbnail-generator-s3:
@@ -115,5 +111,4 @@ build-saa-thumbnail-generator-s3:
   needs:
     - build-scripted-api-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh

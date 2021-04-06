@@ -23,7 +23,6 @@ build-arm-scripted-api-atoms-base:
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/scripted-api-atoms-base/."
     IMG_COMPLEMENTARY_TAG: "-arm"
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - validate-branch-name
@@ -49,7 +48,6 @@ build-arm-scripted-task-atoms-base:
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
     IMG_COMPLEMENTARY_TAG: "-arm"
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - validate-branch-name
@@ -77,7 +75,6 @@ build-arm-scripted-simple-atoms-base:
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/scripted-simple-atoms-base/."
     IMG_COMPLEMENTARY_TAG: "-arm"
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - validate-branch-name

@@ -19,7 +19,6 @@ build-sta-s3-file-sync:
   needs:
     - build-scripted-task-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-sta-uptime-tracker:
@@ -43,6 +42,5 @@ build-sta-uptime-tracker:
   needs:
     - build-scripted-task-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 

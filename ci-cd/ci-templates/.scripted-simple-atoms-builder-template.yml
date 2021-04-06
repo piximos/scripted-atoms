@@ -19,7 +19,6 @@ build-ssa-s3-file-backup:
   needs:
     - build-scripted-simple-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-ssa-git-tagger:
@@ -43,7 +42,6 @@ build-ssa-git-tagger:
   needs:
     - build-scripted-simple-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
 
 build-ssa-git-mirror:
@@ -67,5 +65,4 @@ build-ssa-git-mirror:
   needs:
     - build-scripted-simple-atoms-base
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh

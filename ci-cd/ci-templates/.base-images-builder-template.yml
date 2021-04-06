@@ -21,7 +21,6 @@ build-scripted-api-atoms-base:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/scripted-api-atoms-base/."
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - validate-branch-name
@@ -45,7 +44,6 @@ build-scripted-task-atoms-base:
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - validate-branch-name
@@ -71,7 +69,6 @@ build-scripted-simple-atoms-base:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/scripted-simple-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/scripted-simple-atoms-base/."
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - ./ci-cd/scripts/build-image.sh
   needs:
     - validate-branch-name

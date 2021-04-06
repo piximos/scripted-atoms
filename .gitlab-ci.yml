@@ -14,8 +14,9 @@ stages:
   - build-scripted-task-atoms
   - clean-dev-data
 
-variables:
-  VERSION: "0.0.1"
+before_script:
+  - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+  - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
 
 clean-images:
   tags:
