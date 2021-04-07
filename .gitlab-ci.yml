@@ -4,7 +4,6 @@ include:
   - local: /ci-cd/ci-templates/.scripted-simple-atoms-builder-template.yml
   - local: /ci-cd/ci-templates/.scripted-task-atoms-builder-template.yml
   - local: /ci-cd/ci-templates/.git-sync-template.yml
-  - local: /ci-cd/ci-templates/.git-tagger-template.yml
 
 stages:
   - pre-flight
@@ -33,8 +32,8 @@ clean-images:
   script:
     - ./ci-cd/scripts/clean-image.sh
   dependencies:
-    - build-scripted-api-atoms-base
-    - build-scripted-task-atoms-base
+    - build-saa-base
+    - build-sta-base
     - build-sta-s3-file-sync
     - build-sta-uptime-tracker
     - build-saa-qr-code-s3

@@ -2,15 +2,18 @@ build-saa-qr-code-s3:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/qr-code-s3-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
       variables:
         BUILD_FOR_PRIVATE_REGISTRY: "false"
         MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-qr-code-generator-s3"
+        PUBLIC_IMAGE_NAME: "scriptedatom/saa-qr-code-generator-s3"
   stage:
     build-scripted-api-atoms
   variables:
@@ -19,7 +22,7 @@ build-saa-qr-code-s3:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-s3-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-s3-atom/."
   needs:
-    - build-scripted-api-atoms-base
+    - build-saa-base
   script:
     - ./ci-cd/scripts/build-image.sh
 
@@ -27,15 +30,18 @@ build-saa-qr-code-fs:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/qr-code-fs-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
       variables:
         BUILD_FOR_PRIVATE_REGISTRY: "false"
         MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-qr-code-generator-fs"
+        PUBLIC_IMAGE_NAME: "scriptedatom/saa-qr-code-generator-fs"
   stage:
     build-scripted-api-atoms
   variables:
@@ -44,7 +50,7 @@ build-saa-qr-code-fs:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-fs-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-fs-atom/."
   needs:
-    - build-scripted-api-atoms-base
+    - build-saa-base
   script:
     - ./ci-cd/scripts/build-image.sh
 
@@ -52,15 +58,18 @@ build-saa-otp-maker:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/otp-maker-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
       variables:
         BUILD_FOR_PRIVATE_REGISTRY: "false"
         MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-otp-maker"
+        PUBLIC_IMAGE_NAME: "scriptedatom/saa-otp-maker"
   stage:
     build-scripted-api-atoms
   variables:
@@ -69,7 +78,7 @@ build-saa-otp-maker:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/otp-maker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/otp-maker-atom/."
   needs:
-    - build-scripted-api-atoms-base
+    - build-saa-base
   script:
     - ./ci-cd/scripts/build-image.sh
 
@@ -77,15 +86,18 @@ build-saa-s3-unzipper:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/s3-file-unzipper-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
       variables:
         BUILD_FOR_PRIVATE_REGISTRY: "false"
         MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-s3-unzipper"
+        PUBLIC_IMAGE_NAME: "scriptedatom/saa-s3-unzipper"
   stage:
     build-scripted-api-atoms
   variables:
@@ -94,7 +106,7 @@ build-saa-s3-unzipper:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/s3-file-unzipper-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/s3-file-unzipper-atom/."
   needs:
-    - build-scripted-api-atoms-base
+    - build-saa-base
   script:
     - ./ci-cd/scripts/build-image.sh
 
@@ -102,15 +114,18 @@ build-saa-thumbnail-generator-s3:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)|(master)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/thumbnail-generator-s3-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
       variables:
         BUILD_FOR_PRIVATE_REGISTRY: "false"
         MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "piximos/scripted-api-atom-thumbnail-generator"
+        PUBLIC_IMAGE_NAME: "scriptedatom/saa-thumbnail-generator"
   stage:
     build-scripted-api-atoms
   variables:
@@ -119,6 +134,6 @@ build-saa-thumbnail-generator-s3:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/thumbnail-generator-s3-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/thumbnail-generator-s3-atom/."
   needs:
-    - build-scripted-api-atoms-base
+    - build-saa-base
   script:
     - ./ci-cd/scripts/build-image.sh

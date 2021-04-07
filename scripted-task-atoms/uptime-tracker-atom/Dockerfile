@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/piximos/scripted-atoms/scripted-task-atoms-base:latest
+FROM scriptedatom/sta-base:latest
 
 MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
 

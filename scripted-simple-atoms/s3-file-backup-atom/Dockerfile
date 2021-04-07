@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/piximos/scripted-atoms/scripted-simple-atoms-base:latest
+FROM scriptedatom/ssa-base:latest
 
 MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
 

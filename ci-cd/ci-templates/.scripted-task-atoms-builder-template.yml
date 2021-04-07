@@ -3,14 +3,17 @@ build-sta-s3-file-sync:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/s3-file-sync-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
       variables:
         BUILD_FOR_PRIVATE_REGISTRY: "false"
         MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-s3-file-sync"
+        PUBLIC_IMAGE_NAME: "scriptedatom/sta-s3-file-sync"
   stage:
     build-scripted-task-atoms
   variables:
@@ -19,7 +22,7 @@ build-sta-s3-file-sync:
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
   needs:
-    - build-scripted-task-atoms-base
+    - build-sta-base
   script:
     - ./ci-cd/scripts/build-image.sh
 
@@ -28,14 +31,17 @@ build-sta-uptime-tracker:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/uptime-tracker-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^(stable\-release)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
       variables:
         BUILD_FOR_PRIVATE_REGISTRY: "false"
         MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "piximos/scripted-task-atom-uptime-tracker"
+        PUBLIC_IMAGE_NAME: "scriptedatom/sta-uptime-tracker"
   stage:
     build-scripted-task-atoms
   variables:
@@ -44,7 +50,7 @@ build-sta-uptime-tracker:
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/uptime-tracker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/uptime-tracker-atom/."
   needs:
-    - build-scripted-task-atoms-base
+    - build-sta-base
   script:
     - ./ci-cd/scripts/build-image.sh
 
