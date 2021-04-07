@@ -26,7 +26,7 @@ IMAGES=("scriptedatom/saa-base"
 deployed_tags=""
 for img in "${IMAGES[@]}"; do
   for tag in "${IMG_TAGS[@]}"; do
-    deployed_tags="$deployed_tags\\n$img\`$tag\`"
+    deployed_tags="$deployed_tags\\n- $img:*$tag*"
   done
 done
 
