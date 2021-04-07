@@ -21,5 +21,5 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
     grep "scripted" |
     grep "atom" |
     grep "$IMG_TAG" |
-    xargs docker rmi 2> /dev/null
+    xargs docker rmi 2> /dev/null || exit 0
 done
