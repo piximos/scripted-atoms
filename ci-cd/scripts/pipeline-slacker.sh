@@ -8,25 +8,25 @@ else
   IMG_TAGS=("$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')$IMG_COMPLEMENTARY_TAG")
 fi
 
-IMAGES=("scriptedatom/saa-base"
-  "scriptedatom/sta-base"
-  "scriptedatom/ssa-base"
-  "scriptedatom/saa-qr-code-generator-s3"
-  "scriptedatom/saa-qr-code-generator-fs"
-  "scriptedatom/saa-otp-maker"
-  "scriptedatom/saa-s3-unzipper"
-  "scriptedatom/saa-thumbnail-generator"
-  "scriptedatom/ssa-s3-file-backup-atom"
-  "scriptedatom/ssa-git-tagger-atom"
-  "scriptedatom/ssa-git-mirror-atom"
-  "scriptedatom/ssa-pipeline-slacker-atom"
-  "scriptedatom/sta-s3-file-sync"
-  "scriptedatom/sta-uptime-tracker")
+#IMAGES=("scriptedatom/saa-base"
+#  "scriptedatom/sta-base"
+#  "scriptedatom/ssa-base"
+#  "scriptedatom/saa-qr-code-generator-s3"
+#  "scriptedatom/saa-qr-code-generator-fs"
+#  "scriptedatom/saa-otp-maker"
+#  "scriptedatom/saa-s3-unzipper"
+#  "scriptedatom/saa-thumbnail-generator"
+#  "scriptedatom/ssa-s3-file-backup-atom"
+#  "scriptedatom/ssa-git-tagger-atom"
+#  "scriptedatom/ssa-git-mirror-atom"
+#  "scriptedatom/ssa-pipeline-slacker-atom"
+#  "scriptedatom/sta-s3-file-sync"
+#  "scriptedatom/sta-uptime-tracker")
 
 deployed_tags=""
 for img in "${IMAGES[@]}"; do
   for tag in "${IMG_TAGS[@]}"; do
-    deployed_tags="$deployed_tags\\n- $img:*$tag*"
+    deployed_tags="scriptedatom/$deployed_tags\\n- $img:*$tag*"
   done
 done
 
