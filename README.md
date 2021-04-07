@@ -1,7 +1,7 @@
 # Scripted Atoms
 
 This project intends on creating a set of simple, ready-to-use, cloud-native functions (or as we call them, Scripted
-Atoms) ready for use inside your micro-service infrastructure.
+Atoms) ready for use inside your micro-service infrastructure or CI/CD pipelines.
 
 ## Why the name "Scripted Atoms"?
 
@@ -12,8 +12,9 @@ considered a micro-service.
 
 As stated above, scripted atoms serve a particular and singular purpose. They are divided into separate categories :
 
-* Scripted API Atoms
-* Scripted Task Atoms
+* __*SAA*__ : Scripted API Atoms
+* __*SSA*__ : Scripted Simple Atoms
+* __*STA*__ : Scripted Task Atoms
 
 ### Scripted API Atoms
 
