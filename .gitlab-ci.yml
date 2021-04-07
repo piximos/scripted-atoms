@@ -14,7 +14,7 @@ stages:
   - build-scripted-api-atoms
   - build-scripted-task-atoms
   - git-sync
-  - clean-dev-data
+  - post-flight
 
 before_script:
   - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
@@ -28,7 +28,7 @@ clean-images:
   tags:
     - piximos
   stage:
-    clean-dev-data
+    post-flight
   script:
     - ./ci-cd/scripts/clean-image.sh
   dependencies:
@@ -49,3 +49,15 @@ validate-branch-name:
     pre-flight
   script:
     - ./ci-cd/scripts/validate-commit.sh
+
+deployment-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+  stage:
+    post-flight
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh

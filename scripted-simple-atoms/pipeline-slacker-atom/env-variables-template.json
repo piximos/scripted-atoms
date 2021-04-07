@@ -1,0 +1,19 @@
+{
+  "variables": [
+    {
+      "name": "SLACK_WEBHOOK_URL",
+      "desc": "The slack webhook URL for messaging.",
+      "required": true
+    },
+    {
+      "name": "SLACK_COLOR",
+      "desc": "The border color of the slack message.",
+      "required": true
+    },
+    {
+      "name": "SLACK_MSG",
+      "desc": "URL for the s3 storage.",
+      "required": true
+    },
+  ]
+}
