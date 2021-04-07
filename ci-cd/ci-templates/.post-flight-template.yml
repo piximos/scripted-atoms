@@ -1,0 +1,37 @@
+clean-images:
+  tags:
+    - piximos
+  stage:
+    post-flight
+  script:
+    - ./ci-cd/scripts/clean-image.sh
+  dependencies:
+    - build-saa-base
+    - build-sta-base
+    - build-sta-s3-file-sync
+    - build-sta-uptime-tracker
+    - build-saa-qr-code-s3
+    - build-saa-qr-code-fs
+    - build-saa-otp-maker
+    - build-saa-s3-unzipper
+
+validate-branch-name:
+  tags:
+    - piximos
+  allow_failure: false
+  stage:
+    pre-flight
+  script:
+    - ./ci-cd/scripts/validate-commit.sh
+
+deployment-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+  stage:
+    post-flight
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
