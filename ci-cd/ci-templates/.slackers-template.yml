@@ -1,0 +1,69 @@
+bases-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "saa-base sta-base ssa-base"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-saa-base
+    - build-sta-base
+    - build-ssa-base
+
+saa-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "saa-qr-code-generator-s3 saa-qr-code-generator-fs saa-otp-maker saa-s3-unzipper saa-thumbnail-generator"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-saa-qr-code-s3
+    - build-saa-qr-code-fs
+    - build-saa-otp-maker
+    - build-saa-s3-unzipper
+    - build-saa-thumbnail-generator-s3
+
+ssa-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "ssa-s3-file-backup-atom ssa-git-tagger-atom ssa-git-mirror-atom ssa-pipeline-slacker-atom"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-ssa-s3-file-backup
+    - build-ssa-git-tagger
+    - build-ssa-git-mirror
+    - build-ssa-pipeline-slacker
+
+sta-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "sta-s3-file-sync sta-uptime-tracker"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-sta-s3-file-sync
+    - build-sta-uptime-tracker

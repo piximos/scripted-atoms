@@ -23,20 +23,3 @@ validate-branch-name:
     pre-flight
   script:
     - ./ci-cd/scripts/validate-commit.sh
-
-bases-slacker:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
-      variables:
-        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-        IMAGES: "saa-base sta-base ssa-base"
-  stage:
-    post-flight
-  script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-  needs:
-    - build-saa-base
-    - build-sta-base
-    - build-ssa-base
