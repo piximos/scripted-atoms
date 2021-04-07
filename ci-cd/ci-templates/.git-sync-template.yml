@@ -2,7 +2,7 @@ mirror-to-gitlab-com:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master|(minor|major)\-release))$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
       variables:
         CURRENT_REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
         CURRENT_REPO_USER: ${COMWORK_REPO_USER}
@@ -19,7 +19,7 @@ mirror-to-githun-com:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master|(minor|major)\-release))$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
       variables:
         CURRENT_REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
         CURRENT_REPO_USER: ${COMWORK_REPO_USER}
