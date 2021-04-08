@@ -12,8 +12,13 @@
     },
     {
       "name": "SLACK_MSG",
-      "desc": "URL for the s3 storage.",
+      "desc": "The slack message to send.",
       "required": true
     },
+    {
+      "name": "SLACK_ARTIFACTS",
+      "desc": "The slack block to send alongside the message.",
+      "required": false
+    }
   ]
 }

@@ -14,12 +14,14 @@ for img in "${IMAGES[@]}"; do
   for tag in "${IMG_TAGS[@]}"; do
     deployed_tags="$deployed_tags\\n- scriptedatom/$img:*$tag*"
   done
+    deployed_tags="$deployed_tags\\n"
 done
 
-SLACK_MSG="Deployed the following tags : $deployed_tags"
+SLACK_MSG="Deployed the following tags :"
 
 docker pull scriptedatom/ssa-pipeline-slacker-atom:latest
 docker run --rm \
   -e SLACK_WEBHOOK_URL="$SLACK_WEBHOOK_URL" \
   -e SLACK_MSG="$SLACK_MSG" \
+  -e SLACK_ARTIFACTS="$deployed_tags" \
   scriptedatom/ssa-pipeline-slacker-atom:latest
