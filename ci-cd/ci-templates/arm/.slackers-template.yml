@@ -10,6 +10,8 @@ bases-arm-slacker:
     broadcast
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
+  variables:
+    IMG_COMPLEMENTARY_TAG: "-arm"
   needs:
     - build-saa-base-arm
     - build-sta-base-arm
@@ -27,6 +29,8 @@ saa-arm-slacker:
     broadcast
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
+  variables:
+    IMG_COMPLEMENTARY_TAG: "-arm"
   needs:
     - build-saa-qr-code-s3-arm
     - build-saa-qr-code-fs-arm
@@ -46,6 +50,8 @@ ssa-arm-slacker:
     broadcast
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
+  variables:
+    IMG_COMPLEMENTARY_TAG: "-arm"
   needs:
     - build-ssa-s3-file-backup-arm
     - build-ssa-git-tagger-arm
@@ -64,6 +70,8 @@ sta-arm-slacker:
     broadcast
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
+  variables:
+    IMG_COMPLEMENTARY_TAG: "-arm"
   needs:
     - build-sta-s3-file-sync-arm
     - build-sta-uptime-tracker-arm
