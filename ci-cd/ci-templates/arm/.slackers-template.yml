@@ -1,0 +1,69 @@
+bases-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "saa-base-arm sta-base-arm ssa-base-arm"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-saa-base-arm
+    - build-sta-base-arm
+    - build-ssa-base-arm
+
+saa-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "saa-qr-code-generator-s3-arm saa-qr-code-generator-fs-arm saa-otp-maker-arm saa-s3-unzipper-arm saa-thumbnail-generator-arm"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-saa-qr-code-s3-arm
+    - build-saa-qr-code-fs-arm
+    - build-saa-otp-maker-arm
+    - build-saa-s3-unzipper-arm
+    - build-saa-thumbnail-generator-s3-arm
+
+ssa-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "ssa-s3-file-backup-atom-arm ssa-git-tagger-atom-arm ssa-git-mirror-atom-arm ssa-pipeline-slacker-atom-arm"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-ssa-s3-file-backup-arm
+    - build-ssa-git-tagger-arm
+    - build-ssa-git-mirror-arm
+    - build-ssa-pipeline-slacker-arm
+
+sta-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
+      variables:
+        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+        IMAGES: "sta-s3-file-sync-arm sta-uptime-tracker-arm"
+  stage:
+    broadcast
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
+  needs:
+    - build-sta-s3-file-sync-arm
+    - build-sta-uptime-tracker-arm

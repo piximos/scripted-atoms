@@ -1,0 +1,58 @@
+build-sta-s3-file-sync-arm:
+  tags:
+    - piximos-arm
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/s3-file-sync-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
+        PUBLIC_IMAGE_NAME: "scriptedatom/sta-s3-file-sync"
+  stage:
+    build-scripted-task-atoms
+  variables:
+    IMG_COMPLEMENTARY_TAG: "-arm"
+    IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms/s3-file-sync"
+    DOCKER_REGISTRY: ${CI_REGISTRY}
+    DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
+  needs:
+    - build-sta-base-arm
+  script:
+    - ./ci-cd/scripts/build-image.sh
+
+build-sta-uptime-tracker-arm:
+  tags:
+    - piximos-arm
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "true"
+        MIRROR: "false"
+      changes:
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/uptime-tracker-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
+      variables:
+        BUILD_FOR_PRIVATE_REGISTRY: "false"
+        MIRROR: "true"
+        PUBLIC_IMAGE_NAME: "scriptedatom/sta-uptime-tracker"
+  stage:
+    build-scripted-task-atoms
+  variables:
+    IMG_COMPLEMENTARY_TAG: "-arm"
+    IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms/uptime-tracker"
+    DOCKER_REGISTRY: ${CI_REGISTRY}
+    DOCKER_IMAGE_PATH: "./scripted-task-atoms/uptime-tracker-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/uptime-tracker-atom/."
+  needs:
+    - build-sta-base-arm
+  script:
+    - ./ci-cd/scripts/build-image.sh
+
