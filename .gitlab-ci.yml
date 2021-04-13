@@ -10,6 +10,7 @@ include:
   - local: /ci-cd/ci-templates/.git-sync-template.yml
   - local: /ci-cd/ci-templates/.post-flight-template.yml
   - local: /ci-cd/ci-templates/.slackers-template.yml
+  - local: /ci-cd/ci-templates/arm/.slackers-template.yml
 
 stages:
   - pre-flight

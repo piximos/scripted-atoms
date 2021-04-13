@@ -1,4 +1,4 @@
-bases-slacker:
+bases-arm-slacker:
   tags:
     - piximos
   rules:
@@ -15,7 +15,7 @@ bases-slacker:
     - build-sta-base-arm
     - build-ssa-base-arm
 
-saa-slacker:
+saa-arm-slacker:
   tags:
     - piximos
   rules:
@@ -34,7 +34,7 @@ saa-slacker:
     - build-saa-s3-unzipper-arm
     - build-saa-thumbnail-generator-s3-arm
 
-ssa-slacker:
+ssa-arm-slacker:
   tags:
     - piximos
   rules:
@@ -52,7 +52,7 @@ ssa-slacker:
     - build-ssa-git-mirror-arm
     - build-ssa-pipeline-slacker-arm
 
-sta-slacker:
+sta-arm-slacker:
   tags:
     - piximos
   rules:
