@@ -15,7 +15,7 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
   if [[ $BUILD_FOR_PRIVATE_REGISTRY = "true" ]]; then
   echo "Building image for private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
     sed -e "s:scriptedatom/:$CI_REGISTRY/piximos/scripted-atoms/:g" -i "${DOCKER_IMAGE_PATH}"
-  DOCKER_BUILDKIT=1 docker build --cache-from "${DOCKER_REGISTRY}/${IMAGE_NAME}:latest" \
+  DOCKER_BUILDKIT=1 docker build \
     -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}" \
     -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
   echo "Pushing image to private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
@@ -25,7 +25,7 @@ for IMG_TAG in "${IMG_TAGS[@]}"; do
 
   if [[ $MIRROR == "true" && $PUBLIC_IMAGE_NAME ]]; then
     echo "Building public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
-    DOCKER_BUILDKIT=1 docker build --cache-from "${PUBLIC_IMAGE_NAME}:latest" \
+    DOCKER_BUILDKIT=1 docker build \
       -t "${PUBLIC_IMAGE_NAME}:${IMG_TAG}" \
       -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
     echo "Pushing public image : ${PUBLIC_IMAGE_NAME}:${IMG_TAG}"
