@@ -37,4 +37,4 @@ In order for the image to run, you need to specify the following environment var
     * Description : Whether or not to delete untagged images.
     * Required : `false`
     * Acceptable Values : `true` | `false`
-    * Default : `false`
+    * Default : `true`
