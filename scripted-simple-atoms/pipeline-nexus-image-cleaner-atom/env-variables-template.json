@@ -1,0 +1,39 @@
+{
+  "variables": [
+    {
+      "name": "SA_NEXUS_URI",
+      "desc": "The domain name under which your Nexus registry is hosted.",
+      "required": true
+    },
+    {
+      "name": "SA_NEXUS_SCHEMA",
+      "desc": "The schema of the nexus URL.",
+      "required": true
+    },
+    {
+      "name": "SA_NEXUS_USER",
+      "desc": "The Nexus user.",
+      "required": true
+    },
+    {
+      "name": "SA_NEXUS_PASSWORD",
+      "desc": "The nexus password.",
+      "required": true
+    },
+    {
+      "name": "SA_NEXUS_REPOSITORY",
+      "desc": "The nexus repository.",
+      "required": true
+    },
+    {
+      "name": "SA_DOCKER_IMAGE_NAME",
+      "desc": "The name of the docker image. You can add '*' at the end to indicate that you are looking to delete images by their prefix.",
+      "required": true
+    },
+    {
+      "name": "SA_DOCKER_IMAGE_TAG",
+      "desc": "The name of the docker tag image. You can add '*' at the end to indicate that you are looking to delete tags by their prefix.",
+      "required": true
+    }
+  ]
+}

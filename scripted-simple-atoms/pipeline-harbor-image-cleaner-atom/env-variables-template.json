@@ -1,0 +1,48 @@
+{
+  "variables": [
+    {
+      "name": "SA_HARBOR_URI",
+      "desc": "The URL for your harbor.",
+      "required": true
+    },
+    {
+      "name": "SA_HARBOR_SCHEMA",
+      "desc": "The schema of the Harbor URL.",
+      "required": true
+    },
+    {
+      "name": "SA_HARBOR_USER",
+      "desc": "The Harbor user.",
+      "required": true
+    },
+    {
+      "name": "SA_HARBOR_PASSWORD",
+      "desc": "The Harbor password.",
+      "required": true
+    },
+    {
+      "name": "SA_HARBOR_PROJECT",
+      "desc": "The Harbor project.",
+      "required": true
+    },
+    {
+      "name": "SA_HARBOR_REPOSITORY",
+      "desc": "The Harbor repository.",
+      "required": true
+    },
+    {
+      "name": "SA_TAG_TO_DELETE",
+      "desc": "The Docker image tag to delete.",
+      "required": true
+    },
+    {
+      "name": "SA_DELETE_UNTAGGED_ARTIFACTS",
+      "desc": "Whether or not to delete untagged images.",
+      "required": false,
+      "values": [
+        "true",
+        "false"
+      ]
+    }
+  ]
+}

@@ -41,7 +41,7 @@ ssa-slacker:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)|((minor|major)\-release)$/
       variables:
         SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-        IMAGES: "ssa-s3-file-backup-atom ssa-git-tagger-atom ssa-git-mirror-atom ssa-pipeline-slacker-atom"
+        IMAGES: "ssa-s3-file-backup-atom ssa-git-tagger-atom ssa-git-mirror-atom ssa-pipeline-slacker-atom build-ssa-pipeline-nexus-image-cleaner build-ssa-pipeline-harbor-image-cleaner"
   stage:
     broadcast
   script:
@@ -51,6 +51,9 @@ ssa-slacker:
     - build-ssa-git-tagger
     - build-ssa-git-mirror
     - build-ssa-pipeline-slacker
+    - build-ssa-pipeline-harbor-image-cleaner
+    - build-ssa-pipeline-nexus-image-cleaner
+
 
 sta-slacker:
   tags:
