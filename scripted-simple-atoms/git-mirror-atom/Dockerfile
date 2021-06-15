@@ -1,4 +1,5 @@
-FROM scriptedatom/ssa-base:latest
+ARG SA_BASE_VERSION="latest"
+FROM scriptedatom/ssa-base:${SA_BASE_VERSION}
 
 MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
 

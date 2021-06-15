@@ -2,55 +2,43 @@ build-sta-s3-file-sync:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${sta_base_version}
+        IMAGE_VERSION: ${sta_s3_file_sync_version}
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/s3-file-sync-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/sta-s3-file-sync"
   stage:
     build-scripted-task-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms/s3-file-sync"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/sta-s3-file-sync"
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
   needs:
     - build-sta-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
 
 build-sta-uptime-tracker:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${sta_base_version}
+        IMAGE_VERSION: ${sta_uptime_tracker_version}
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/uptime-tracker-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/sta-uptime-tracker"
   stage:
     build-scripted-task-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-task-atoms/uptime-tracker"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/sta-uptime-tracker"
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/uptime-tracker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/uptime-tracker-atom/."
   needs:
     - build-sta-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
 

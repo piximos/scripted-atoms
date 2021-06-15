@@ -2,166 +2,130 @@ build-ssa-s3-file-backup:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_s3_file_backup_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/s3-file-backup-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/ssa-s3-file-backup-atom"
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms/s3-file-backup-atom"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/ssa-s3-file-backup-atom"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/s3-file-backup-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/s3-file-backup-atom/."
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
 
 build-ssa-git-tagger:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_git_tagger_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/git-tagger-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/ssa-git-tagger-atom"
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms/git-tagger-atom"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/ssa-git-tagger-atom"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/git-tagger-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/git-tagger-atom/."
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
 
 build-ssa-git-mirror:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_git_mirror_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/git-mirror-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/ssa-git-mirror-atom"
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms/git-mirror-atom"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/ssa-git-mirror-atom"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/git-mirror-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/git-mirror-atom/."
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
 
 build-ssa-pipeline-slacker:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_pipeline_slacker_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/pipeline-slacker-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/ssa-pipeline-slacker-atom"
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms/pipeline-slacker-atom"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/ssa-pipeline-slacker-atom"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-slacker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-slacker-atom/."
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
 
 build-ssa-pipeline-harbor-image-cleaner:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_pipeline_harbor_image_cleaner_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/pipeline-harbor-image-cleaner-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/ssa-pipeline-harbor-image-cleaner-atom"
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms/pipeline-harbor-image-cleaner-atom"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/ssa-pipeline-harbor-image-cleaner-atom"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-harbor-image-cleaner-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-harbor-image-cleaner-atom/."
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
 
 build-ssa-pipeline-nexus-image-cleaner:
   tags:
     - piximos
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^((develop|dev).*)$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "true"
-        MIRROR: "false"
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_pipeline_nexus_image_cleaner_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/pipeline-nexus-image-cleaner-atom/*
-    - if: $CI_COMMIT_REF_NAME =~ /^((minor|major)\-release)|(master)$/
-      variables:
-        BUILD_FOR_PRIVATE_REGISTRY: "false"
-        MIRROR: "true"
-        PUBLIC_IMAGE_NAME: "scriptedatom/ssa-pipeline-nexus-image-cleaner-atom"
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "piximos/scripted-atoms/scripted-simple-atoms/pipeline-nexus-image-cleaner-atom"
-    DOCKER_REGISTRY: ${CI_REGISTRY}
+    IMAGE_NAME: "scriptedatom/ssa-pipeline-nexus-image-cleaner-atom"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-nexus-image-cleaner-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-nexus-image-cleaner-atom/."
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/build-image.sh
+    - ./ci-cd/scripts/build-public-image.sh
