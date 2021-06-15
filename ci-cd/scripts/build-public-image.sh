@@ -13,7 +13,7 @@ DOCKER_BUILDKIT=1 docker build \
 
 echo "Pushing 'latest' tag."
 docker push "${IMAGE_NAME}"
-echo "Pushed public image : ${IMAGE_NAME}:${IMG_TAG}"
+echo "Pushed public image : ${IMAGE_NAME}"
 
 if [[ ${IMAGE_VERSION} ]]; then
   echo "Tagging versioned image."
@@ -21,8 +21,8 @@ if [[ ${IMAGE_VERSION} ]]; then
     "${IMAGE_NAME}:latest" \
     "${IMAGE_NAME}:${IMAGE_VERSION}"
 
-  echo "Pushing image : ${IMAGE_NAME}:${IMG_TAG}"
+  echo "Pushing image : ${IMAGE_NAME}:${IMAGE_VERSION}"
 
-  docker push "${IMAGE_NAME}:${IMG_TAG}"
-  echo "Pushed public image : ${IMAGE_NAME}:${IMG_TAG}"
+  docker push "${IMAGE_NAME}:${IMAGE_VERSION}"
+  echo "Pushed public image : ${IMAGE_NAME}"
 fi
