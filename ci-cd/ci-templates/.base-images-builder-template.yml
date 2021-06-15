@@ -8,8 +8,6 @@ build-saa-base:
       variables:
         SA_BASE_VERSION: ${saa_base_version}
         IMAGE_VERSION: ${saa_base_version}
-      changes:
-        - scripted-api-atoms/*
   variables:
     IMAGE_NAME: "scriptedatom/saa-base"
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
@@ -29,8 +27,6 @@ build-sta-base:
       variables:
         SA_BASE_VERSION: ${sta_base_version}
         IMAGE_VERSION: ${sta_base_version}
-      changes:
-        - scripted-task-atoms/*
   variables:
     IMAGE_NAME: "scriptedatom/sta-base"
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
@@ -50,8 +46,6 @@ build-ssa-base:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_base_version}
-      changes:
-        - scripted-simple-atoms/*
   variables:
     IMAGE_NAME: "scriptedatom/ssa-base"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/scripted-simple-atoms-base/Dockerfile"
