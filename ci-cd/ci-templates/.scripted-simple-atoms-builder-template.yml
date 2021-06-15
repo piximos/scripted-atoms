@@ -6,9 +6,6 @@ build-ssa-s3-file-backup:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_s3_file_backup_version}
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/s3-file-backup-atom/*
   stage:
     build-scripted-simple-atoms
   variables:
@@ -28,9 +25,6 @@ build-ssa-git-tagger:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_git_tagger_version}
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/git-tagger-atom/*
   stage:
     build-scripted-simple-atoms
   variables:
@@ -50,9 +44,6 @@ build-ssa-git-mirror:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_git_mirror_version}
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/git-mirror-atom/*
   stage:
     build-scripted-simple-atoms
   variables:
@@ -72,9 +63,6 @@ build-ssa-pipeline-slacker:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_pipeline_slacker_version}
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/pipeline-slacker-atom/*
   stage:
     build-scripted-simple-atoms
   variables:
@@ -94,9 +82,6 @@ build-ssa-pipeline-harbor-image-cleaner:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_pipeline_harbor_image_cleaner_version}
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/pipeline-harbor-image-cleaner-atom/*
   stage:
     build-scripted-simple-atoms
   variables:
@@ -116,9 +101,6 @@ build-ssa-pipeline-nexus-image-cleaner:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_pipeline_nexus_image_cleaner_version}
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/pipeline-nexus-image-cleaner-atom/*
   stage:
     build-scripted-simple-atoms
   variables:

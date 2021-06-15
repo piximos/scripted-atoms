@@ -6,9 +6,6 @@ build-saa-qr-code-s3:
       variables:
         SA_BASE_VERSION: ${saa_base_version}
         IMAGE_VERSION: ${saa_qr_code_s3_version}
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/qr-code-s3-atom/*
   stage:
     build-scripted-api-atoms
   variables:
@@ -28,9 +25,6 @@ build-saa-qr-code-fs:
       variables:
         SA_BASE_VERSION: ${saa_base_version}
         IMAGE_VERSION: ${saa_qr_code_fs_version}
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/qr-code-fs-atom/*
   stage:
     build-scripted-api-atoms
   variables:
@@ -50,9 +44,6 @@ build-saa-otp-maker:
       variables:
         SA_BASE_VERSION: ${saa_base_version}
         IMAGE_VERSION: ${saa_otp_maker_version}
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/otp-maker-atom/*
   stage:
     build-scripted-api-atoms
   variables:
@@ -72,9 +63,6 @@ build-saa-s3-unzipper:
       variables:
         SA_BASE_VERSION: ${saa_base_version}
         IMAGE_VERSION: ${saa_s3_unzipper_version}
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/s3-file-unzipper-atom/*
   stage:
     build-scripted-api-atoms
   variables:
@@ -94,9 +82,6 @@ build-saa-thumbnail-generator-s3:
       variables:
         SA_BASE_VERSION: ${saa_base_version}
         IMAGE_VERSION: ${saa_thumbnail_generator_s3_version}
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/thumbnail-generator-s3-atom/*
   stage:
     build-scripted-api-atoms
   variables:

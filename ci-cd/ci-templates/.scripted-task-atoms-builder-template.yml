@@ -6,9 +6,6 @@ build-sta-s3-file-sync:
       variables:
         SA_BASE_VERSION: ${sta_base_version}
         IMAGE_VERSION: ${sta_s3_file_sync_version}
-      changes:
-        - scripted-task-atoms/scripted-task-atoms-base/*
-        - scripted-task-atoms/s3-file-sync-atom/*
   stage:
     build-scripted-task-atoms
   variables:
@@ -28,9 +25,6 @@ build-sta-uptime-tracker:
       variables:
         SA_BASE_VERSION: ${sta_base_version}
         IMAGE_VERSION: ${sta_uptime_tracker_version}
-      changes:
-        - scripted-task-atoms/scripted-task-atoms-base/*
-        - scripted-task-atoms/uptime-tracker-atom/*
   stage:
     build-scripted-task-atoms
   variables:
