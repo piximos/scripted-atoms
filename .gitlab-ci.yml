@@ -1,9 +1,12 @@
 include:
-  - local: /ci-cd/ci-templates/.scripted-api-atoms-builder-template.yml
-  - local: /ci-cd/ci-templates/.scripted-task-atoms-builder-template.yml
   - local: /ci-cd/ci-templates/.git-sync-template.yml
   # Scripted API Atom Version Variables
   - local: /scripted-api-atoms/scripted-api-atoms-base/.gitlab-ci.yml
+  - local: /scripted-api-atoms/otp-maker-atom/.gitlab-ci.yml
+  - local: /scripted-api-atoms/qr-code-fs-atom/.gitlab-ci.yml
+  - local: /scripted-api-atoms/qr-code-s3-atom/.gitlab-ci.yml
+  - local: /scripted-api-atoms/s3-file-unzipper-atom/.gitlab-ci.yml
+  - local: /scripted-api-atoms/thumbnail-generator-s3-atom/.gitlab-ci.yml
   # Scripted Simple Atom Version Variables
   - local: /scripted-simple-atoms/scripted-simple-atoms-base/.gitlab-ci.yml
   - local: /scripted-simple-atoms/git-mirror-atom/.gitlab-ci.yml
@@ -14,6 +17,7 @@ include:
   - local: /scripted-simple-atoms/s3-file-backup-atom/.gitlab-ci.yml
   # Scripted Task Atom Version Variables
   - local: /scripted-task-atoms/scripted-task-atoms-base/.gitlab-ci.yml
+  - local: /scripted-task-atoms/s3-file-sync-atom/.gitlab-ci.yml
 
 stages:
   - pre-flight
@@ -46,7 +50,7 @@ variables:
   saa_qr_code_s3_version: "1.0"
   saa_qr_code_fs_version: "1.0"
   saa_otp_maker_version: "1.0"
-  saa_s3_unzipper_version: "1.0"
+  saa_s3_file_unzipper_version: "1.0"
   saa_thumbnail_generator_s3_version: "1.0"
   # Scripted Task Atom Version Variables
   sta_base_version: "1.0"

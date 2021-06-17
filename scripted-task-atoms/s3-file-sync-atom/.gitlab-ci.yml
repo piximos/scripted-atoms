@@ -1,50 +1,50 @@
-build-sta-base:
+build-sta-s3-file-sync:
   tags:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
         SA_BASE_VERSION: ${sta_base_version}
-        IMAGE_VERSION: ${sta_base_version}
+        IMAGE_VERSION: ${sta_s3_file_sync_version}
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
-        - scripted-task-atoms/**/*
+        - scripted-task-atoms/s3-file-sync-atom/*
   stage:
     build-scripted-task-atoms
   variables:
-    IMAGE_NAME: "scriptedatom/sta-base"
-    DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
-    DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
+    IMAGE_NAME: "scriptedatom/sta-s3-file-sync"
+    DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
   needs:
     - build-sta-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-sta-base-slacker:
+sta-s3-file-sync-slacker:
   tags:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
-        - scripted-task-atoms/**/*
+        - scripted-task-atoms/s3-file-sync-atom/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
-        - scripted-task-atoms/**/*
+        - scripted-task-atoms/s3-file-sync-atom/*
       when: on_failure
       variables:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-    IMAGE: "scriptedatom/sta-base"
-    TAGS: "latest ${sta_base_version}"
+    IMAGE: "scriptedatom/sta-s3-file-sync"
+    TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
     broadcast
   needs:
-    - build-sta-base
+    - build-sta-s3-file-sync
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh

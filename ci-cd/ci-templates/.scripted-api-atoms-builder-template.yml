@@ -62,7 +62,7 @@ build-saa-s3-unzipper:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
         SA_BASE_VERSION: ${saa_base_version}
-        IMAGE_VERSION: ${saa_s3_unzipper_version}
+        IMAGE_VERSION: ${saa_s3_file_unzipper_version}
   stage:
     build-scripted-api-atoms
   variables:

@@ -12,7 +12,7 @@ build-ssa-s3-file-backup:
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-s3-file-backup-atom"
+    IMAGE_NAME: "scriptedatom/ssa-s3-file-backup"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/s3-file-backup-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/s3-file-backup-atom/."
   needs:
@@ -40,7 +40,7 @@ ssa-s3-file-backup-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-    IMAGE: "scriptedatom/ssa-s3-file-backup-atom"
+    IMAGE: "scriptedatom/ssa-s3-file-backup"
     TAGS: "latest ${ssa_s3_file_backup_version}"
   stage:
     broadcast

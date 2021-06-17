@@ -5,7 +5,7 @@ This image launches inside your pipeline to delete obsolete images from your Nex
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-nexus-image-cleaner-atom:latest
+  docker pull scriptedatom/ssa-nexus-image-cleaner:latest
 ```
 
 ## Image configurations

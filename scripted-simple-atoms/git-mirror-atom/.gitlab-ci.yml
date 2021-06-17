@@ -12,7 +12,7 @@ build-ssa-git-mirror:
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-git-mirror-atom"
+    IMAGE_NAME: "scriptedatom/ssa-git-mirror"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/git-mirror-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/git-mirror-atom/."
   needs:
@@ -40,7 +40,7 @@ ssa-git-mirror-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-    IMAGE: "scriptedatom/ssa-git-mirror-atom"
+    IMAGE: "scriptedatom/ssa-git-mirror"
     TAGS: "latest ${ssa_git_mirror_version}"
   stage:
     broadcast

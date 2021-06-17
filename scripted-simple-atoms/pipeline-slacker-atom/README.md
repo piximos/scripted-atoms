@@ -5,7 +5,7 @@ This image launches inside your pipeline to send Slack messages.
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-pipeline-slacker-atom
+  docker pull scriptedatom/ssa-pipeline-slacker
 ```
 
 ## Image configurations
