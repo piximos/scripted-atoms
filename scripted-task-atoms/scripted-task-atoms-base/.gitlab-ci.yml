@@ -45,6 +45,6 @@ sta-base-slacker:
   stage:
     broadcast
   needs:
-    - validate-branch-name
+    - build-sta-base
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh

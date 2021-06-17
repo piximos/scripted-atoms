@@ -45,6 +45,6 @@ saa-base-slacker:
   stage:
     broadcast
   needs:
-    - validate-branch-name
+    - build-saa-base
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
