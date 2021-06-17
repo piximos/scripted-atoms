@@ -1,0 +1,94 @@
+build-saa-qr-code-s3:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${saa_base_version}
+        IMAGE_VERSION: ${saa_qr_code_s3_version}
+  stage:
+    build-scripted-api-atoms
+  variables:
+    IMAGE_NAME: "scriptedatom/saa-qr-code-generator-s3"
+    DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-s3-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-s3-atom/."
+  needs:
+    - build-saa-base
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+
+build-saa-qr-code-fs:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${saa_base_version}
+        IMAGE_VERSION: ${saa_qr_code_fs_version}
+  stage:
+    build-scripted-api-atoms
+  variables:
+    IMAGE_NAME: "scriptedatom/saa-qr-code-generator-fs"
+    DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-fs-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-fs-atom/."
+  needs:
+    - build-saa-base
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+
+build-saa-otp-maker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${saa_base_version}
+        IMAGE_VERSION: ${saa_otp_maker_version}
+  stage:
+    build-scripted-api-atoms
+  variables:
+    IMAGE_NAME: "scriptedatom/saa-otp-maker"
+    DOCKER_IMAGE_PATH: "./scripted-api-atoms/otp-maker-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/otp-maker-atom/."
+  needs:
+    - build-saa-base
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+
+build-saa-s3-unzipper:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${saa_base_version}
+        IMAGE_VERSION: ${saa_s3_file_unzipper_version}
+  stage:
+    build-scripted-api-atoms
+  variables:
+    IMAGE_NAME: "scriptedatom/saa-s3-unzipper"
+    DOCKER_IMAGE_PATH: "./scripted-api-atoms/s3-file-unzipper-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/s3-file-unzipper-atom/."
+  needs:
+    - build-saa-base
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+
+build-saa-thumbnail-generator-s3:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${saa_base_version}
+        IMAGE_VERSION: ${saa_thumbnail_generator_s3_version}
+  stage:
+    build-scripted-api-atoms
+  variables:
+    IMAGE_NAME: "scriptedatom/saa-thumbnail-generator"
+    DOCKER_IMAGE_PATH: "./scripted-api-atoms/thumbnail-generator-s3-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/thumbnail-generator-s3-atom/."
+  needs:
+    - build-saa-base
+  script:
+    - ./ci-cd/scripts/build-public-image.sh

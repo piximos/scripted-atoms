@@ -1,0 +1,56 @@
+build-saa-base:
+  tags:
+    - piximos
+  stage:
+    build-bases
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${saa_base_version}
+        IMAGE_VERSION: ${saa_base_version}
+  variables:
+    IMAGE_NAME: "scriptedatom/saa-base"
+    DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/scripted-api-atoms-base/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - validate-branch-name
+
+build-sta-base:
+  tags:
+    - piximos
+  stage:
+    build-bases
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${sta_base_version}
+        IMAGE_VERSION: ${sta_base_version}
+  variables:
+    IMAGE_NAME: "scriptedatom/sta-base"
+    DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - validate-branch-name
+
+build-ssa-base:
+  tags:
+    - piximos
+  stage:
+    build-bases
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_base_version}
+  variables:
+    IMAGE_NAME: "scriptedatom/ssa-base"
+    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/scripted-simple-atoms-base/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/scripted-simple-atoms-base/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - validate-branch-name

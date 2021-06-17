@@ -7,8 +7,8 @@ build-saa-qr-code-fs:
         SA_BASE_VERSION: ${saa_base_version}
         IMAGE_VERSION: ${saa_qr_code_fs_version}
       changes:
-        - scripted-api-atoms/*
-        - scripted-api-atoms/**/*
+        - scripted-api-atoms/scripted-api-atoms-base/*
+        - scripted-api-atoms/qr-code-fs-atom/*
   stage:
     build-scripted-api-atoms
   variables:
@@ -26,15 +26,15 @@ saa-qr-code-fs-slacker:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-api-atoms/*
-        - scripted-api-atoms/**/*
+        - scripted-api-atoms/scripted-api-atoms-base/*
+        - scripted-api-atoms/qr-code-fs-atom/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-api-atoms/*
-        - scripted-api-atoms/**/*
+        - scripted-api-atoms/scripted-api-atoms-base/*
+        - scripted-api-atoms/qr-code-fs-atom/*
       when: on_failure
       variables:
         SUCCESS: "false"
