@@ -1,0 +1,38 @@
+{
+  "variables": [
+    {
+      "name": "SA_WEBSITE_URL",
+      "desc": "The URL of the website to check for uptime.",
+      "required": true
+    },
+    {
+      "name": "SLACK_WEBHOOK_URL",
+      "desc": "The slack webhook URL for messaging.",
+      "required": true
+    },
+    {
+      "name": "SLACK_SUCCESS_COLOR",
+      "desc": "The border color of the slack message on success.",
+      "required": true
+    },
+    {
+      "name": "SLACK_FAILURE_COLOR",
+      "desc": "The border color of the slack message on failure.",
+      "required": true
+    },
+    {
+      "name": "SA_IS_SLEEPER_SCRIPT",
+      "desc": "If set to 'false', the script executes a single time and dies. Otherwise it runs in a loop.",
+      "required": false,
+      "values": [
+        "true",
+        "false"
+      ]
+    },
+    {
+      "name": "SA_SLEEP_DURATION",
+      "desc": "The sleep duration between uptime checks.",
+      "required": false
+    }
+  ]
+}

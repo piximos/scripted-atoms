@@ -1,0 +1,50 @@
+build-ssa-uptime-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_pipeline_uptime_slacker_version}
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/uptime-slacker-atom/*
+  stage:
+    build-scripted-simple-atoms
+  variables:
+    IMAGE_NAME: "scriptedatom/ssa-uptime-slacker"
+    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/uptime-slacker-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/uptime-slacker-atom/."
+  needs:
+    - build-ssa-base
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+
+ssa-uptime-slacker-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/uptime-slacker-atom/*
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/uptime-slacker-atom/*
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    IMAGE: "scriptedatom/ssa-uptime-slacker"
+    TAGS: "latest ${ssa_pipeline_uptime_slacker_version}"
+  stage:
+    broadcast
+  needs:
+    - build-ssa-uptime-slacker
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh

@@ -15,6 +15,7 @@ include:
   - local: /scripted-simple-atoms/harbor-image-cleaner-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/pipeline-slacker-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/s3-file-backup-atom/.gitlab-ci.yml
+  - local: /scripted-simple-atoms/uptime-slacker-atom/.gitlab-ci.yml
   # Scripted Task Atom Version Variables
   - local: /scripted-task-atoms/scripted-task-atoms-base/.gitlab-ci.yml
   - local: /scripted-task-atoms/s3-file-sync-atom/.gitlab-ci.yml
@@ -55,7 +56,6 @@ variables:
   # Scripted Task Atom Version Variables
   sta_base_version: "1.0"
   sta_s3_file_sync_version: "1.0"
-  sta_uptime_tracker_version: "1.0"
   # Scripted Simple Atom Version Variables
   ssa_base_version: "1.0"
   ssa_s3_file_backup_version: "1.0"
@@ -64,3 +64,4 @@ variables:
   ssa_pipeline_slacker_version: "1.0"
   ssa_pipeline_harbor_image_cleaner_version: "1.0"
   ssa_pipeline_nexus_image_cleaner_version: "1.0"
+  ssa_pipeline_uptime_slacker_version: "1.0"
