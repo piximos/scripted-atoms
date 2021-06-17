@@ -1,4 +1,4 @@
-# Scripted Simple Atoms : Pipeline Nexus Image Cleaner
+# Scripted Simple Atoms : Nexus Image Cleaner
 
 This image launches inside your pipeline to delete obsolete images from your Nexus registry.
 

@@ -31,9 +31,6 @@ ssa-nexus-image-cleaner-slacker:
       when: on_success
       variables:
         SUCCESS: "true"
-        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-        IMAGE: "scriptedatom/ssa-nexus-image-cleaner-atom"
-        TAGS: "${ssa_base_version} ${ssa_pipeline_nexus_image_cleaner_version}"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
@@ -41,9 +38,10 @@ ssa-nexus-image-cleaner-slacker:
       when: on_failure
       variables:
         SUCCESS: "false"
-        SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-        IMAGE: "scriptedatom/ssa-nexus-image-cleaner-atom"
-        TAGS: "${ssa_base_version} ${ssa_pipeline_nexus_image_cleaner_version}"
+  variables:
+    SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    IMAGE: "scriptedatom/ssa-nexus-image-cleaner-atom"
+    TAGS: "latest ${ssa_pipeline_nexus_image_cleaner_version}"
   stage:
     broadcast
   needs:

@@ -1,4 +1,4 @@
-# Scripted Simple Atoms : Pipeline Harbor Image Cleaner
+# Scripted Simple Atoms : Harbor Image Cleaner
 
 This image launches inside your pipeline to delete obsolete images from your Harbor registry.
 

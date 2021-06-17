@@ -1,50 +1,50 @@
-build-ssa-harbor-image-cleaner:
+build-ssa-s3-file-backup:
   tags:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
-        IMAGE_VERSION: ${ssa_pipeline_harbor_image_cleaner_version}
+        IMAGE_VERSION: ${ssa_s3_file_backup_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/harbor-image-cleaner-atom/*
+        - scripted-simple-atoms/s3-file-backup-atom/*
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-harbor-image-cleaner-atom"
-    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/harbor-image-cleaner-atom/Dockerfile"
-    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/harbor-image-cleaner-atom/."
+    IMAGE_NAME: "scriptedatom/ssa-s3-file-backup-atom"
+    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/s3-file-backup-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/s3-file-backup-atom/."
   needs:
     - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-ssa-harbor-image-cleaner-slacker:
+ssa-s3-file-backup-slacker:
   tags:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/harbor-image-cleaner-atom/*
+        - scripted-simple-atoms/s3-file-backup-atom/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/harbor-image-cleaner-atom/*
+        - scripted-simple-atoms/s3-file-backup-atom/*
       when: on_failure
       variables:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-    IMAGE: "scriptedatom/ssa-harbor-image-cleaner-atom"
-    TAGS: "latest ${ssa_pipeline_harbor_image_cleaner_version}"
+    IMAGE: "scriptedatom/ssa-s3-file-backup-atom"
+    TAGS: "latest ${ssa_s3_file_backup_version}"
   stage:
     broadcast
   needs:
-    - build-ssa-harbor-image-cleaner
+    - build-ssa-s3-file-backup
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
