@@ -6,8 +6,6 @@ build-ssa-base:
       variables:
         SA_BASE_VERSION: ${ssa_base_version}
         IMAGE_VERSION: ${ssa_base_version}
-      changes:
-         - scripted-simple-atoms/**/*
   stage:
     build-scripted-simple-atoms
   variables:
@@ -24,14 +22,10 @@ ssa-base-slacker:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-         - scripted-simple-atoms/**/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-         - scripted-simple-atoms/**/*
       when: on_failure
       variables:
         SUCCESS: "false"
