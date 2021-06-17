@@ -12,7 +12,7 @@ IFS=', ' read -r -a TAGS <<<"$(echo "$TAGS")"
 
 slack_artifacts=""
 for tag in "${TAGS[@]}"; do
-  slack_artifacts="$slack_artifacts\\n- $IMAGE:*$tag*"
+  slack_artifacts="$slack_artifacts\\n- $IMAGE:\`$tag\`"
 done
 
 docker pull scriptedatom/ssa-pipeline-slacker-atom:latest
