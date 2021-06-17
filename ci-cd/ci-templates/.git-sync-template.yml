@@ -15,7 +15,7 @@ mirror-to-gitlab-com:
   script:
     - ./ci-cd/scripts/mirror-repo.sh
 
-mirror-to-githun-com:
+mirror-to-github-com:
   tags:
     - piximos
   rules:

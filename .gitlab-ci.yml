@@ -4,14 +4,8 @@ include:
   - local: /ci-cd/ci-templates/.scripted-simple-atoms-builder-template.yml
   - local: /ci-cd/ci-templates/.scripted-task-atoms-builder-template.yml
   - local: /ci-cd/ci-templates/.git-sync-template.yml
-  - local: /ci-cd/ci-templates/.post-flight-template.yml
-  - local: /ci-cd/ci-templates/.slackers-template.yml
-#    ARM STAGES
-#  - local: /ci-cd/ci-templates/arm/.base-images-builder-template.yml
-#  - local: /ci-cd/ci-templates/arm/.scripted-api-atoms-builder-template.yml
-#  - local: /ci-cd/ci-templates/arm/.scripted-simple-atoms-builder-template.yml
-#  - local: /ci-cd/ci-templates/arm/.scripted-task-atoms-builder-template.yml
-#  - local: /ci-cd/ci-templates/arm/.slackers-template.yml
+  - local: /scripted-simple-atoms/nexus-image-cleaner-atom/.gitlab-ci.yml
+  - local: /scripted-simple-atoms/harbor-image-cleaner-atom/.gitlab-ci.yml
 
 stages:
   - pre-flight
@@ -28,6 +22,15 @@ stages:
 before_script:
   - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
   - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
+
+validate-branch-name:
+  tags:
+    - piximos
+  allow_failure: false
+  stage:
+    pre-flight
+  script:
+    - ./ci-cd/scripts/validate-commit.sh
 
 variables:
   # Scripted Api Atom Version Variables

@@ -1,27 +1,24 @@
 #!/bin/bash
 
-if [[ $CI_COMMIT_REF_NAME != "major-release" && $CI_COMMIT_REF_NAME != "minor-release" && $CI_COMMIT_REF_NAME != "master" ]]; then
-  IMG_TAGS=("$CI_COMMIT_REF_NAME$IMG_COMPLEMENTARY_TAG")
-elif [[ $CI_COMMIT_REF_NAME == "master" ]]; then
-  IMG_TAGS=("latest$IMG_COMPLEMENTARY_TAG" "$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')$IMG_COMPLEMENTARY_TAG")
+if [[ "${SUCCESS}" == "true" ]]; then
+  SLACK_MSG="Successfully deployed the following images :"
+  SLACK_COLOR="#87ebaa"
 else
-  IMG_TAGS=("$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')$IMG_COMPLEMENTARY_TAG")
+  SLACK_MSG="Failed to build and deploy the following images :"
+  SLACK_COLOR="#eb87b7"
 fi
 
-IFS=', ' read -r -a IMAGES <<<"$(echo "$IMAGES")"
-deployed_tags=""
-for img in "${IMAGES[@]}"; do
-  for tag in "${IMG_TAGS[@]}"; do
-    deployed_tags="$deployed_tags\\n- scriptedatom/$img:*$tag*"
-  done
-    deployed_tags="$deployed_tags\\n"
-done
+IFS=', ' read -r -a TAGS <<<"$(echo "$TAGS")"
 
-SLACK_MSG="Deployed the following tags :"
+slack_artifacts=""
+for tag in "${TAGS[@]}"; do
+  slack_artifacts="$slack_artifacts\\n- $IMAGE:*$tag*"
+done
 
 docker pull scriptedatom/ssa-pipeline-slacker-atom:latest
 docker run --rm \
   -e SLACK_WEBHOOK_URL="$SLACK_WEBHOOK_URL" \
   -e SLACK_MSG="$SLACK_MSG" \
-  -e SLACK_ARTIFACTS="$deployed_tags" \
+  -e SLACK_COLOR="$SLACK_COLOR" \
+  -e SLACK_ARTIFACTS="$slack_artifacts" \
   scriptedatom/ssa-pipeline-slacker-atom:latest

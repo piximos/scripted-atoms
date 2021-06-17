@@ -74,7 +74,7 @@ build-ssa-pipeline-slacker:
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-build-ssa-pipeline-harbor-image-cleaner:
+build-ssa-harbor-image-cleaner:
   tags:
     - piximos
   rules:
@@ -85,15 +85,15 @@ build-ssa-pipeline-harbor-image-cleaner:
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-pipeline-harbor-image-cleaner-atom"
-    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-harbor-image-cleaner-atom/Dockerfile"
-    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-harbor-image-cleaner-atom/."
+    IMAGE_NAME: "scriptedatom/ssa-harbor-image-cleaner-atom"
+    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/harbor-image-cleaner-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/harbor-image-cleaner-atom/."
   needs:
     - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-build-ssa-pipeline-nexus-image-cleaner:
+build-ssa-nexus-image-cleaner:
   tags:
     - piximos
   rules:
@@ -104,9 +104,9 @@ build-ssa-pipeline-nexus-image-cleaner:
   stage:
     build-scripted-simple-atoms
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-pipeline-nexus-image-cleaner-atom"
-    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-nexus-image-cleaner-atom/Dockerfile"
-    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-nexus-image-cleaner-atom/."
+    IMAGE_NAME: "scriptedatom/ssa-nexus-image-cleaner-atom"
+    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/nexus-image-cleaner-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/nexus-image-cleaner-atom/."
   needs:
     - build-ssa-base
   script:

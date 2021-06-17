@@ -26,3 +26,7 @@ if [[ ${IMAGE_VERSION} ]]; then
   docker push "${IMAGE_NAME}:${IMAGE_VERSION}"
   echo "Pushed public image : ${IMAGE_NAME}"
 fi
+
+echo "Deleting local images"
+docker rmi "${IMAGE_NAME}:latest"
+docker rmi "${IMAGE_NAME}:${IMAGE_VERSION}"
