@@ -10,7 +10,7 @@ build-saa-base:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/**/*
   stage:
-    build-scripted-api-atoms
+    build-bases
   variables:
     IMAGE_NAME: "scriptedatom/saa-base"
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"

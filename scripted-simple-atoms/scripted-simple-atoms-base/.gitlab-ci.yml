@@ -10,7 +10,7 @@ build-ssa-base:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/**/*
   stage:
-    build-scripted-simple-atoms
+    build-bases
   variables:
     IMAGE_NAME: "scriptedatom/ssa-base"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/scripted-simple-atoms-base/Dockerfile"

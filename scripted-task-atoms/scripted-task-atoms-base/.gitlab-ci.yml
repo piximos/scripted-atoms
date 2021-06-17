@@ -10,7 +10,7 @@ build-sta-base:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/**/*
   stage:
-    build-scripted-task-atoms
+    build-bases
   variables:
     IMAGE_NAME: "scriptedatom/sta-base"
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
