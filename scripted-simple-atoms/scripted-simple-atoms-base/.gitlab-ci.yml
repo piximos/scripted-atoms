@@ -16,7 +16,7 @@ build-ssa-base:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/scripted-simple-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/scripted-simple-atoms-base/."
   needs:
-    - build-ssa-base
+    - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
@@ -45,6 +45,6 @@ ssa-base-slacker:
   stage:
     broadcast
   needs:
-    - build-ssa-base
+    - validate-branch-name
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh

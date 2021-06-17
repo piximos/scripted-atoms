@@ -16,7 +16,7 @@ build-sta-base:
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
   needs:
-    - build-sta-base
+    - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
@@ -45,6 +45,6 @@ sta-base-slacker:
   stage:
     broadcast
   needs:
-    - build-sta-base
+    - validate-branch-name
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
