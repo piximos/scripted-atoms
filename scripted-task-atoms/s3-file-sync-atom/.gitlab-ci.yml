@@ -7,7 +7,8 @@ build-sta-s3-file-sync:
         SA_BASE_VERSION: ${sta_base_version}
         IMAGE_VERSION: ${sta_s3_file_sync_version}
       changes:
-         - scripted-task-atoms/**/*
+        - scripted-task-atoms/*
+        - scripted-task-atoms/**/*
   stage:
     build-scripted-task-atoms
   variables:
@@ -25,13 +26,15 @@ sta-s3-file-sync-slacker:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-         - scripted-task-atoms/**/*
+        - scripted-task-atoms/*
+        - scripted-task-atoms/**/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-         - scripted-task-atoms/**/*
+        - scripted-task-atoms/*
+        - scripted-task-atoms/**/*
       when: on_failure
       variables:
         SUCCESS: "false"
