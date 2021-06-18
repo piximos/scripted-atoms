@@ -17,6 +17,7 @@ include:
   - local: /scripted-simple-atoms/pipeline-discorder-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/s3-file-backup-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/uptime-slacker-atom/.gitlab-ci.yml
+  - local: /scripted-simple-atoms/uptime-discorder-atom/.gitlab-ci.yml
   # Scripted Task Atom Version Variables
   - local: /scripted-task-atoms/scripted-task-atoms-base/.gitlab-ci.yml
   - local: /scripted-task-atoms/s3-file-sync-atom/.gitlab-ci.yml
@@ -65,3 +66,4 @@ variables:
   ssa_pipeline_harbor_image_cleaner_version: "1.1"
   ssa_pipeline_nexus_image_cleaner_version: "1.1"
   ssa_pipeline_uptime_slacker_version: "1.1"
+  ssa_pipeline_uptime_discorder_version: "1.1"
