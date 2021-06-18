@@ -3,43 +3,39 @@ build-saa-thumbnail-generator-s3:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${saa_base_version}
-        IMAGE_VERSION: ${saa_otp_maker_version}
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/thumbnail-generator-s3-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-scripted-api-atoms
   variables:
     IMAGE_NAME: "scriptedatom/saa-thumbnail-generator"
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/thumbnail-generator-s3-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/thumbnail-generator-s3-atom/."
+    SA_BASE_VERSION: ${saa_base_version}
+    IMAGE_VERSION: ${saa_otp_maker_version}
   needs:
     - build-saa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-saa-thumbnail-generator-s3-slacker:
+saa-thumbnail-generator-s3-broadcaster:
   tags:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/thumbnail-generator-s3-atom/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/thumbnail-generator-s3-atom/*
       when: on_failure
       variables:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/saa-thumbnail-generator"
     TAGS: "latest ${saa_otp_maker_version}"
   stage:
@@ -47,4 +43,4 @@ saa-thumbnail-generator-s3-slacker:
   needs:
     - build-saa-thumbnail-generator-s3
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

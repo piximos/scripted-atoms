@@ -3,24 +3,25 @@ build-sta-base:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${sta_base_version}
-        IMAGE_VERSION: ${sta_base_version}
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/**/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-bases
   variables:
     IMAGE_NAME: "scriptedatom/sta-base"
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
+    SA_BASE_VERSION: ${sta_base_version}
+    IMAGE_VERSION: ${sta_base_version}
   needs:
     - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-sta-base-slacker:
+sta-base-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ sta-base-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/sta-base"
     TAGS: "latest ${sta_base_version}"
   stage:
@@ -47,4 +49,4 @@ sta-base-slacker:
   needs:
     - build-sta-base
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

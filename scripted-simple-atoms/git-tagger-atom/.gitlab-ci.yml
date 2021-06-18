@@ -3,24 +3,25 @@ build-ssa-git-tagger:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${ssa_base_version}
-        IMAGE_VERSION: ${ssa_git_tagger_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/git-tagger-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-scripted-simple-atoms
   variables:
     IMAGE_NAME: "scriptedatom/ssa-git-tagger"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/git-tagger-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/git-tagger-atom/."
+    SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_git_tagger_version}
   needs:
     - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-ssa-git-tagger-slacker:
+ssa-git-tagger-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ ssa-git-tagger-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/ssa-git-tagger"
     TAGS: "latest ${ssa_git_tagger_version}"
   stage:
@@ -47,4 +49,4 @@ ssa-git-tagger-slacker:
   needs:
     - build-ssa-git-tagger
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

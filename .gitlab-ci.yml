@@ -28,7 +28,6 @@ stages:
   - build-scripted-api-atoms
   - build-scripted-task-atoms
   - broadcast
-  - git-tagger
   - git-sync
 
 before_script:

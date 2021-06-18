@@ -3,24 +3,25 @@ build-ssa-harbor-image-cleaner:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${ssa_base_version}
-        IMAGE_VERSION: ${ssa_pipeline_harbor_image_cleaner_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/harbor-image-cleaner-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-scripted-simple-atoms
   variables:
     IMAGE_NAME: "scriptedatom/ssa-harbor-image-cleaner"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/harbor-image-cleaner-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/harbor-image-cleaner-atom/."
+    SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_pipeline_harbor_image_cleaner_version}
   needs:
     - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-ssa-harbor-image-cleaner-slacker:
+ssa-harbor-image-cleaner-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ ssa-harbor-image-cleaner-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/ssa-harbor-image-cleaner"
     TAGS: "latest ${ssa_pipeline_harbor_image_cleaner_version}"
   stage:
@@ -47,4 +49,4 @@ ssa-harbor-image-cleaner-slacker:
   needs:
     - build-ssa-harbor-image-cleaner
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

@@ -3,43 +3,39 @@ build-saa-base:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${saa_base_version}
-        IMAGE_VERSION: ${saa_base_version}
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/**/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-bases
   variables:
     IMAGE_NAME: "scriptedatom/saa-base"
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/scripted-api-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/scripted-api-atoms-base/."
+    SA_BASE_VERSION: ${saa_base_version}
+    IMAGE_VERSION: ${saa_base_version}
   needs:
     - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-saa-base-slacker:
+saa-base-broadcaster:
   tags:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/**/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/**/*
       when: on_failure
       variables:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/saa-base"
     TAGS: "latest ${saa_base_version}"
   stage:
@@ -47,4 +43,4 @@ saa-base-slacker:
   needs:
     - build-saa-base
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

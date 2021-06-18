@@ -3,24 +3,25 @@ build-ssa-s3-file-backup:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${ssa_base_version}
-        IMAGE_VERSION: ${ssa_s3_file_backup_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/s3-file-backup-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-scripted-simple-atoms
   variables:
     IMAGE_NAME: "scriptedatom/ssa-s3-file-backup"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/s3-file-backup-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/s3-file-backup-atom/."
+    SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_s3_file_backup_version}
   needs:
     - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-ssa-s3-file-backup-slacker:
+ssa-s3-file-backup-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ ssa-s3-file-backup-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/ssa-s3-file-backup"
     TAGS: "latest ${ssa_s3_file_backup_version}"
   stage:
@@ -47,4 +49,4 @@ ssa-s3-file-backup-slacker:
   needs:
     - build-ssa-s3-file-backup
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

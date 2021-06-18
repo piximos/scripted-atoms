@@ -3,24 +3,25 @@ build-sta-s3-file-sync:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${sta_base_version}
-        IMAGE_VERSION: ${sta_s3_file_sync_version}
       changes:
         - scripted-task-atoms/scripted-task-atoms-base/*
         - scripted-task-atoms/s3-file-sync-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-scripted-task-atoms
   variables:
     IMAGE_NAME: "scriptedatom/sta-s3-file-sync"
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
+    SA_BASE_VERSION: ${sta_base_version}
+    IMAGE_VERSION: ${sta_s3_file_sync_version}
   needs:
     - build-sta-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-sta-s3-file-sync-slacker:
+sta-s3-file-sync-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ sta-s3-file-sync-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/sta-s3-file-sync"
     TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
@@ -47,4 +49,4 @@ sta-s3-file-sync-slacker:
   needs:
     - build-sta-s3-file-sync
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

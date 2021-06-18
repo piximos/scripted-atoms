@@ -3,24 +3,25 @@ build-ssa-base:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${ssa_base_version}
-        IMAGE_VERSION: ${ssa_base_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/**/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-bases
   variables:
     IMAGE_NAME: "scriptedatom/ssa-base"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/scripted-simple-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/scripted-simple-atoms-base/."
+    SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_base_version}
   needs:
     - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-ssa-base-slacker:
+ssa-base-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ ssa-base-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/ssa-base"
     TAGS: "latest ${ssa_base_version}"
   stage:
@@ -47,4 +49,4 @@ ssa-base-slacker:
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

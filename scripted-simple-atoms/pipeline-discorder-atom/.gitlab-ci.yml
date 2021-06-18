@@ -3,24 +3,25 @@ build-ssa-pipeline-discorder:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${ssa_base_version}
-        IMAGE_VERSION: ${ssa_pipeline_discorder_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/pipeline-discorder-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-scripted-simple-atoms
   variables:
     IMAGE_NAME: "scriptedatom/ssa-pipeline-discorder"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-discorder-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-discorder-atom/."
+    SA_BASE_VERSION: "1.0"
+    IMAGE_VERSION: "1.0"
   needs:
     - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-ssa-pipeline-discorder-slacker:
+ssa-pipeline-discorder-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ ssa-pipeline-discorder-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/ssa-pipeline-discorder"
     TAGS: "latest ${ssa_pipeline_discorder_version}"
   stage:
@@ -47,4 +49,4 @@ ssa-pipeline-discorder-slacker:
   needs:
     - build-ssa-pipeline-discorder
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh

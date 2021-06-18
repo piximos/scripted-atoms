@@ -3,24 +3,25 @@ build-ssa-pipeline-slacker:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      variables:
-        SA_BASE_VERSION: ${ssa_base_version}
-        IMAGE_VERSION: ${ssa_pipeline_slacker_version}
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/pipeline-slacker-atom/*
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: manual
   stage:
     build-scripted-simple-atoms
   variables:
     IMAGE_NAME: "scriptedatom/ssa-pipeline-slacker"
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-slacker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-slacker-atom/."
+    SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_pipeline_slacker_version}
   needs:
     - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-ssa-pipeline-slacker-slacker:
+ssa-pipeline-slacker-broadcaster:
   tags:
     - piximos
   rules:
@@ -40,6 +41,7 @@ ssa-pipeline-slacker-slacker:
         SUCCESS: "false"
   variables:
     SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/ssa-pipeline-slacker"
     TAGS: "latest ${ssa_pipeline_slacker_version}"
   stage:
@@ -47,4 +49,4 @@ ssa-pipeline-slacker-slacker:
   needs:
     - build-ssa-pipeline-slacker
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
+    - ./ci-cd/scripts/pipeline-broadcaster.sh
