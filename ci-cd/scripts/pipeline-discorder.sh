@@ -12,8 +12,6 @@ for tag in ${TAGS}; do
   DISCORD_MSG="$DISCORD_MSG \\n > $IMAGE:\`$tag\`"
 done
 
-docker pull scriptedatom/ssa-pipeline-discorder:latest
-docker run --rm \
-  -e DISCORD_WEBHOOK_URL="$DISCORD_WEBHOOK_URL" \
-  -e DISCORD_MSG="$DISCORD_MSG" \
-  scriptedatom/ssa-pipeline-discorder:latest
+export DISCORD_MSG="$DISCORD_MSG"
+
+./scripted-simple-atoms/pipeline-discorder-atom/runner.sh
