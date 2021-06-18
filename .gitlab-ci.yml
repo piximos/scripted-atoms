@@ -28,6 +28,7 @@ stages:
   - build-scripted-api-atoms
   - build-scripted-task-atoms
   - broadcast
+  - git-sync
 
 before_script:
   - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
