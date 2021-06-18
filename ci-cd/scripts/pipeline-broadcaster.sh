@@ -2,11 +2,11 @@
 
 if [[ "${SUCCESS}" == "true" ]]; then
   SLACK_MSG="Successfully deployed the following images :"
-  DISCORD_MSG="Successfully deployed the following tags for the \`$IMAGE\` :"
+  DISCORD_MSG="\`$IMAGE\` has been successfully deployed with the following tags :"
   SLACK_COLOR="#87ebaa"
 else
   SLACK_MSG="Failed to build and deploy the following images :"
-  DISCORD_MSG="Failed to build and deploy the following tags for the \`$IMAGE\` :"
+  DISCORD_MSG="\`$IMAGE\` failed to deploy with the following tags :"
   SLACK_COLOR="#eb87b7"
 fi
 

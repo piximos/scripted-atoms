@@ -7,7 +7,7 @@ build-ssa-pipeline-discorder:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/pipeline-discorder-atom/*
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: manual
+      when: on_success
   stage:
     build-scripted-simple-atoms
   variables:
@@ -26,16 +26,10 @@ ssa-pipeline-discorder-broadcaster:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/pipeline-discorder-atom/*
       when: on_success
       variables:
         SUCCESS: "true"
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/pipeline-discorder-atom/*
       when: on_failure
       variables:
         SUCCESS: "false"

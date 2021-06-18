@@ -7,7 +7,7 @@ build-saa-s3-file-unzipper:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/s3-file-unzipper-atom/*
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: manual
+      when: on_success
   stage:
     build-scripted-api-atoms
   variables:

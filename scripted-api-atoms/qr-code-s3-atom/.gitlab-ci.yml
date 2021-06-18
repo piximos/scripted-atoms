@@ -7,7 +7,7 @@ build-saa-qr-code-s3:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/qr-code-s3-atom/*
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: manual
+      when: on_success
   stage:
     build-scripted-api-atoms
   variables:
