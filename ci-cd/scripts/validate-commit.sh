@@ -1,7 +1,7 @@
 #!/bin/bash
 
 branch_name=$CI_COMMIT_REF_NAME
-echo "The current branch is : ${branch_name} and the version is : $REPO_VERSION"
+echo "The current branch is : ${branch_name}"
 
 if [[ $CI_COMMIT_REF_NAME =~ ((major|minor)\-release)|(dev|develop).*|master$ ]] ; then
     echo "BRANCH NAME :  '$CI_COMMIT_REF_NAME' is valid."

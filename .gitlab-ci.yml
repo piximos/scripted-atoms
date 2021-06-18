@@ -45,7 +45,6 @@ validate-branch-name:
     - ./ci-cd/scripts/validate-commit.sh
 
 variables:
-  REPO_VERSION: "$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
   # Scripted Api Atom Version Variables
   saa_base_version: "1.0"
   saa_qr_code_s3_version: "1.0"
