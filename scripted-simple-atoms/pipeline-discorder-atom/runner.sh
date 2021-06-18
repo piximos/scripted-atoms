@@ -9,7 +9,5 @@ else
   payload="{ \"content\": \"$DISCORD_MSG\"}"
 fi
 
-curl -X POST "$DISCORD_WEBHOOK_URL" \
-  -H 'Content-type: application/json' \
-  --data "$payload" \
-  -w '%{http_code}'
+curl -X POST "$DISCORD_WEBHOOK_URL" -s -H 'Content-type: application/json' \
+  -d "$payload" -o /dev/null

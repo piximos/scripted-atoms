@@ -9,6 +9,5 @@ else
   payload="{ \"text\": \"$SLACK_MSG\"}"
 fi
 
-curl -X POST "$SLACK_WEBHOOK_URL" \
-  -H 'Content-type: application/json' \
-  --data "$payload"
+curl -X POST "$SLACK_WEBHOOK_URL" -s -H 'Content-type: application/json' \
+  -d "$payload" -o /dev/null
