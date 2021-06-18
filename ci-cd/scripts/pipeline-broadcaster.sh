@@ -2,7 +2,7 @@
 
 if [[ "${SUCCESS}" == "true" ]]; then
   SLACK_MSG="Successfully deployed the following images :"
-  DISCORD_MSG="Successfully deployed the following tags : \\n >"
+  DISCORD_MSG="Successfully deployed the following tags :"
   SLACK_COLOR="#87ebaa"
 else
   SLACK_MSG="Failed to build and deploy the following images :"
@@ -15,7 +15,7 @@ IFS=', ' read -r -a TAGS <<<"$(echo "$TAGS")"
 slack_artifacts=""
 for tag in "${TAGS[@]}"; do
   slack_artifacts="$slack_artifacts\\n- $IMAGE:\`$tag\`"
-  DISCORD_MSG="$DISCORD_MSG \\n > \_$IMAGE\_:\`$tag\`"
+  DISCORD_MSG="$DISCORD_MSG \\n > $IMAGE:\`$tag\`"
 done
 
 docker pull scriptedatom/ssa-pipeline-slacker:latest
