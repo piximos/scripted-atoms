@@ -15,7 +15,6 @@ build-ssa-pipeline-slacker:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-slacker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-slacker-atom/."
     SA_BASE_VERSION: ${ssa_base_version}
-    IMAGE_VERSION: ${ssa_pipeline_slacker_version}
   needs:
     - build-ssa-base
   script:
@@ -35,7 +34,7 @@ ssa-pipeline-slacker-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-pipeline-slacker"
-    TAGS: "latest ${ssa_pipeline_slacker_version}"
+    TAGS: "latest"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +56,7 @@ ssa-pipeline-slacker-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-pipeline-slacker"
-    TAGS: "latest ${ssa_pipeline_slacker_version}"
+    TAGS: "latest"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +72,7 @@ ssa-pipeline-slacker-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/ssa-pipeline-slacker"
-    TAGS: "latest ${ssa_pipeline_slacker_version}"
+    TAGS: "latest"
   stage:
     cleaner
   needs:

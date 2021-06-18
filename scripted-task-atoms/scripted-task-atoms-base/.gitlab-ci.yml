@@ -15,7 +15,7 @@ build-sta-base:
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/scripted-task-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
     SA_BASE_VERSION: ${sta_base_version}
-    IMAGE_VERSION: ${sta_base_version}
+
   needs:
     - validate-branch-name
   script:
@@ -35,7 +35,7 @@ sta-base-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/sta-base"
-    TAGS: "latest ${sta_base_version}"
+    TAGS: "latest"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +57,7 @@ sta-base-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/sta-base"
-    TAGS: "latest ${sta_base_version}"
+    TAGS: "latest"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +73,7 @@ sta-base-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/sta-base"
-    TAGS: "latest ${sta_base_version}"
+    TAGS: "latest"
   stage:
     cleaner
   needs:

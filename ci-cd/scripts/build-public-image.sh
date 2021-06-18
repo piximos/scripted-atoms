@@ -33,19 +33,8 @@ push_image() {
 
 REPO_VERSION="$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
 
-echo "Building 'latest' tag."
-DOCKER_BUILDKIT=1 docker build \
-  --build-arg SA_BASE_VERSION="${SA_BASE_VERSION}" \
-  -t "${IMAGE_NAME}" \
-  -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
-
-build_image "${SA_BASE_VERSION}" "latest"
-push_image "latest"
-
 build_image "${SA_BASE_VERSION}" "${REPO_VERSION}"
 push_image "${REPO_VERSION}"
 
-if [[ ${IMAGE_VERSION} ]]; then
-  re_tag_image "latest" "${IMAGE_VERSION}"
-  push_image "${IMAGE_VERSION}"
-fi
+re_tag_image "${REPO_VERSION}" "latest"
+push_image "latest"
