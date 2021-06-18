@@ -13,3 +13,5 @@ ENV SA_IS_SLEEPER_SCRIPT "true"
 ENV SA_SLEEP_DURATION "60"
 
 
+COPY env-variables-template.json $ENV_TEMPLATE_PATH
+COPY runner.sh $RUNNER_FILE_PATH

@@ -21,3 +21,5 @@ RUN mc config host rm s3 \
  && mc config host rm play \
  && mc config host rm local
 
+COPY env-variables-template.json $ENV_TEMPLATE_PATH
+COPY runner.sh $RUNNER_FILE_PATH
