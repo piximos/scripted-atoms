@@ -37,7 +37,7 @@ saa-base-slacker:
     IMAGE: "scriptedatom/saa-base"
     TAGS: "latest ${saa_base_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-saa-base
   script:
@@ -59,7 +59,7 @@ saa-base-discorder:
     IMAGE: "scriptedatom/saa-base"
     TAGS: "latest ${saa_base_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-saa-base
   script:

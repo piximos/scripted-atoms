@@ -37,7 +37,7 @@ ssa-git-tagger-slacker:
     IMAGE: "scriptedatom/ssa-git-tagger"
     TAGS: "latest ${ssa_git_tagger_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-git-tagger
   script:
@@ -59,7 +59,7 @@ ssa-git-tagger-discorder:
     IMAGE: "scriptedatom/ssa-git-tagger"
     TAGS: "latest ${ssa_git_tagger_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-git-tagger
   script:

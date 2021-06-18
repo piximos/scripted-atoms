@@ -37,7 +37,7 @@ saa-qr-code-s3-slacker:
     IMAGE: "scriptedatom/saa-qr-code-generator-s3"
     TAGS: "latest ${saa_qr_code_s3_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-saa-qr-code-s3
   script:
@@ -59,7 +59,7 @@ saa-qr-code-s3-discorder:
     IMAGE: "scriptedatom/saa-qr-code-generator-s3"
     TAGS: "latest ${saa_qr_code_s3_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-saa-qr-code-s3
   script:

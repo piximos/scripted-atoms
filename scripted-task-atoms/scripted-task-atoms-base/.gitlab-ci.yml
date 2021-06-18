@@ -37,7 +37,7 @@ sta-base-slacker:
     IMAGE: "scriptedatom/sta-base"
     TAGS: "latest ${sta_base_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-sta-base
   script:
@@ -59,7 +59,7 @@ sta-base-discorder:
     IMAGE: "scriptedatom/sta-base"
     TAGS: "latest ${sta_base_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-sta-base
   script:

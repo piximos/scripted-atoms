@@ -37,7 +37,7 @@ ssa-pipeline-slacker-slacker:
     IMAGE: "scriptedatom/ssa-pipeline-slacker"
     TAGS: "latest ${ssa_pipeline_slacker_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-pipeline-slacker
   script:
@@ -59,7 +59,7 @@ ssa-pipeline-slacker-discorder:
     IMAGE: "scriptedatom/ssa-pipeline-slacker"
     TAGS: "latest ${ssa_pipeline_slacker_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-pipeline-slacker
   script:

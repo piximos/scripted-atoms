@@ -37,7 +37,7 @@ ssa-nexus-image-cleaner-slacker:
     IMAGE: "scriptedatom/ssa-nexus-image-cleaner"
     TAGS: "latest ${ssa_pipeline_nexus_image_cleaner_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-nexus-image-cleaner
   script:
@@ -59,7 +59,7 @@ ssa-nexus-image-cleaner-discorder:
     IMAGE: "scriptedatom/ssa-nexus-image-cleaner"
     TAGS: "latest ${ssa_pipeline_nexus_image_cleaner_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-nexus-image-cleaner
   script:

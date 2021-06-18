@@ -37,7 +37,7 @@ ssa-git-mirror-slacker:
     IMAGE: "scriptedatom/ssa-git-mirror"
     TAGS: "latest ${ssa_git_mirror_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-git-mirror
   script:
@@ -59,7 +59,7 @@ ssa-git-mirror-discorder:
     IMAGE: "scriptedatom/ssa-git-mirror"
     TAGS: "latest ${ssa_git_mirror_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-git-mirror
   script:

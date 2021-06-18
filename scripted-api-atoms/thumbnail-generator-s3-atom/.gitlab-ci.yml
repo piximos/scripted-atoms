@@ -37,7 +37,7 @@ saa-thumbnail-generator-s3-slacker:
     IMAGE: "scriptedatom/saa-thumbnail-generator"
     TAGS: "latest ${saa_otp_maker_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-saa-thumbnail-generator-s3
   script:
@@ -59,7 +59,7 @@ saa-thumbnail-generator-s3-discorder:
     IMAGE: "scriptedatom/saa-thumbnail-generator"
     TAGS: "latest ${saa_otp_maker_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-saa-thumbnail-generator-s3
   script:

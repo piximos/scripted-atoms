@@ -37,7 +37,7 @@ saa-otp-maker-slacker:
     IMAGE: "scriptedatom/saa-otp-maker"
     TAGS: "latest ${saa_otp_maker_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-saa-otp-maker
   script:
@@ -59,7 +59,7 @@ saa-otp-maker-discorder:
     IMAGE: "scriptedatom/saa-otp-maker"
     TAGS: "latest ${saa_otp_maker_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-saa-otp-maker
   script:

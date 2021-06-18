@@ -37,7 +37,7 @@ saa-s3-file-unzipper-slacker:
     IMAGE: "scriptedatom/saa-s3-unzipper"
     TAGS: "latest ${saa_s3_file_unzipper_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-saa-s3-file-unzipper
   script:
@@ -59,7 +59,7 @@ saa-s3-file-unzipper-discorder:
     IMAGE: "scriptedatom/saa-s3-unzipper"
     TAGS: "latest ${saa_s3_file_unzipper_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-saa-s3-file-unzipper
   script:

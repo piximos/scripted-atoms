@@ -37,7 +37,7 @@ sta-s3-file-sync-slacker:
     IMAGE: "scriptedatom/sta-s3-file-sync"
     TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-sta-s3-file-sync
   script:
@@ -59,7 +59,7 @@ sta-s3-file-sync-discorder:
     IMAGE: "scriptedatom/sta-s3-file-sync"
     TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-sta-s3-file-sync
   script:

@@ -37,7 +37,7 @@ saa-qr-code-fs-slacker:
     IMAGE: "scriptedatom/saa-qr-code-generator-fs"
     TAGS: "latest ${saa_qr_code_fs_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-saa-qr-code-fs
   script:
@@ -59,7 +59,7 @@ saa-qr-code-fs-discorder:
     IMAGE: "scriptedatom/saa-qr-code-generator-fs"
     TAGS: "latest ${saa_qr_code_fs_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-saa-qr-code-fs
   script:

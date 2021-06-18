@@ -37,7 +37,7 @@ ssa-base-slacker:
     IMAGE: "scriptedatom/ssa-base"
     TAGS: "latest ${ssa_base_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-base
   script:
@@ -59,7 +59,7 @@ ssa-base-discorder:
     IMAGE: "scriptedatom/ssa-base"
     TAGS: "latest ${ssa_base_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-base
   script:

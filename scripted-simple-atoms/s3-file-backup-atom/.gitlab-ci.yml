@@ -37,7 +37,7 @@ ssa-s3-file-backup-slacker:
     IMAGE: "scriptedatom/ssa-s3-file-backup"
     TAGS: "latest ${ssa_s3_file_backup_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-s3-file-backup
   script:
@@ -59,7 +59,7 @@ ssa-s3-file-backup-discorder:
     IMAGE: "scriptedatom/ssa-s3-file-backup"
     TAGS: "latest ${ssa_s3_file_backup_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-s3-file-backup
   script:

@@ -37,7 +37,7 @@ ssa-uptime-slacker-slacker:
     IMAGE: "scriptedatom/ssa-uptime-slacker"
     TAGS: "latest ${ssa_pipeline_uptime_slacker_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-uptime-slacker
   script:
@@ -59,7 +59,7 @@ ssa-uptime-slacker-discorder:
     IMAGE: "scriptedatom/ssa-uptime-slacker"
     TAGS: "latest ${ssa_pipeline_uptime_slacker_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-uptime-slacker
   script:

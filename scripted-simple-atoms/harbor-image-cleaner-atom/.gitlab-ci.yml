@@ -37,7 +37,7 @@ ssa-harbor-image-cleaner-slacker:
     IMAGE: "scriptedatom/ssa-harbor-image-cleaner"
     TAGS: "latest ${ssa_pipeline_harbor_image_cleaner_version}"
   stage:
-    broadcast
+    slack-broadcast
   needs:
     - build-ssa-harbor-image-cleaner
   script:
@@ -59,7 +59,7 @@ ssa-harbor-image-cleaner-discorder:
     IMAGE: "scriptedatom/ssa-harbor-image-cleaner"
     TAGS: "latest ${ssa_pipeline_harbor_image_cleaner_version}"
   stage:
-    broadcast
+    discord-broadcast
   needs:
     - build-ssa-harbor-image-cleaner
   script:

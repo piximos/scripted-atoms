@@ -27,7 +27,8 @@ stages:
   - build-scripted-simple-atoms
   - build-scripted-api-atoms
   - build-scripted-task-atoms
-  - broadcast
+  - slack-broadcast
+  - discord-broadcast
   - cleaner
   - git-sync
 
