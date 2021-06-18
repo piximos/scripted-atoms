@@ -14,6 +14,7 @@ include:
   - local: /scripted-simple-atoms/nexus-image-cleaner-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/harbor-image-cleaner-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/pipeline-slacker-atom/.gitlab-ci.yml
+  - local: /scripted-simple-atoms/pipeline-discorder-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/s3-file-backup-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/uptime-slacker-atom/.gitlab-ci.yml
   # Scripted Task Atom Version Variables
@@ -22,18 +23,13 @@ include:
 
 stages:
   - pre-flight
-  - git-tagger
   - build-bases
-  - build-arm-bases
   - build-scripted-simple-atoms
   - build-scripted-api-atoms
   - build-scripted-task-atoms
-  - git-sync
   - broadcast
-  - post-flight
 
 before_script:
-  - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
   - echo "$DOCKER_REGISTRY_TOKEN" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
 
 validate-branch-name:
@@ -62,6 +58,7 @@ variables:
   ssa_git_tagger_version: "1.0"
   ssa_git_mirror_version: "1.0"
   ssa_pipeline_slacker_version: "1.0"
+  ssa_pipeline_discorder_version: "1.0"
   ssa_pipeline_harbor_image_cleaner_version: "1.0"
   ssa_pipeline_nexus_image_cleaner_version: "1.0"
   ssa_pipeline_uptime_slacker_version: "1.0"

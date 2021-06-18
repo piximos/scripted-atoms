@@ -1,0 +1,24 @@
+{
+  "variables": [
+    {
+      "name": "DISCORD_WEBHOOK_URL",
+      "desc": "The discord webhook URL for messaging.",
+      "required": true
+    },
+    {
+      "name": "DISCORD_MSG",
+      "desc": "The discord message to send.",
+      "required": true
+    },
+    {
+      "name": "DISCORD_BUTTON_LABEL",
+      "desc": "The label of the button to add in the components block.",
+      "required": false
+    },
+    {
+      "name": "DISCORD_BUTTON_URL",
+      "desc": "The url of the button to add in the components block.",
+      "required": false
+    }
+  ]
+}

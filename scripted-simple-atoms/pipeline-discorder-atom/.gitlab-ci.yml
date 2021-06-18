@@ -1,0 +1,50 @@
+build-ssa-pipeline-discorder:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      variables:
+        SA_BASE_VERSION: ${ssa_base_version}
+        IMAGE_VERSION: ${ssa_pipeline_discorder_version}
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/pipeline-discorder-atom/*
+  stage:
+    build-scripted-simple-atoms
+  variables:
+    IMAGE_NAME: "scriptedatom/ssa-pipeline-discorder"
+    DOCKER_IMAGE_PATH: "./scripted-simple-atoms/pipeline-discorder-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/pipeline-discorder-atom/."
+  needs:
+    - build-ssa-base
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+
+ssa-pipeline-discorder-slacker:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/pipeline-discorder-atom/*
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/pipeline-discorder-atom/*
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    IMAGE: "scriptedatom/ssa-pipeline-discorder"
+    TAGS: "latest ${ssa_pipeline_discorder_version}"
+  stage:
+    broadcast
+  needs:
+    - build-ssa-pipeline-discorder
+  script:
+    - ./ci-cd/scripts/pipeline-slacker.sh
