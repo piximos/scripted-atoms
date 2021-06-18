@@ -11,7 +11,7 @@ else
   IMG_TAGS=("$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')$IMG_COMPLEMENTARY_TAG")
 fi
 
-for IMG_TAG in "${IMG_TAGS[@]}"; do
+for IMG_TAG in ${IMG_TAGS}; do
   if [[ $BUILD_FOR_PRIVATE_REGISTRY = "true" ]]; then
   echo "Building image for private registry : ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMG_TAG}"
     sed -e "s:scriptedatom/:$CI_REGISTRY/piximos/scripted-atoms/:g" -i "${DOCKER_IMAGE_PATH}"

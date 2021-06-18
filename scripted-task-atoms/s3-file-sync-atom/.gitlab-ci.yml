@@ -21,7 +21,7 @@ build-sta-s3-file-sync:
   script:
     - ./ci-cd/scripts/build-public-image.sh
 
-sta-s3-file-sync-broadcaster:
+sta-s3-file-sync-slacker:
   tags:
     - piximos
   rules:
@@ -34,8 +34,6 @@ sta-s3-file-sync-broadcaster:
       variables:
         SUCCESS: "false"
   variables:
-    SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
-    DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     IMAGE: "scriptedatom/sta-s3-file-sync"
     TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
@@ -43,4 +41,42 @@ sta-s3-file-sync-broadcaster:
   needs:
     - build-sta-s3-file-sync
   script:
-    - ./ci-cd/scripts/pipeline-broadcaster.sh
+    - ./ci-cd/scripts/pipeline-slacker.sh
+
+sta-s3-file-sync-discorder:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    IMAGE: "scriptedatom/sta-s3-file-sync"
+    TAGS: "latest ${sta_s3_file_sync_version}"
+  stage:
+    broadcast
+  needs:
+    - build-sta-s3-file-sync
+  script:
+    - ./ci-cd/scripts/pipeline-discorder.sh
+
+sta-s3-file-sync-cleaner:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+  variables:
+    IMAGE: "scriptedatom/sta-s3-file-sync"
+    TAGS: "latest ${sta_s3_file_sync_version}"
+  stage:
+    cleaner
+  needs:
+    - build-sta-s3-file-sync
+  script:
+    - ./ci-cd/scripts/pipeline-cleaner.sh

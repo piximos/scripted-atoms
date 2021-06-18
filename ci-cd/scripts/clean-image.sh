@@ -7,7 +7,7 @@ else
   IMG_TAGS+=("$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')")
 fi
 
-for IMG_TAG in "${IMG_TAGS[@]}"; do
+for IMG_TAG in ${IMG_TAGS}; do
   echo "Deleting the following images : \
     $(docker images |
     grep -E '^(registry\.gitlab\.com\/piximos)|(scriptedatom\/)' |

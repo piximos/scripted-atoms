@@ -5,24 +5,47 @@ if [[ -z ${SA_BASE_VERSION} ]]; then
   exit 1
 fi
 
+build_image() {
+  base_img_tag="${1}"
+  img_tag="${2}"
+  echo "Building '${img_tag}' tag."
+  DOCKER_BUILDKIT=1 docker build \
+    --build-arg SA_BASE_VERSION="${base_img_tag}" \
+    -t "${IMAGE_NAME}:${img_tag}" \
+    -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
+}
+
+re_tag_image() {
+  src_tag="${1}"
+  dst_tag="${2}"
+  echo "Tagging '${dst_tag}' from '${src_tag}'."
+  docker tag \
+    "${IMAGE_NAME}:${src_tag}" \
+    "${IMAGE_NAME}:${dst_tag}"
+}
+
+push_image() {
+  img_tag="${1}"
+  echo "Pushing '${img_tag}' tag."
+  docker push "${IMAGE_NAME}:${img_tag}"
+  echo "Pushed public image : ${IMAGE_NAME}"
+}
+
+REPO_VERSION="$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
+
 echo "Building 'latest' tag."
 DOCKER_BUILDKIT=1 docker build \
   --build-arg SA_BASE_VERSION="${SA_BASE_VERSION}" \
   -t "${IMAGE_NAME}" \
   -f "${DOCKER_IMAGE_PATH}" "${DOCKER_BUILD_CONTEXT}"
 
-echo "Pushing 'latest' tag."
-docker push "${IMAGE_NAME}"
-echo "Pushed public image : ${IMAGE_NAME}"
+build_image "${SA_BASE_VERSION}" "latest"
+push_image "latest"
+
+build_image "${SA_BASE_VERSION}" "${REPO_VERSION}"
+push_image "${REPO_VERSION}"
 
 if [[ ${IMAGE_VERSION} ]]; then
-  echo "Tagging versioned image."
-  docker tag \
-    "${IMAGE_NAME}:latest" \
-    "${IMAGE_NAME}:${IMAGE_VERSION}"
-
-  echo "Pushing image : ${IMAGE_NAME}:${IMAGE_VERSION}"
-
-  docker push "${IMAGE_NAME}:${IMAGE_VERSION}"
-  echo "Pushed public image : ${IMAGE_NAME}"
+  re_tag_image "latest" "${IMAGE_VERSION}"
+  push_image "${IMAGE_VERSION}"
 fi
