@@ -15,5 +15,3 @@ RUN apk update \
 
 RUN mkdir ~/.ssh
 
-COPY env-variables-template.json $ENV_TEMPLATE_PATH
-COPY runner.sh $RUNNER_FILE_PATH

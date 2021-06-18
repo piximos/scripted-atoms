@@ -10,5 +10,3 @@ RUN apk update \
 ENV SA_DELETE_UNTAGGED_ARTIFACTS "true"
 
 
-COPY env-variables-template.json $ENV_TEMPLATE_PATH
-COPY runner.sh $RUNNER_FILE_PATH

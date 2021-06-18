@@ -19,3 +19,6 @@ WORKDIR /scripted-atom
 COPY runner.sh $RUNNER_FILE_PATH
 
 ENTRYPOINT /docker-entrypoint.sh
+
+ONBUILD COPY env-variables-template.json $ENV_TEMPLATE_PATH
+ONBUILD COPY runner.sh $RUNNER_FILE_PATH
