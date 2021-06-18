@@ -1,10 +1,5 @@
 #!/bin/bash
 
-
-echo "The current branch is : $(git describe)"
-echo "The current branch is : $(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)')"
-echo "The current branch is : $(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
-
 branch_name=$CI_COMMIT_REF_NAME
 echo "The current branch is : ${branch_name}"
 

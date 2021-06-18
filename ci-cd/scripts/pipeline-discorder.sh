@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAGS="$TAGS $(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
+TAGS="$TAGS $(git describe | grep -Eo '^([0-9]+(\-|\.)[0-9]+((\-|\.)[0-9]+)?)' | tr '-' '.')"
 
 if [[ "${SUCCESS}" == "true" ]]; then
   DISCORD_MSG="Successfully deployed the following tags :"
