@@ -11,6 +11,20 @@
       "required": true
     },
     {
+      "name": "ADD_GIT_LOG",
+      "desc": "Whether to add Git commit info in a changelog.",
+      "required": false,
+      "values": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "name": "GIT_LOG_PATH",
+      "desc": "The path for the Git changelog (using Markdown format).",
+      "required": false
+    },
+    {
       "name": "REPO_URI",
       "desc": "The repo URI.",
       "required": true

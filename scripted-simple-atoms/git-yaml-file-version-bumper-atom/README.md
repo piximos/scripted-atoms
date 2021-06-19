@@ -18,6 +18,13 @@ In order for the image to run, you need to specify the following environment var
 * `VERSION_PATH`
     * Description : The version variable path inside the YAML file.
     * Required : `true`
+* `ADD_GIT_LOG`
+    * Description : Whether to add Git commit info in a changelog.
+    * Required : `false`
+    * Acceptable Values : `true` | `false`
+* `GIT_LOG_PATH`
+    * Description : The path for the Git changelog (using Markdown format).
+    * Required : `false`
 * `REPO_URI`
     * Description : The repo URI.
     * Required : `true`

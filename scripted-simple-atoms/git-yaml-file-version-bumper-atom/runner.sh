@@ -47,9 +47,15 @@ fi
 target_version=$(generate_new_version "$latest_version")
 echo "Version bump : $latest_version -> $target_version"
 yq e "$VERSION_PATH |= $target_version " "$VERSION_FILE" -i
-
-# Commit version bump
 git add "$VERSION_FILE"
+
+if [[ "$ADD_GIT_LOG" == "true" ]]; then
+  #Add git log
+  echo -e "## $target_version \n\n Commit : \`$(git rev-parse HEAD)\`\n\n Author : $(git log -1 --format='%an') <$(git log -1 --format='Author : %ae')> \n\n Date \t: $(git log -1 --format='%cd') \n" > "$GIT_LOG_PATH"
+  git add "$GIT_LOG_PATH"
+fi
+
+# Committing changes
 git commit -m "$VERSION_BUMP_MESSAGE_PREFIX $target_version"
 # Push version bump
 git push origin "$REPO_BRANCH"
