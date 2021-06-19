@@ -11,6 +11,7 @@ include:
   - local: /scripted-simple-atoms/scripted-simple-atoms-base/.gitlab-ci.yml
   - local: /scripted-simple-atoms/git-mirror-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/git-tagger-atom/.gitlab-ci.yml
+  - local: /scripted-simple-atoms/git-yaml-file-version-bumper-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/nexus-image-cleaner-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/harbor-image-cleaner-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/pipeline-slacker-atom/.gitlab-ci.yml
@@ -44,26 +45,3 @@ validate-branch-name:
     pre-flight
   script:
     - ./ci-cd/scripts/validate-commit.sh
-
-variables:
-  # Scripted Api Atom Version Variables
-  saa_base_version: "1.0"
-  saa_qr_code_s3_version: "1.0"
-  saa_qr_code_fs_version: "1.0"
-  saa_otp_maker_version: "1.0"
-  saa_s3_file_unzipper_version: "1.0"
-  saa_thumbnail_generator_s3_version: "1.0"
-  # Scripted Task Atom Version Variables
-  sta_base_version: "1.0"
-  sta_s3_file_sync_version: "1.0"
-  # Scripted Simple Atom Version Variables
-  ssa_base_version: "1.1"
-  ssa_s3_file_backup_version: "1.1"
-  ssa_git_tagger_version: "1.1"
-  ssa_git_mirror_version: "1.1"
-  ssa_pipeline_slacker_version: "1.1"
-  ssa_pipeline_discorder_version: "1.1"
-  ssa_pipeline_harbor_image_cleaner_version: "1.1"
-  ssa_pipeline_nexus_image_cleaner_version: "1.1"
-  ssa_pipeline_uptime_slacker_version: "1.1"
-  ssa_pipeline_uptime_discorder_version: "1.1"

@@ -17,6 +17,15 @@ generate_new_tag() {
   echo "$target_tag"
 }
 
+switch_git_branch(){
+  git rev-parse --verify "$REPO_BRANCH" >/dev/null 2>/dev/null
+  if [ $? -eq 0 ]; then
+    git checkout "$REPO_BRANCH"
+  else
+    git checkout -b "$REPO_BRANCH"
+    fi
+}
+
 # Init global git configs
 git config --global user.email "$ATOM_ROBOT_USERNAME"
 git config --global user.name "$ATOM_ROBOT_EMAIL"
@@ -27,13 +36,20 @@ repo_url="$REPO_SCHEMA://$REPO_USER:$REPO_TOKEN@$REPO_URI"
 # Clone repo
 git clone "$repo_url" "$REPO_TARGET" </dev/null
 cd "$REPO_TARGET" || exit 1
+switch_git_branch
 
 # Retrieve latest tag
-latest_tag=$(git describe --tags "$(git rev-list --tags --max-count=1)" 2>/dev/null || echo "0-0")
+latest_tag="$(yq eval "$VERSION_PATH" "$VERSION_FILE" 2>/dev/null)"
+if [[ -z $latest_tag || "$latest_tag" == "null" ]]; then
+    latest_tag="0-0"
+fi
 # Bump tag
 target_tag=$(generate_new_tag "$latest_tag")
 echo "Tag bump : $latest_tag -> $target_tag"
+yq e "$VERSION_PATH |= $target_tag " "$VERSION_FILE" -i
+
 # Commit tag bump
-git tag -a "$target_tag" -m "$TAG_BUMP_MESSAGE_PREFIX $target_tag"
+git add "$VERSION_FILE"
+git commit -m "$TAG_BUMP_MESSAGE_PREFIX $target_tag"
 # Push tag bump
-git push origin --tags
+git push origin "$REPO_BRANCH"
