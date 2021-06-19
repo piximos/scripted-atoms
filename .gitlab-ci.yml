@@ -45,3 +45,11 @@ validate-branch-name:
     pre-flight
   script:
     - ./ci-cd/scripts/validate-commit.sh
+
+variables:
+  # Scripted Api Atom Version Variables
+  saa_base_version: "1.0"
+  # Scripted Task Atom Version Variables
+  sta_base_version: "1.0"
+  # Scripted Simple Atom Version Variables
+  ssa_base_version: "1.1"
