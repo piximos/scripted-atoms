@@ -7,9 +7,9 @@ ENV ATOM_ROBOT_USERNAME "dhraief.youssef@gmail.com"
 ENV ATOM_ROBOT_EMAIL "scripted-atom"
 ENV REPO_SCHEMA "https"
 ENV REPO_BRANCH "master"
-ENV TAG_BUMP_MESSAGE_PREFIX "Bumped tag to"
+ENV VERSION_BUMP_MESSAGE_PREFIX "Bumped version to"
 ENV BUMP_TYPE "minor"
-ENV TAG_DELIMITER "-"
+ENV VERSION_DELIMITER "-"
 ENV REPO_TARGET "/scripted-atom/repo"
 
 RUN apk update \

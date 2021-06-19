@@ -15,7 +15,7 @@ build-sta-s3-file-sync:
     DOCKER_IMAGE_PATH: "./scripted-task-atoms/s3-file-sync-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/s3-file-sync-atom/."
     SA_BASE_VERSION: ${sta_base_version}
-
+    IMAGE_VERSION: ${sta_s3_file_sync_version}
   needs:
     - build-sta-base
   script:
@@ -35,7 +35,7 @@ sta-s3-file-sync-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/sta-s3-file-sync"
-    TAGS: "latest"
+    TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +57,7 @@ sta-s3-file-sync-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/sta-s3-file-sync"
-    TAGS: "latest"
+    TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +73,7 @@ sta-s3-file-sync-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/sta-s3-file-sync"
-    TAGS: "latest"
+    TAGS: "latest ${sta_s3_file_sync_version}"
   stage:
     cleaner
   needs:

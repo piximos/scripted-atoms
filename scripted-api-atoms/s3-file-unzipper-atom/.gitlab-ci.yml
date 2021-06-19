@@ -15,7 +15,7 @@ build-saa-s3-file-unzipper:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/s3-file-unzipper-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/s3-file-unzipper-atom/."
     SA_BASE_VERSION: ${saa_base_version}
-
+    IMAGE_VERSION: ${saa_s3_file_unzipper_version}
   needs:
     - build-saa-base
   script:
@@ -35,7 +35,7 @@ saa-s3-file-unzipper-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-s3-unzipper"
-    TAGS: "latest"
+    TAGS: "latest ${saa_s3_file_unzipper_version}"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +57,7 @@ saa-s3-file-unzipper-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-s3-unzipper"
-    TAGS: "latest"
+    TAGS: "latest ${saa_s3_file_unzipper_version}"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +73,7 @@ saa-s3-file-unzipper-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/saa-s3-unzipper"
-    TAGS: "latest"
+    TAGS: "latest ${saa_s3_file_unzipper_version}"
   stage:
     cleaner
   needs:

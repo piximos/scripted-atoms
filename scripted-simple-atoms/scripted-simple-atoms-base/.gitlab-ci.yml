@@ -15,6 +15,7 @@ build-ssa-base:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/scripted-simple-atoms-base/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/scripted-simple-atoms-base/."
     SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_base_version}
   needs:
     - validate-branch-name
   script:
@@ -34,7 +35,7 @@ ssa-base-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-base"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_base_version}"
   stage:
     slack-broadcast
   needs:
@@ -56,7 +57,7 @@ ssa-base-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-base"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_base_version}"
   stage:
     discord-broadcast
   needs:
@@ -72,7 +73,7 @@ ssa-base-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/ssa-base"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_base_version}"
   stage:
     cleaner
   needs:

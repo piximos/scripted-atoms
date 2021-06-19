@@ -15,7 +15,7 @@ build-saa-qr-code-fs:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/qr-code-fs-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/qr-code-fs-atom/."
     SA_BASE_VERSION: ${saa_base_version}
-
+    IMAGE_VERSION: ${saa_qr_code_fs_version}
   needs:
     - build-saa-base
   script:
@@ -35,7 +35,7 @@ saa-qr-code-fs-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-qr-code-generator-fs"
-    TAGS: "latest"
+    TAGS: "latest ${saa_qr_code_fs_version}"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +57,7 @@ saa-qr-code-fs-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-qr-code-generator-fs"
-    TAGS: "latest"
+    TAGS: "latest ${saa_qr_code_fs_version}"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +73,7 @@ saa-qr-code-fs-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/saa-qr-code-generator-fs"
-    TAGS: "latest"
+    TAGS: "latest ${saa_qr_code_fs_version}"
   stage:
     cleaner
   needs:

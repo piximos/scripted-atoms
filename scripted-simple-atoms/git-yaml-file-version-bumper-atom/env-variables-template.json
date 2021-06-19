@@ -40,8 +40,8 @@
       "required": true
     },
     {
-      "name": "TAG_BUMP_MESSAGE_PREFIX",
-      "desc": "Message to start the tag commit message with.",
+      "name": "VERSION_BUMP_MESSAGE_PREFIX",
+      "desc": "Message to start the version commit message with.",
       "required": true
     },
     {
@@ -55,8 +55,8 @@
       "required": true
     },
     {
-      "name": "TAG_DELIMITER",
-      "desc": "Tag delimiter between minor and major versions.",
+      "name": "VERSION_DELIMITER",
+      "desc": "Version delimiter between minor and major versions.",
       "required": true,
       "values": [
         "-",

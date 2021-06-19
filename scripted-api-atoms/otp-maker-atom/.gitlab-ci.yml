@@ -15,7 +15,7 @@ build-saa-otp-maker:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/otp-maker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/otp-maker-atom/."
     SA_BASE_VERSION: ${saa_base_version}
-
+    IMAGE_VERSION: ${saa_otp_maker_version}
   needs:
     - build-saa-base
   script:
@@ -35,7 +35,7 @@ saa-otp-maker-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-otp-maker"
-    TAGS: "latest"
+    TAGS: "latest ${saa_otp_maker_version}"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +57,7 @@ saa-otp-maker-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-otp-maker"
-    TAGS: "latest"
+    TAGS: "latest ${saa_otp_maker_version}"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +73,7 @@ saa-otp-maker-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/saa-otp-maker"
-    TAGS: "latest"
+    TAGS: "latest ${saa_otp_maker_version}"
   stage:
     cleaner
   needs:

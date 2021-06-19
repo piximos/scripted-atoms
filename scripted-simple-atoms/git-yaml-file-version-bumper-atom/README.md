@@ -35,8 +35,8 @@ In order for the image to run, you need to specify the following environment var
 * `REPO_TOKEN`
     * Description : The robot user token.
     * Required : `true`
-* `TAG_BUMP_MESSAGE_PREFIX`
-    * Description : Message to start the tag commit message with.
+* `VERSION_BUMP_MESSAGE_PREFIX`
+    * Description : Message to start the version commit message with.
     * Required : `true`
 * `ATOM_ROBOT_USERNAME`
     * Description : The robot username inside git configurations.
@@ -44,8 +44,8 @@ In order for the image to run, you need to specify the following environment var
 * `ATOM_ROBOT_EMAIL`
     * Description : The robot email inside git configurations.
     * Required : `true`
-* `TAG_DELIMITER`
-    * Description : Tag delimiter between minor and major versions.
+* `VERSION_DELIMITER`
+    * Description : Version delimiter between minor and major versions.
     * Required : `true`
     * Acceptable Values : `-` | `_` | `.`
 * `BUMP_TYPE`

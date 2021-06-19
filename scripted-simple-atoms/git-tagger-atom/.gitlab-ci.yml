@@ -15,6 +15,7 @@ build-ssa-git-tagger:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/git-tagger-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/git-tagger-atom/."
     SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_git_tagger_version}
   needs:
     - build-ssa-base
   script:
@@ -34,7 +35,7 @@ ssa-git-tagger-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-git-tagger"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_git_tagger_version}"
   stage:
     slack-broadcast
   needs:
@@ -56,7 +57,7 @@ ssa-git-tagger-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-git-tagger"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_git_tagger_version}"
   stage:
     discord-broadcast
   needs:
@@ -72,7 +73,7 @@ ssa-git-tagger-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/ssa-git-tagger"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_git_tagger_version}"
   stage:
     cleaner
   needs:

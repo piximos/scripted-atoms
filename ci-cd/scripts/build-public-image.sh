@@ -1,7 +1,16 @@
 #!/bin/bash
 
+if [[ -z ${SA_BETA_BUILD} ]]; then
+  SA_BETA_BUILD="false"
+fi
+
 if [[ -z ${SA_BASE_VERSION} ]]; then
   echo "Missing 'SA_BASE_VERSION' variable"
+  exit 1
+fi
+
+if [[ -z ${IMAGE_VERSION} ]]; then
+  echo "Missing 'IMAGE_VERSION' variable"
   exit 1
 fi
 
@@ -31,10 +40,15 @@ push_image() {
   echo "Pushed public image : ${IMAGE_NAME}"
 }
 
-REPO_VERSION="$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
+REPO_VERSION="sa-$(git describe | grep -Eo '^([0-9]+\-[0-9]+\-[0-9]+)' | tr '-' '.')"
 
 build_image "${SA_BASE_VERSION}" "${REPO_VERSION}"
 push_image "${REPO_VERSION}"
 
-re_tag_image "${REPO_VERSION}" "latest"
-push_image "latest"
+if [[ "$SA_BETA_BUILD" != "true" ]]; then
+  build_image "${SA_BASE_VERSION}" "${IMAGE_VERSION}"
+  push_image "${IMAGE_VERSION}"
+
+  re_tag_image "${IMAGE_VERSION}" "latest"
+  push_image "latest"
+fi

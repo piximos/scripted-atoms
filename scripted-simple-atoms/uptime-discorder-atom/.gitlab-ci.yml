@@ -15,6 +15,7 @@ build-ssa-uptime-discorder:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/uptime-discorder-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/uptime-discorder-atom/."
     SA_BASE_VERSION: ${ssa_base_version}
+    IMAGE_VERSION: ${ssa_pipeline_uptime_discorder_version}
   needs:
     - build-ssa-base
   script:
@@ -34,7 +35,7 @@ ssa-uptime-discorder-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-uptime-discorder"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_pipeline_uptime_discorder_version}"
   stage:
     slack-broadcast
   needs:
@@ -56,7 +57,7 @@ ssa-uptime-discorder-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-uptime-discorder"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_pipeline_uptime_discorder_version}"
   stage:
     discord-broadcast
   needs:
@@ -72,7 +73,7 @@ ssa-uptime-discorder-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/ssa-uptime-discorder"
-    TAGS: "latest"
+    TAGS: "latest ${ssa_pipeline_uptime_discorder_version}"
   stage:
     cleaner
   needs:

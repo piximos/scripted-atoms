@@ -1,20 +1,20 @@
 #!/bin/bash
 
-generate_new_tag() {
-  # Transform tag to array of numbers
-  IFS=', ' read -r -a latest_tag_elements <<<"$(echo "${1}" | grep -Eo '^([0-9]+(\-|\_|\.)[0-9]+)' | tr "-" ' ' | tr "_" ' ' | tr "." ' ')"
+generate_new_version() {
+  # Transform version to array of numbers
+  IFS=', ' read -r -a latest_version_elements <<<"$(echo "${1}" | grep -Eo '^([0-9]+(\-|\_|\.)[0-9]+)' | tr "-" ' ' | tr "_" ' ' | tr "." ' ')"
   # Extract minor and major version numbers
-  minor_tag=${latest_tag_elements[${#latest_tag_elements[@]} - 1]}
-  major_tag=${latest_tag_elements[${#latest_tag_elements[@]} - 2]}
+  minor_version=${latest_version_elements[${#latest_version_elements[@]} - 1]}
+  major_version=${latest_version_elements[${#latest_version_elements[@]} - 2]}
 
   if [[ $BUMP_TYPE == "minor" ]]; then
     # Bump minor version
-    target_tag="$major_tag$TAG_DELIMITER$((minor_tag + 1))"
+    target_version="$major_version$VERSION_DELIMITER$((minor_version + 1))"
   else
     # Bump major version
-    target_tag="$((major_tag + 1))$TAG_DELIMITER$minor_tag"
+    target_version="$((major_version + 1))$VERSION_DELIMITER$minor_version"
   fi
-  echo "$target_tag"
+  echo "$target_version"
 }
 
 switch_git_branch(){
@@ -38,18 +38,18 @@ git clone "$repo_url" "$REPO_TARGET" </dev/null
 cd "$REPO_TARGET" || exit 1
 switch_git_branch
 
-# Retrieve latest tag
-latest_tag="$(yq eval "$VERSION_PATH" "$VERSION_FILE" 2>/dev/null)"
-if [[ -z $latest_tag || "$latest_tag" == "null" ]]; then
-    latest_tag="0-0"
+# Retrieve latest version
+latest_version="$(yq eval "$VERSION_PATH" "$VERSION_FILE" 2>/dev/null)"
+if [[ -z $latest_version || "$latest_version" == "null" ]]; then
+    latest_version="0-0"
 fi
-# Bump tag
-target_tag=$(generate_new_tag "$latest_tag")
-echo "Tag bump : $latest_tag -> $target_tag"
-yq e "$VERSION_PATH |= $target_tag " "$VERSION_FILE" -i
+# Bump version
+target_version=$(generate_new_version "$latest_version")
+echo "Version bump : $latest_version -> $target_version"
+yq e "$VERSION_PATH |= $target_version " "$VERSION_FILE" -i
 
-# Commit tag bump
+# Commit version bump
 git add "$VERSION_FILE"
-git commit -m "$TAG_BUMP_MESSAGE_PREFIX $target_tag"
-# Push tag bump
+git commit -m "$VERSION_BUMP_MESSAGE_PREFIX $target_version"
+# Push version bump
 git push origin "$REPO_BRANCH"
