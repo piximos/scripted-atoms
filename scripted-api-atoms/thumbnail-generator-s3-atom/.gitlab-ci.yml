@@ -4,8 +4,8 @@ build-saa-thumbnail-generator-s3:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/thumbnail-generator-s3-atom/*
+        - scripted-api-atoms/scripted-api-atoms-base/changelog.md
+        - scripted-api-atoms/thumbnail-generator-s3-atom/changelog.md
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       when: on_success
   stage:
@@ -15,11 +15,34 @@ build-saa-thumbnail-generator-s3:
     DOCKER_IMAGE_PATH: "./scripted-api-atoms/thumbnail-generator-s3-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/thumbnail-generator-s3-atom/."
     SA_BASE_VERSION: ${saa_base_version}
-    IMAGE_VERSION: ${saa_otp_maker_version}
-  needs:
-    - build-saa-base
+    IMAGE_VERSION: ${saa_thumbnail_generator_s3_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+
+bump-saa-thumbnail-generator-s3-version:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      changes:
+        - scripted-api-atoms/scripted-api-atoms-base/*
+        - scripted-api-atoms/thumbnail-generator-s3-atom/*
+  stage:
+    bump-scripted-api-atoms
+  variables:
+    VERSION_FILE: "./.gitlab-ci.yml"
+    VERSION_PATH: ".variables.saa_thumbnail_generator_s3_version"
+    ADD_GIT_LOG: "true"
+    GIT_LOG_PATH: "./scripted-api-atoms/thumbnail-generator-s3-atom/changelog.md"
+    VERSION_BUMP_MESSAGE_PREFIX: "Updated 'saa-thumbnail-generator-s3' version to"
+    REPO_BRANCH: "master"
+    REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
+    REPO_USER: ${COMWORK_REPO_USER}
+    REPO_TOKEN: ${COMWORK_REPO_TOKEN}
+  script:
+    - ./ci-cd/scripts/bump-sa-version.sh
+  needs:
+    - validate-branch-name
 
 saa-thumbnail-generator-s3-slacker:
   tags:
@@ -35,7 +58,7 @@ saa-thumbnail-generator-s3-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-thumbnail-generator"
-    TAGS: "latest ${saa_otp_maker_version}"
+    TAGS: "latest ${saa_thumbnail_generator_s3_version}"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +80,7 @@ saa-thumbnail-generator-s3-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/saa-thumbnail-generator"
-    TAGS: "latest ${saa_otp_maker_version}"
+    TAGS: "latest ${saa_thumbnail_generator_s3_version}"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +96,7 @@ saa-thumbnail-generator-s3-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/saa-thumbnail-generator"
-    TAGS: "latest ${saa_otp_maker_version}"
+    TAGS: "latest ${saa_thumbnail_generator_s3_version}"
   stage:
     cleaner
   needs:
