@@ -4,8 +4,8 @@ build-ssa-s3-file-backup:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/s3-file-backup-atom/*
+        - scripted-simple-atoms/scripted-simple-atoms-base/changelog.md
+        - scripted-simple-atoms/s3-file-backup-atom/changelog.md
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       when: on_success
   stage:
@@ -16,10 +16,33 @@ build-ssa-s3-file-backup:
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/s3-file-backup-atom/."
     SA_BASE_VERSION: ${ssa_base_version}
     IMAGE_VERSION: ${ssa_s3_file_backup_version}
-  needs:
-    - build-ssa-base
   script:
     - ./ci-cd/scripts/build-public-image.sh
+
+bump-ssa-s3-file-backup-version:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/s3-file-backup-atom/*
+  stage:
+    bump-scripted-simple-atoms
+  variables:
+    VERSION_FILE: "./.gitlab-ci.yml"
+    VERSION_PATH: ".variables.ssa_s3_file_backup_version"
+    ADD_GIT_LOG: "true"
+    GIT_LOG_PATH: "./scripted-simple-atoms/s3-file-backup-atom/changelog.md"
+    VERSION_BUMP_MESSAGE_PREFIX: "Updated 'ssa-s3-file-backup' version to"
+    REPO_BRANCH: "master"
+    REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
+    REPO_USER: ${COMWORK_REPO_USER}
+    REPO_TOKEN: ${COMWORK_REPO_TOKEN}
+  script:
+    - ./ci-cd/scripts/bump-sa-version.sh
+  needs:
+    - validate-branch-name
 
 ssa-s3-file-backup-slacker:
   tags:

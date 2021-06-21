@@ -4,8 +4,8 @@ build-ssa-uptime-discorder:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/uptime-discorder-atom/*
+        - scripted-simple-atoms/scripted-simple-atoms-base/changelog.md
+        - scripted-simple-atoms/uptime-discorder-atom/changelog.md
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       when: on_success
   stage:
@@ -15,11 +15,34 @@ build-ssa-uptime-discorder:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/uptime-discorder-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/uptime-discorder-atom/."
     SA_BASE_VERSION: ${ssa_base_version}
-    IMAGE_VERSION: ${ssa_pipeline_uptime_discorder_version}
-  needs:
-    - build-ssa-base
+    IMAGE_VERSION: ${ssa_uptime_discorder_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+
+bump-ssa-uptime-discorder-version:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      changes:
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/uptime-discorder-atom/*
+  stage:
+    bump-scripted-simple-atoms
+  variables:
+    VERSION_FILE: "./.gitlab-ci.yml"
+    VERSION_PATH: ".variables.ssa_uptime_discorder_version"
+    ADD_GIT_LOG: "true"
+    GIT_LOG_PATH: "./scripted-simple-atoms/uptime-discorder-atom/changelog.md"
+    VERSION_BUMP_MESSAGE_PREFIX: "Updated 'ssa-uptime-discorder' version to"
+    REPO_BRANCH: "master"
+    REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
+    REPO_USER: ${COMWORK_REPO_USER}
+    REPO_TOKEN: ${COMWORK_REPO_TOKEN}
+  script:
+    - ./ci-cd/scripts/bump-sa-version.sh
+  needs:
+    - validate-branch-name
 
 ssa-uptime-discorder-slacker:
   tags:
@@ -35,7 +58,7 @@ ssa-uptime-discorder-slacker:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-uptime-discorder"
-    TAGS: "latest ${ssa_pipeline_uptime_discorder_version}"
+    TAGS: "latest ${ssa_uptime_discorder_version}"
   stage:
     slack-broadcast
   needs:
@@ -57,7 +80,7 @@ ssa-uptime-discorder-discorder:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-uptime-discorder"
-    TAGS: "latest ${ssa_pipeline_uptime_discorder_version}"
+    TAGS: "latest ${ssa_uptime_discorder_version}"
   stage:
     discord-broadcast
   needs:
@@ -73,7 +96,7 @@ ssa-uptime-discorder-cleaner:
       when: on_success
   variables:
     IMAGE: "scriptedatom/ssa-uptime-discorder"
-    TAGS: "latest ${ssa_pipeline_uptime_discorder_version}"
+    TAGS: "latest ${ssa_uptime_discorder_version}"
   stage:
     cleaner
   needs:

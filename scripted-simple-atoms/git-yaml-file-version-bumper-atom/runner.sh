@@ -2,7 +2,7 @@
 
 generate_new_version() {
   # Transform version to array of numbers
-  IFS=', ' read -r -a latest_version_elements <<<"$(echo "${1}" | grep -Eo '^([0-9]+(\-|\_|\.)[0-9]+)' | tr "-" ' ' | tr "_" ' ' | tr "." ' ')"
+  IFS=', ' read -r -a latest_version_elements <<<"$(echo "${1}" | grep -Eo '^([0-9]+(\-|\_|\.)[0-9]+)' | tr -d \" | tr "-" ' ' | tr "_" ' ' | tr "." ' ')"
   # Extract minor and major version numbers
   minor_version=${latest_version_elements[${#latest_version_elements[@]} - 1]}
   major_version=${latest_version_elements[${#latest_version_elements[@]} - 2]}

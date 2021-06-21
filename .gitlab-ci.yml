@@ -26,6 +26,7 @@ include:
 stages:
   - pre-flight
   - build-bases
+  - bump-bases
   - build-scripted-simple-atoms
   - bump-scripted-simple-atoms
   - build-scripted-api-atoms
@@ -68,7 +69,7 @@ variables:
   ssa_git_mirror_version: "1.1"
   ssa_pipeline_slacker_version: "1.1"
   ssa_pipeline_discorder_version: "1.1"
-  ssa_pipeline_harbor_image_cleaner_version: "1.1"
-  ssa_pipeline_nexus_image_cleaner_version: "1.1"
-  ssa_pipeline_uptime_slacker_version: "1.1"
-  ssa_pipeline_uptime_discorder_version: "1.1"
+  ssa_harbor_image_cleaner_version: "1.1"
+  ssa_nexus_image_cleaner_version: "1.1"
+  ssa_uptime_slacker_version: "1.1"
+  ssa_uptime_discorder_version: "1.1"
