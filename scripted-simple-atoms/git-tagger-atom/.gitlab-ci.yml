@@ -41,28 +41,6 @@ ssa-git-tagger-slacker:
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
 
-ssa-git-tagger-discorder:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/ssa-git-tagger"
-    TAGS: "latest ${ssa_git_tagger_version}"
-  stage:
-    discord-broadcast
-  needs:
-    - build-ssa-git-tagger
-  script:
-    - ./ci-cd/scripts/pipeline-discorder.sh
-
 ssa-git-tagger-cleaner:
   tags:
     - piximos

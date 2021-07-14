@@ -41,28 +41,6 @@ saa-qr-code-fs-slacker:
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
 
-saa-qr-code-fs-discorder:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/saa-qr-code-generator-fs"
-    TAGS: "latest ${saa_qr_code_fs_version}"
-  stage:
-    discord-broadcast
-  needs:
-    - build-saa-qr-code-fs
-  script:
-    - ./ci-cd/scripts/pipeline-discorder.sh
-
 saa-qr-code-fs-cleaner:
   tags:
     - piximos

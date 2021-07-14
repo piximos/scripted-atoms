@@ -41,28 +41,6 @@ ssa-uptime-slacker-slacker:
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
 
-ssa-uptime-slacker-discorder:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/ssa-uptime-slacker"
-    TAGS: "latest ${ssa_uptime_slacker_version}"
-  stage:
-    discord-broadcast
-  needs:
-    - build-ssa-uptime-slacker
-  script:
-    - ./ci-cd/scripts/pipeline-discorder.sh
-
 ssa-uptime-slacker-cleaner:
   tags:
     - piximos

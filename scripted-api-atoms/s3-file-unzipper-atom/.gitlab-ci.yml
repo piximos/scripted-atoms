@@ -41,28 +41,6 @@ saa-s3-file-unzipper-slacker:
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
 
-saa-s3-file-unzipper-discorder:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/saa-s3-unzipper"
-    TAGS: "latest ${saa_s3_file_unzipper_version}"
-  stage:
-    discord-broadcast
-  needs:
-    - build-saa-s3-file-unzipper
-  script:
-    - ./ci-cd/scripts/pipeline-discorder.sh
-
 saa-s3-file-unzipper-cleaner:
   tags:
     - piximos

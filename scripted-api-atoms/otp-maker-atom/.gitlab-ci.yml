@@ -41,28 +41,6 @@ saa-otp-maker-slacker:
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
 
-saa-otp-maker-discorder:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/saa-otp-maker"
-    TAGS: "latest ${saa_otp_maker_version}"
-  stage:
-    discord-broadcast
-  needs:
-    - build-saa-otp-maker
-  script:
-    - ./ci-cd/scripts/pipeline-discorder.sh
-
 saa-otp-maker-cleaner:
   tags:
     - piximos

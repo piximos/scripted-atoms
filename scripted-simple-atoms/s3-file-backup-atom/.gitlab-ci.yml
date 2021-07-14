@@ -41,28 +41,6 @@ ssa-s3-file-backup-slacker:
   script:
     - ./ci-cd/scripts/pipeline-slacker.sh
 
-ssa-s3-file-backup-discorder:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/ssa-s3-file-backup"
-    TAGS: "latest ${ssa_s3_file_backup_version}"
-  stage:
-    discord-broadcast
-  needs:
-    - build-ssa-s3-file-backup
-  script:
-    - ./ci-cd/scripts/pipeline-discorder.sh
-
 ssa-s3-file-backup-cleaner:
   tags:
     - piximos
