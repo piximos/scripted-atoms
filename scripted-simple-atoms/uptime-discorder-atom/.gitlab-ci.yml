@@ -3,6 +3,7 @@ build-ssa-uptime-discorder:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/uptime-discorder-atom/*

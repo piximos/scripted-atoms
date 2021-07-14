@@ -3,6 +3,7 @@ build-ssa-nexus-image-cleaner:
     - piximos
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
       changes:
         - scripted-simple-atoms/scripted-simple-atoms-base/*
         - scripted-simple-atoms/nexus-image-cleaner-atom/*
