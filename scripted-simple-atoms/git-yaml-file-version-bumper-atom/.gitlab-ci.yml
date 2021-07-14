@@ -16,6 +16,8 @@ build-ssa-git-yaml-file-version-bumper:
     IMAGE_VERSION: ${ssa_git_yaml_file_version_bumper}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-git-yaml-file-version-bumper-slacker:
   tags:

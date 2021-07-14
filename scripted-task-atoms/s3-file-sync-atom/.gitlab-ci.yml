@@ -16,6 +16,8 @@ build-sta-s3-file-sync:
     IMAGE_VERSION: ${sta_s3_file_sync_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-sta-base
 
 sta-s3-file-sync-slacker:
   tags:

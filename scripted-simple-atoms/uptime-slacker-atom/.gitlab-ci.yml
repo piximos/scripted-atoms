@@ -16,6 +16,8 @@ build-ssa-uptime-slacker:
     IMAGE_VERSION: ${ssa_uptime_slacker_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-uptime-slacker-slacker:
   tags:

@@ -14,10 +14,10 @@ build-sta-base:
     DOCKER_BUILD_CONTEXT: "./scripted-task-atoms/scripted-task-atoms-base/."
     SA_BASE_VERSION: ${sta_base_version}
     IMAGE_VERSION: ${sta_base_version}
-  needs:
-    - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - validate-branch-name
 
 sta-base-slacker:
   tags:

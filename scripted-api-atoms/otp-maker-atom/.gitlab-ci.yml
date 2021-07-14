@@ -16,6 +16,8 @@ build-saa-otp-maker:
     IMAGE_VERSION: ${saa_otp_maker_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-saa-base
 
 saa-otp-maker-slacker:
   tags:

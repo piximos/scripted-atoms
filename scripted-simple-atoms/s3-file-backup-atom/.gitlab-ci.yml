@@ -16,6 +16,8 @@ build-ssa-s3-file-backup:
     IMAGE_VERSION: ${ssa_s3_file_backup_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-s3-file-backup-slacker:
   tags:

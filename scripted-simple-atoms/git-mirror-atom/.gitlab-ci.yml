@@ -16,6 +16,8 @@ build-ssa-git-mirror:
     IMAGE_VERSION: ${ssa_git_mirror_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-git-mirror-slacker:
   tags:

@@ -14,10 +14,10 @@ build-ssa-base:
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/scripted-simple-atoms-base/."
     SA_BASE_VERSION: ${ssa_base_version}
     IMAGE_VERSION: ${ssa_base_version}
-  needs:
-    - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - validate-branch-name
 
 ssa-base-slacker:
   tags:

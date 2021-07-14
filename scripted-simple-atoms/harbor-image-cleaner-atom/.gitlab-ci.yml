@@ -16,6 +16,8 @@ build-ssa-harbor-image-cleaner:
     IMAGE_VERSION: ${ssa_harbor_image_cleaner_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-harbor-image-cleaner-slacker:
   tags:

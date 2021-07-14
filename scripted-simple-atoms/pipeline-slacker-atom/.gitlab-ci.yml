@@ -16,6 +16,8 @@ build-ssa-pipeline-slacker:
     IMAGE_VERSION: ${ssa_pipeline_slacker_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-pipeline-slacker-slacker:
   tags:

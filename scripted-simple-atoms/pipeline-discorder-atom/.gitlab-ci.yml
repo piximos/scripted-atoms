@@ -16,6 +16,8 @@ build-ssa-pipeline-discorder:
     IMAGE_VERSION: ${ssa_pipeline_discorder_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-pipeline-discorder-slacker:
   tags:

@@ -14,10 +14,10 @@ build-saa-base:
     DOCKER_BUILD_CONTEXT: "./scripted-api-atoms/scripted-api-atoms-base/."
     SA_BASE_VERSION: ${saa_base_version}
     IMAGE_VERSION: ${saa_base_version}
-  needs:
-    - validate-branch-name
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - validate-branch-name
 
 saa-base-slacker:
   tags:

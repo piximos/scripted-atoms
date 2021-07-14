@@ -16,6 +16,8 @@ build-saa-qr-code-fs:
     IMAGE_VERSION: ${saa_qr_code_fs_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-saa-base
 
 saa-qr-code-fs-slacker:
   tags:

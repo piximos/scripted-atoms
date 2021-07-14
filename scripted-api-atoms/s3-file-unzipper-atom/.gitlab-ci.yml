@@ -16,6 +16,8 @@ build-saa-s3-file-unzipper:
     IMAGE_VERSION: ${saa_s3_file_unzipper_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-saa-base
 
 saa-s3-file-unzipper-slacker:
   tags:

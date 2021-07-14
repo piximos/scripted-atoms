@@ -16,6 +16,8 @@ build-ssa-uptime-discorder:
     IMAGE_VERSION: ${ssa_uptime_discorder_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-uptime-discorder-slacker:
   tags:

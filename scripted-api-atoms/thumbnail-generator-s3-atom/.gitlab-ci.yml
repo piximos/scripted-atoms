@@ -16,6 +16,8 @@ build-saa-thumbnail-generator-s3:
     IMAGE_VERSION: ${saa_thumbnail_generator_s3_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-saa-base
 
 saa-thumbnail-generator-s3-slacker:
   tags:

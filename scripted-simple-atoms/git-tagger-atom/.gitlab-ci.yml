@@ -16,6 +16,8 @@ build-ssa-git-tagger:
     IMAGE_VERSION: ${ssa_git_tagger_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-git-tagger-slacker:
   tags:

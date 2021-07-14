@@ -16,6 +16,8 @@ build-ssa-nexus-image-cleaner:
     IMAGE_VERSION: ${ssa_nexus_image_cleaner_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-ssa-base
 
 ssa-nexus-image-cleaner-slacker:
   tags:
