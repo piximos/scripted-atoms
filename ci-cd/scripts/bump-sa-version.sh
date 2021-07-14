@@ -11,4 +11,5 @@ docker run --rm \
   -e REPO_URI="$REPO_URI" \
   -e REPO_USER="$REPO_USER" \
   -e REPO_TOKEN="$REPO_TOKEN" \
+  -e VERSION_DELIMITER="." \
   scriptedatom/ssa-git-yaml-file-version-bumper:latest
