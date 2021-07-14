@@ -4,10 +4,8 @@ build-sta-s3-file-sync:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-task-atoms/scripted-task-atoms-base/changelog.md
-        - scripted-task-atoms/s3-file-sync-atom/changelog.md
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
+        - scripted-task-atoms/scripted-task-atoms-base/*
+        - scripted-task-atoms/s3-file-sync-atom/*
   stage:
     build-scripted-task-atoms
   variables:
@@ -18,31 +16,6 @@ build-sta-s3-file-sync:
     IMAGE_VERSION: ${sta_s3_file_sync_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
-
-bump-sta-s3-file-sync-version:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-task-atoms/scripted-task-atoms-base/*
-        - scripted-task-atoms/s3-file-sync-atom/*
-  stage:
-    bump-scripted-task-atoms
-  variables:
-    VERSION_FILE: "./.gitlab-ci.yml"
-    VERSION_PATH: ".variables.sta_s3_file_sync_version"
-    ADD_GIT_LOG: "true"
-    GIT_LOG_PATH: "./scripted-task-atoms/s3-file-sync-atom/changelog.md"
-    VERSION_BUMP_MESSAGE_PREFIX: "Updated 'sta-s3-file-sync' version to"
-    REPO_BRANCH: "master"
-    REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
-    REPO_USER: ${COMWORK_REPO_USER}
-    REPO_TOKEN: ${COMWORK_REPO_TOKEN}
-  script:
-    - ./ci-cd/scripts/bump-sa-version.sh
-  needs:
-    - validate-branch-name
 
 sta-s3-file-sync-slacker:
   tags:

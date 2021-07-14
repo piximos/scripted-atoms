@@ -4,10 +4,8 @@ build-saa-otp-maker:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-api-atoms/scripted-api-atoms-base/changelog.md
-        - scripted-api-atoms/otp-maker-atom/changelog.md
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
+        - scripted-api-atoms/scripted-api-atoms-base/*
+        - scripted-api-atoms/otp-maker-atom/*
   stage:
     build-scripted-api-atoms
   variables:
@@ -18,31 +16,6 @@ build-saa-otp-maker:
     IMAGE_VERSION: ${saa_otp_maker_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
-
-bump-saa-otp-maker-version:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-api-atoms/scripted-api-atoms-base/*
-        - scripted-api-atoms/otp-maker-atom/*
-  stage:
-    bump-scripted-api-atoms
-  variables:
-    VERSION_FILE: "./.gitlab-ci.yml"
-    VERSION_PATH: ".variables.saa_otp_maker_version"
-    ADD_GIT_LOG: "true"
-    GIT_LOG_PATH: "./scripted-api-atoms/otp-maker-atom/changelog.md"
-    VERSION_BUMP_MESSAGE_PREFIX: "Updated 'saa-otp-maker' version to"
-    REPO_BRANCH: "master"
-    REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
-    REPO_USER: ${COMWORK_REPO_USER}
-    REPO_TOKEN: ${COMWORK_REPO_TOKEN}
-  script:
-    - ./ci-cd/scripts/bump-sa-version.sh
-  needs:
-    - validate-branch-name
 
 saa-otp-maker-slacker:
   tags:

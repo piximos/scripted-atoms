@@ -4,10 +4,8 @@ build-ssa-git-yaml-file-version-bumper:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/changelog.md
-        - scripted-simple-atoms/git-yaml-file-version-bumper-atom/changelog.md
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
+        - scripted-simple-atoms/scripted-simple-atoms-base/*
+        - scripted-simple-atoms/git-yaml-file-version-bumper-atom/*
   stage:
     build-scripted-simple-atoms
   variables:
@@ -18,31 +16,6 @@ build-ssa-git-yaml-file-version-bumper:
     IMAGE_VERSION: ${ssa_git_yaml_file_version_bumper}
   script:
     - ./ci-cd/scripts/build-public-image.sh
-
-bump-ssa-git-yaml-file-version-bumper-version:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      changes:
-        - scripted-simple-atoms/scripted-simple-atoms-base/*
-        - scripted-simple-atoms/git-yaml-file-version-bumper-atom/*
-  stage:
-    bump-scripted-simple-atoms
-  variables:
-    VERSION_FILE: "./.gitlab-ci.yml"
-    VERSION_PATH: ".variables.ssa_git_yaml_file_version_bumper"
-    ADD_GIT_LOG: "true"
-    GIT_LOG_PATH: "./scripted-simple-atoms/git-yaml-file-version-bumper-atom/changelog.md"
-    VERSION_BUMP_MESSAGE_PREFIX: "Updated 'ssa-git-yaml-file-version-bumper' version to"
-    REPO_BRANCH: "master"
-    REPO_URI: "gitlab.comwork.io/ydhraief/scripted-atoms.git"
-    REPO_USER: ${COMWORK_REPO_USER}
-    REPO_TOKEN: ${COMWORK_REPO_TOKEN}
-  script:
-    - ./ci-cd/scripts/bump-sa-version.sh
-  needs:
-    - validate-branch-name
 
 ssa-git-yaml-file-version-bumper-slacker:
   tags:
