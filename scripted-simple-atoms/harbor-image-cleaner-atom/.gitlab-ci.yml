@@ -19,7 +19,7 @@ build-ssa-harbor-image-cleaner:
   needs:
     - build-ssa-base
 
-ssa-harbor-image-cleaner-slacker:
+ssa-harbor-image-cleaner-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ ssa-harbor-image-cleaner-slacker:
     IMAGE: "scriptedatom/ssa-harbor-image-cleaner"
     TAGS: "latest ${ssa_harbor_image_cleaner_version}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-ssa-harbor-image-cleaner
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-ssa-harbor-image-cleaner-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/ssa-harbor-image-cleaner"
-    TAGS: "latest ${ssa_harbor_image_cleaner_version}"
-  stage:
-    cleaner
-  needs:
-    - build-ssa-harbor-image-cleaner
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh

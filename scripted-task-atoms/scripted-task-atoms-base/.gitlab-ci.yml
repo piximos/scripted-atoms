@@ -19,7 +19,7 @@ build-sta-base:
   needs:
     - validate-branch-name
 
-sta-base-slacker:
+sta-base-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ sta-base-slacker:
     IMAGE: "scriptedatom/sta-base"
     TAGS: "latest ${sta_base_version}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-sta-base
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-sta-base-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/sta-base"
-    TAGS: "latest ${sta_base_version}"
-  stage:
-    cleaner
-  needs:
-    - build-sta-base
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh

@@ -19,7 +19,7 @@ build-saa-otp-maker:
   needs:
     - build-saa-base
 
-saa-otp-maker-slacker:
+saa-otp-maker-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ saa-otp-maker-slacker:
     IMAGE: "scriptedatom/saa-otp-maker"
     TAGS: "latest ${saa_otp_maker_version}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-saa-otp-maker
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-saa-otp-maker-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/saa-otp-maker"
-    TAGS: "latest ${saa_otp_maker_version}"
-  stage:
-    cleaner
-  needs:
-    - build-saa-otp-maker
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh

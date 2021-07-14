@@ -19,7 +19,7 @@ build-ssa-pipeline-slacker:
   needs:
     - build-ssa-base
 
-ssa-pipeline-slacker-slacker:
+ssa-pipeline-slacker-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ ssa-pipeline-slacker-slacker:
     IMAGE: "scriptedatom/ssa-pipeline-slacker"
     TAGS: "latest ${ssa_pipeline_slacker_version}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-ssa-pipeline-slacker
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-ssa-pipeline-slacker-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/ssa-pipeline-slacker"
-    TAGS: "latest ${ssa_pipeline_slacker_version}"
-  stage:
-    cleaner
-  needs:
-    - build-ssa-pipeline-slacker
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh

@@ -19,7 +19,7 @@ build-ssa-pipeline-discorder:
   needs:
     - build-ssa-base
 
-ssa-pipeline-discorder-slacker:
+ssa-pipeline-discorder-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ ssa-pipeline-discorder-slacker:
     IMAGE: "scriptedatom/ssa-pipeline-discorder"
     TAGS: "latest ${ssa_pipeline_discorder_version}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-ssa-pipeline-discorder
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-ssa-pipeline-discorder-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/ssa-pipeline-discorder"
-    TAGS: "latest ${ssa_pipeline_discorder_version}"
-  stage:
-    cleaner
-  needs:
-    - build-ssa-pipeline-discorder
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh

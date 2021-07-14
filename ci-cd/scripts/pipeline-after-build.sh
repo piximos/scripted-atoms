@@ -23,5 +23,13 @@ export SLACK_COLOR="$SLACK_COLOR"
 export SLACK_ARTIFACTS="$slack_artifacts"
 export DISCORD_MSG="$DISCORD_MSG"
 
+echo "Sending Slack Message"
 ./scripted-simple-atoms/pipeline-slacker-atom/runner.sh
+echo "Sending Discord Message"
 ./scripted-simple-atoms/pipeline-discorder-atom/runner.sh
+
+echo "Cleaning pipeline"
+for tag in ${TAGS}; do
+  echo "Deleting the following image : ${IMAGE}:${tag}"
+  docker rmi "${IMAGE}:${tag}" || true
+done

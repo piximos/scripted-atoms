@@ -26,16 +26,10 @@ include:
 stages:
   - pre-flight
   - build-bases
-  - bump-bases
   - build-scripted-simple-atoms
-  - bump-scripted-simple-atoms
   - build-scripted-api-atoms
-  - bump-scripted-api-atoms
   - build-scripted-task-atoms
-  - bump-scripted-task-atoms
-  - slack-broadcast
-  - discord-broadcast
-  - cleaner
+  - post-flight
   - git-sync
 
 before_script:

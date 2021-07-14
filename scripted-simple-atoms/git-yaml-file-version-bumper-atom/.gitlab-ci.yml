@@ -19,7 +19,7 @@ build-ssa-git-yaml-file-version-bumper:
   needs:
     - build-ssa-base
 
-ssa-git-yaml-file-version-bumper-slacker:
+ssa-git-yaml-file-version-bumper-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ ssa-git-yaml-file-version-bumper-slacker:
     IMAGE: "scriptedatom/ssa-git-yaml-file-version-bumper"
     TAGS: "latest ${ssa_git_yaml_file_version_bumper}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-ssa-git-yaml-file-version-bumper
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-ssa-git-yaml-file-version-bumper-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/ssa-git-yaml-file-version-bumper"
-    TAGS: "latest ${ssa_git_yaml_file_version_bumper}"
-  stage:
-    cleaner
-  needs:
-    - build-ssa-git-yaml-file-version-bumper
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh

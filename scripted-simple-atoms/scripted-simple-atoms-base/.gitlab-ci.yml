@@ -19,7 +19,7 @@ build-ssa-base:
   needs:
     - validate-branch-name
 
-ssa-base-slacker:
+ssa-base-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ ssa-base-slacker:
     IMAGE: "scriptedatom/ssa-base"
     TAGS: "latest ${ssa_base_version}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-ssa-base
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-ssa-base-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/ssa-base"
-    TAGS: "latest ${ssa_base_version}"
-  stage:
-    cleaner
-  needs:
-    - build-ssa-base
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh

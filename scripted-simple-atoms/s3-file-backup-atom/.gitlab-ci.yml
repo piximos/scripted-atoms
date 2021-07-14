@@ -19,7 +19,7 @@ build-ssa-s3-file-backup:
   needs:
     - build-ssa-base
 
-ssa-s3-file-backup-slacker:
+ssa-s3-file-backup-post-flight:
   tags:
     - piximos
   rules:
@@ -35,24 +35,8 @@ ssa-s3-file-backup-slacker:
     IMAGE: "scriptedatom/ssa-s3-file-backup"
     TAGS: "latest ${ssa_s3_file_backup_version}"
   stage:
-    slack-broadcast
+    post-flight
   needs:
     - build-ssa-s3-file-backup
   script:
-    - ./ci-cd/scripts/pipeline-slacker.sh
-
-ssa-s3-file-backup-cleaner:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-  variables:
-    IMAGE: "scriptedatom/ssa-s3-file-backup"
-    TAGS: "latest ${ssa_s3_file_backup_version}"
-  stage:
-    cleaner
-  needs:
-    - build-ssa-s3-file-backup
-  script:
-    - ./ci-cd/scripts/pipeline-cleaner.sh
+    - ./ci-cd/scripts/pipeline-after-build.sh
