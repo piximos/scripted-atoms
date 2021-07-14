@@ -19,16 +19,12 @@ include:
   - local: /scripted-simple-atoms/s3-file-backup-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/uptime-slacker-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/uptime-discorder-atom/.gitlab-ci.yml
-  # Scripted Task Atom Version Variables
-  - local: /scripted-task-atoms/scripted-task-atoms-base/.gitlab-ci.yml
-  - local: /scripted-task-atoms/s3-file-sync-atom/.gitlab-ci.yml
 
 stages:
   - pre-flight
   - build-bases
   - build-scripted-simple-atoms
   - build-scripted-api-atoms
-  - build-scripted-task-atoms
   - post-flight
   - git-sync
 
@@ -52,9 +48,6 @@ variables:
   saa_otp_maker_version: "1.0"
   saa_s3_file_unzipper_version: "1.0"
   saa_thumbnail_generator_s3_version: "1.0"
-  # Scripted Task Atom Version Variables
-  sta_base_version: "1.0"
-  sta_s3_file_sync_version: "1.0"
   # Scripted Simple Atom Version Variables
   ssa_base_version: "1.1"
   ssa_s3_file_backup_version: "1.1"
