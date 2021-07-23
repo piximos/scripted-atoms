@@ -4,6 +4,8 @@ build-saa-qr-code-fs:
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
       when: on_success
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
       changes:
         - scripted-api-atoms/scripted-api-atoms-base/*
         - scripted-api-atoms/qr-code-fs-atom/*
