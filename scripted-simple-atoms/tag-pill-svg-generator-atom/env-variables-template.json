@@ -1,0 +1,14 @@
+{
+  "variables": [
+    {
+      "name": "TAG_PREFIX",
+      "desc": "The tag prefix to use inside the image.",
+      "required": true
+    },
+    {
+      "name": "TAG_VALUE",
+      "desc": "The value of the tag to generate.",
+      "required": true
+    }
+  ]
+}

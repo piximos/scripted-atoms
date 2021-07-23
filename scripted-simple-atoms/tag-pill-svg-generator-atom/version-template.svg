@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="650" height="200" id="svgcontent" x="0" y="0" viewBox="0 0 550 200">
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+
+            const outer_padding_factor = 25;
+
+            const absolute_container = document.getElementById("background");
+
+            const vp_text = document.getElementById("prefix-text");
+            const vp_container = document.getElementById("prefix-container");
+
+            const vt_text = document.getElementById("version-text");
+
+            const vp_container_width = vp_container.getBBox().width;
+            const vp_text_width = vp_text.getBBox().width;
+            const vp_text_x = (( vp_container_width - vp_text_width ) / 2) + outer_padding_factor;
+
+            const vt_container_width = absolute_container.getBBox().width - vp_container_width;
+            const vt_text_width = vt_text.getBBox().width;
+            const vt_text_x = (( vt_container_width - vt_text_width ) / 2) + outer_padding_factor + vp_container_width;
+
+            // Setting outer container position
+            absolute_container.setAttribute("x", outer_padding_factor);
+
+            // Setting version prefix position
+            vp_text.setAttribute("x", vp_text_x);
+
+            // Setting version text position
+            vt_text.setAttribute("x", vt_text_x);
+
+        })
+    </script>
+    <rect rx="20" ry="20" id="background" height="150" width="450" y="25" x="20" fill="#007f00" stroke="null"/>
+    <g>
+        <rect fill="#333333" stroke-width="0" x="20" y="25" width="150" height="150" id="prefix-container" rx="20"
+              stroke="null"/>
+        <text font-style="normal" font-weight="normal" xml:space="preserve"
+              text-anchor="start" font-family="'sans-serif'" font-size="50"
+              stroke-width="0" id="prefix-text" y="115" x="60"
+              fill="#ffffff">{{version_prefix}}</text>
+    </g>
+        <text font-style="normal" font-weight="normal" xml:space="preserve" text-anchor="start"
+              font-family="'sans-serif'" font-size="50" stroke-width="0" id="version-text" y="115" x="230"
+              fill="#ffffff">{{version_tag}}</text>
+</svg>

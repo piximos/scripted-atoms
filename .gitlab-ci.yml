@@ -19,6 +19,7 @@ include:
   - local: /scripted-simple-atoms/s3-file-backup-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/uptime-slacker-atom/.gitlab-ci.yml
   - local: /scripted-simple-atoms/uptime-discorder-atom/.gitlab-ci.yml
+  - local: /scripted-simple-atoms/tag-pill-svg-generator-atom/.gitlab-ci.yml
 
 stages:
   - pre-flight
@@ -52,6 +53,7 @@ variables:
   ssa_base_version: "1.1"
   ssa_s3_file_backup_version: "1.1"
   ssa_git_tagger_version: "1.1"
+  ssa_tag_pill_svg_generator_version: "1.1"
   ssa_git_yaml_file_version_bumper: "1.1"
   ssa_git_mirror_version: "1.1"
   ssa_pipeline_slacker_version: "1.1"
