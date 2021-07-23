@@ -1,45 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="650" height="200" id="svgcontent" x="0" y="0" viewBox="0 0 550 200">
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="{{container_width}}"
+     height="{{container_height}}"
+     id="{{id_prefix}}-version-pill"
+     x="0"
+     y="0"
+     viewBox="0 0 {{container_width}} {{container_height}}">
     <script>
         window.addEventListener('DOMContentLoaded', () => {
 
-            const outer_padding_factor = 25;
+        const outer_padding_factor = {{outer_padding}};
 
-            const absolute_container = document.getElementById("background");
+        const absolute_container = document.getElementById("{{id_prefix}}-background");
 
-            const vp_text = document.getElementById("prefix-text");
-            const vp_container = document.getElementById("prefix-container");
+        const vp_text = document.getElementById("{{id_prefix}}-prefix-text");
+        const vp_container = document.getElementById("{{id_prefix}}-prefix-container");
 
-            const vt_text = document.getElementById("version-text");
+        const vt_text = document.getElementById("{{id_prefix}}-version-text");
 
-            const vp_container_width = vp_container.getBBox().width;
-            const vp_text_width = vp_text.getBBox().width;
-            const vp_text_x = (( vp_container_width - vp_text_width ) / 2) + outer_padding_factor;
+        const vp_container_width = vp_container.getBBox().width;
+        const vp_text_width = vp_text.getBBox().width;
+        const vp_text_x = (( vp_container_width - vp_text_width ) / 2) + outer_padding_factor;
 
-            const vt_container_width = absolute_container.getBBox().width - vp_container_width;
-            const vt_text_width = vt_text.getBBox().width;
-            const vt_text_x = (( vt_container_width - vt_text_width ) / 2) + outer_padding_factor + vp_container_width;
+        const vt_container_width = absolute_container.getBBox().width - vp_container_width;
+        const vt_text_width = vt_text.getBBox().width;
+        const vt_text_x = (( vt_container_width - vt_text_width ) / 2) + outer_padding_factor + vp_container_width;
 
-            // Setting outer container position
-            absolute_container.setAttribute("x", outer_padding_factor);
+        // Setting version prefix position
+        vp_text.setAttribute("x", vp_text_x);
 
-            // Setting version prefix position
-            vp_text.setAttribute("x", vp_text_x);
-
-            // Setting version text position
-            vt_text.setAttribute("x", vt_text_x);
+        // Setting version text position
+        vt_text.setAttribute("x", vt_text_x);
 
         })
     </script>
-    <rect rx="20" ry="20" id="background" height="150" width="450" y="25" x="20" fill="#007f00" stroke="null"/>
+
+    <rect rx="{{pill_radius}}" ry="{{pill_radius}}"
+          id="{{id_prefix}}-background"
+          height="{{pill_height}}"
+          width="{{background_container_width}}"
+          y="{{pill_pos_y}}"
+          x="{{background_container_pos_x}}"
+          fill="{{pill_value_bg_color}}"
+          stroke="null"/>
     <g>
-        <rect fill="#333333" stroke-width="0" x="20" y="25" width="150" height="150" id="prefix-container" rx="20"
+        <rect fill="{{pill_prefix_bg_color}}"
+              stroke-width="0"
+              width="{{prefix_container_width}}"
+              height="{{pill_height}}"
+              x="{{prefix_container_pos_x}}"
+              y="{{pill_pos_y}}"
+              id="{{id_prefix}}-prefix-container"
+              rx="{{pill_radius}}"
+              ry="{{pill_radius}}"
               stroke="null"/>
-        <text font-style="normal" font-weight="normal" xml:space="preserve"
-              text-anchor="start" font-family="'sans-serif'" font-size="50"
-              stroke-width="0" id="prefix-text" y="115" x="60"
-              fill="#ffffff">{{version_prefix}}</text>
+        <text font-style="normal"
+              font-weight="normal"
+              xml:space="preserve"
+              text-anchor="start"
+              font-family="'sans-serif'"
+              font-size="{{font_size}}"
+              stroke-width="0"
+              id="{{id_prefix}}-prefix-text"
+              y="{{text_pos_y}}"
+              x="{{prefix_text_pos_x}}"
+              fill="{{pill_prefix_color}}">{{version_prefix_text}}</text>
     </g>
-        <text font-style="normal" font-weight="normal" xml:space="preserve" text-anchor="start"
-              font-family="'sans-serif'" font-size="50" stroke-width="0" id="version-text" y="115" x="230"
-              fill="#ffffff">{{version_tag}}</text>
+    <text font-style="normal"
+          font-weight="normal"
+          xml:space="preserve"
+          text-anchor="start"
+          font-family="'sans-serif'"
+          font-size="{{font_size}}"
+          stroke-width="0"
+          id="{{id_prefix}}-version-text"
+          y="{{text_pos_y}}"
+          x="{{version_text_pos_x}}"
+          fill="{{pill_value_color}}">{{version_tag_text}}</text>
 </svg>

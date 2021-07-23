@@ -1,44 +1,40 @@
 # Scripted Simple Atoms : Git Tagger
 
-This image bumps the tag of your git repository.
+Generates tag pills to be used inside web pages as an SVG file.
 
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-git-tagger
+  docker pull scriptedatom/ssa-tag-pill-svg-generator
 ```
 
 ## Image configurations
 
 In order for the image to run, you need to specify the following environment variables :
 
-* `REPO_URI`
-    * Description : The repo URI.
+* `TAG_PREFIX`
+    * Description : The tag prefix to use inside the image.
     * Required : `true`
-* `REPO_SCHEMA`
-    * Description : The repo URL schema.
+* `TAG_VALUE`
+    * Description : The value of the tag to generate.
     * Required : `true`
-    * Acceptable Values : `http` | `https`
-* `REPO_USER`
-    * Description : The repo robot user.
+* `PILL_PREFIX_BG_COLOR`
+    * Description : The color of the pill prefix background.
+    * Required : `false`
+    * Default : `#333333`
+* `PILL_PREFIX_COLOR`
+    * Description : The color of the pill prefix text.
+    * Required : `false`
+    * Default : `#FFFFFF`
+* `PILL_VALUE_BG_COLOR`
+    * Description : The color of the pill value background.
+    * Required : `false`
+    * Default : #007f00
+* `PILL_VALUE_COLOR`
+    * Description : The color of the pill value text.
+    * Required : `false`
+    * Default : `#FFFFFF`
+* `PILL_HEIGHT_IN_PX`
+    * Description : The maximum height of the pill in pixels.
     * Required : `true`
-* `REPO_TOKEN`
-    * Description : The robot user token.
-    * Required : `true`
-* `TAG_BUMP_MESSAGE_PREFIX`
-    * Description : Message to start the tag commit message with.
-    * Required : `true`
-* `ATOM_ROBOT_USERNAME`
-    * Description : The robot username inside git configurations.
-    * Required : `true`
-* `ATOM_ROBOT_EMAIL`
-    * Description : The robot email inside git configurations.
-    * Required : `true`
-* `TAG_DELIMITER`
-    * Description : Tag delimiter between minor and major versions.
-    * Required : `true`
-    * Acceptable Values : `-` | `_` | `.`
-* `BUMP_TYPE`
-    * Description : Whether to bump the minor or the major versions.
-    * Required : `true`
-    * Acceptable Values : `minor` | `major`
+    * Default : `40`

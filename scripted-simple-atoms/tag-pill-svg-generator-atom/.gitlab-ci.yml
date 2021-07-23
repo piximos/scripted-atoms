@@ -14,7 +14,7 @@ build-ssa-tag-pill-svg-generator:
     DOCKER_IMAGE_PATH: "./scripted-simple-atoms/tag-pill-svg-generator-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./scripted-simple-atoms/tag-pill-svg-generator-atom/."
     SA_BASE_VERSION: ${ssa_base_version}
-    IMAGE_VERSION: ${ssa_git_tagger_version}
+    IMAGE_VERSION: ${ssa_tag_pill_svg_generator_version}
   script:
     - ./ci-cd/scripts/build-public-image.sh
   needs:
@@ -34,7 +34,7 @@ ssa-tag-pill-svg-generator-post-flight:
         SUCCESS: "false"
   variables:
     IMAGE: "scriptedatom/ssa-tag-pill-svg-generator"
-    TAGS: "latest ${ssa_git_tagger_version}"
+    TAGS: "latest ${ssa_tag_pill_svg_generator_version}"
   stage:
     post-flight
   needs:

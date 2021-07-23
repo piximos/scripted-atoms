@@ -9,6 +9,31 @@
       "name": "TAG_VALUE",
       "desc": "The value of the tag to generate.",
       "required": true
+    },
+    {
+      "name": "PILL_PREFIX_BG_COLOR",
+      "desc": "The color of the pill prefix background.",
+      "required": true
+    },
+    {
+      "name": "PILL_PREFIX_COLOR",
+      "desc": "The color of the pill prefix text.",
+      "required": true
+    },
+    {
+      "name": "PILL_VALUE_BG_COLOR",
+      "desc": "The color of the pill value background.",
+      "required": true
+    },
+    {
+      "name": "PILL_VALUE_COLOR",
+      "desc": "The color of the pill value text.",
+      "required": true
+    },
+    {
+      "name": "PILL_HEIGHT_IN_PX",
+      "desc": "The maximum height of the pill in pixels.",
+      "required": false
     }
   ]
 }
