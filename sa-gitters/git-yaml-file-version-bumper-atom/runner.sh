@@ -26,10 +26,6 @@ switch_git_branch(){
     fi
 }
 
-# Init global git configs
-git config --global user.email "$ATOM_ROBOT_USERNAME"
-git config --global user.name "$ATOM_ROBOT_EMAIL"
-
 # Compose git URL with basic auth
 repo_url="$REPO_SCHEMA://$REPO_USER:$REPO_TOKEN@$REPO_URI"
 
