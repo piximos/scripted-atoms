@@ -1,6 +1,11 @@
 #!/bin/bash
 
-TAGS="$TAGS sa-$(git describe | grep -Eo '^([0-9]+(\-|\.)[0-9]+((\-|\.)[0-9]+)?)' | tr '-' '.')"
+if [[ "$SA_BETA_BUILD" == "true" ]]; then
+  TAGS="$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}"
+else
+  PUBLIC_VERSION="$(git describe | grep -Eo '^([0-9]+(\-|\.)[0-9]+((\-|\.)[0-9]+)?)' | tr '-' '.')"
+  TAGS="$TAGS $PUBLIC_VERSION sa-$PUBLIC_VERSION"
+fi
 
 if [[ "${SUCCESS}" == "true" ]]; then
   SLACK_MSG="Successfully deployed the following images :"
@@ -24,9 +29,9 @@ export SLACK_ARTIFACTS="$slack_artifacts"
 export DISCORD_MSG="$DISCORD_MSG"
 
 echo "Sending Slack Message"
-./scripted-simple-atoms/pipeline-slacker-atom/runner.sh
+./sa-bash/pipeline-slacker-atom/runner.sh
 echo "Sending Discord Message"
-./scripted-simple-atoms/pipeline-discorder-atom/runner.sh
+./sa-bash/pipeline-discorder-atom/runner.sh
 
 echo "Cleaning pipeline"
 for tag in ${TAGS}; do

@@ -1,0 +1,54 @@
+build-sa-python:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+  stage:
+    build-bases
+  variables:
+    IMAGE_NAME: "scriptedatom/sa-python"
+    DOCKER_IMAGE_PATH: "./sa-bases/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./sa-bases/."
+    SA_BASE_IMAGE: "python:alpine"
+    SA_TARGET: "sa_python"
+  script:
+    - ./ci-cd/scripts/build-runtime-image.sh
+  needs:
+    - validate-branch-name
+
+sa-python-post-flight:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_failure
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "false"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    IMAGE: "scriptedatom/sa-python"
+    TAGS: "latest"
+  stage:
+    post-flight
+  needs:
+    - build-sa-python
+  script:
+    - ./ci-cd/scripts/pipeline-after-build.sh

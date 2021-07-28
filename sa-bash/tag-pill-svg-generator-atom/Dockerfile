@@ -1,0 +1,24 @@
+ARG SA_BASE_VERSION="latest"
+FROM scriptedatom/sa-bash:${SA_BASE_VERSION}
+
+MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
+
+ENV TAG_PREFIX "sa"
+ENV TAG_VALUE ""
+
+ENV PILL_PREFIX_BG_COLOR "#333333"
+ENV PILL_PREFIX_COLOR "#FFFFFF"
+ENV PILL_VALUE_BG_COLOR "#007f00"
+ENV PILL_VALUE_COLOR "#FFFFFF"
+ENV PILL_HEIGHT_IN_PX "40"
+
+ENV WORKING_DIRECTORY "/scripted-atom"
+ENV PILL_TEMPLATE "$WORKING_DIRECTORY/pill-template.svg"
+ENV PILL_OUTPUT "$WORKING_DIRECTORY/pill-output.svg"
+
+
+RUN mkdir ~/.ssh
+
+COPY env-variables-template.json $ENV_TEMPLATE_PATH
+COPY runner.sh $RUNNER_FILE_PATH
+COPY version-template.svg $PILL_TEMPLATE
