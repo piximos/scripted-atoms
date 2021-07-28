@@ -1,0 +1,52 @@
+build-ssa-s3-file-backup:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+  stage:
+    build-sa-s3
+  variables:
+    IMAGE_NAME: "scriptedatom/sa-s3-file-backup"
+    DOCKER_IMAGE_PATH: "./sa-s3/s3-file-backup-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./sa-s3/s3-file-backup-atom/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-sa-fastapi
+
+ssa-s3-file-backup-post-flight:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_failure
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "false"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    IMAGE: "scriptedatom/sa-s3-file-backup"
+    TAGS: "latest"
+  stage:
+    post-flight
+  needs:
+    - build-ssa-s3-file-backup
+  script:
+    - ./ci-cd/scripts/pipeline-after-build.sh

@@ -1,0 +1,52 @@
+build-ssa-git-yaml-file-version-bumper:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+  stage:
+    build-sa-bash
+  variables:
+    IMAGE_NAME: "scriptedatom/ssa-git-yaml-file-version-bumper"
+    DOCKER_IMAGE_PATH: "./sa-gitters/git-yaml-file-version-bumper-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./sa-gitters/git-yaml-file-version-bumper-atom/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-sa-gitter
+
+ssa-git-yaml-file-version-bumper-post-flight:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_failure
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "false"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    IMAGE: "scriptedatom/ssa-git-yaml-file-version-bumper"
+    TAGS: "latest"
+  stage:
+    post-flight
+  needs:
+    - build-ssa-git-yaml-file-version-bumper
+  script:
+    - ./ci-cd/scripts/pipeline-after-build.sh

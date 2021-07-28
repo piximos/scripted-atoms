@@ -1,31 +1,39 @@
 include:
   - local: /ci-cd/ci-templates/.git-sync-template.yml
-  # Scripted API Atom Version Variables
-  - local: /scripted-api-atoms/scripted-api-atoms-base/.gitlab-ci.yml
-  - local: /scripted-api-atoms/otp-maker-atom/.gitlab-ci.yml
-  - local: /scripted-api-atoms/qr-code-fs-atom/.gitlab-ci.yml
-  - local: /scripted-api-atoms/qr-code-s3-atom/.gitlab-ci.yml
-  - local: /scripted-api-atoms/s3-file-unzipper-atom/.gitlab-ci.yml
-  - local: /scripted-api-atoms/thumbnail-generator-s3-atom/.gitlab-ci.yml
-  # Scripted Simple Atom Version Variables
-  - local: /scripted-simple-atoms/scripted-simple-atoms-base/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/git-mirror-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/git-tagger-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/git-yaml-file-version-bumper-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/nexus-image-cleaner-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/harbor-image-cleaner-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/pipeline-slacker-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/pipeline-discorder-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/s3-file-backup-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/uptime-slacker-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/uptime-discorder-atom/.gitlab-ci.yml
-  - local: /scripted-simple-atoms/tag-pill-svg-generator-atom/.gitlab-ci.yml
+  # Scripted Atom Bases
+  - local: /sa-bases/sa-bash.gitlab-ci.yml
+  - local: /sa-bases/sa-gitter.gitlab-ci.yml
+  - local: /sa-bases/sa-python.gitlab-ci.yml
+  - local: /sa-bases/sa-fastapi.gitlab-ci.yml
+  # Scripted API Atoms
+  #   SA FastApi
+  - local: /sa-fastapi/otp-maker-atom/.gitlab-ci.yml
+  - local: /sa-fastapi/qr-code-fs-atom/.gitlab-ci.yml
+  - local: /sa-fastapi/qr-code-s3-atom/.gitlab-ci.yml
+  - local: /sa-fastapi/s3-file-unzipper-atom/.gitlab-ci.yml
+  - local: /sa-fastapi/thumbnail-generator-s3-atom/.gitlab-ci.yml
+  # Scripted Simple Atoms
+  #   SA Gitters
+  - local: /sa-gitters/git-mirror-atom/.gitlab-ci.yml
+  - local: /sa-gitters/git-tagger-atom/.gitlab-ci.yml
+  - local: /sa-gitters/git-yaml-file-version-bumper-atom/.gitlab-ci.yml
+  #   SA Basics
+  - local: /sa-bash/nexus-image-cleaner-atom/.gitlab-ci.yml
+  - local: /sa-bash/harbor-image-cleaner-atom/.gitlab-ci.yml
+  - local: /sa-bash/pipeline-slacker-atom/.gitlab-ci.yml
+  - local: /sa-bash/pipeline-discorder-atom/.gitlab-ci.yml
+  - local: /sa-bash/uptime-slacker-atom/.gitlab-ci.yml
+  - local: /sa-bash/uptime-discorder-atom/.gitlab-ci.yml
+  - local: /sa-bash/tag-pill-svg-generator-atom/.gitlab-ci.yml
+  #   SA S3
+  - local: /sa-s3/s3-file-backup-atom/.gitlab-ci.yml
 
 stages:
   - pre-flight
   - build-bases
-  - build-scripted-simple-atoms
-  - build-scripted-api-atoms
+  - build-sa-bash
+  - build-sa-fastapi
+  - build-sa-s3
   - post-flight
   - git-sync
 
@@ -40,25 +48,3 @@ validate-branch-name:
     pre-flight
   script:
     - ./ci-cd/scripts/validate-commit.sh
-
-variables:
-  # Scripted Api Atom Version Variables
-  saa_base_version: "1.0"
-  saa_qr_code_s3_version: "1.0"
-  saa_qr_code_fs_version: "1.0"
-  saa_otp_maker_version: "1.0"
-  saa_s3_file_unzipper_version: "1.0"
-  saa_thumbnail_generator_s3_version: "1.0"
-  # Scripted Simple Atom Version Variables
-  ssa_base_version: "1.1"
-  ssa_s3_file_backup_version: "1.1"
-  ssa_git_tagger_version: "1.1"
-  ssa_tag_pill_svg_generator_version: "1.1"
-  ssa_git_yaml_file_version_bumper: "1.1"
-  ssa_git_mirror_version: "1.1"
-  ssa_pipeline_slacker_version: "1.1"
-  ssa_pipeline_discorder_version: "1.1"
-  ssa_harbor_image_cleaner_version: "1.1"
-  ssa_nexus_image_cleaner_version: "1.1"
-  ssa_uptime_slacker_version: "1.1"
-  ssa_uptime_discorder_version: "1.1"

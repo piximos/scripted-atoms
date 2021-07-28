@@ -1,0 +1,52 @@
+build-ssa-tag-pill-svg-generator:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+  stage:
+    build-sa-bash
+  variables:
+    IMAGE_NAME: "scriptedatom/ssa-tag-pill-svg-generator"
+    DOCKER_IMAGE_PATH: "./sa-bash/tag-pill-svg-generator-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./sa-bash/tag-pill-svg-generator-atom/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-sa-fastapi
+
+ssa-tag-pill-svg-generator-post-flight:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_failure
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "false"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    IMAGE: "scriptedatom/ssa-tag-pill-svg-generator"
+    TAGS: "latest"
+  stage:
+    post-flight
+  needs:
+    - build-ssa-tag-pill-svg-generator
+  script:
+    - ./ci-cd/scripts/pipeline-after-build.sh

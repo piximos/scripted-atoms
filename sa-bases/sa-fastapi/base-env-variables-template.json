@@ -1,0 +1,9 @@
+{
+  "variables": [
+    {
+      "name": "ATOM_PORT",
+      "desc": "The port to run the API on.",
+      "required": true
+    }
+  ]
+}

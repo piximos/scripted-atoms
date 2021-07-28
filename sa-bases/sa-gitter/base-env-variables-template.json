@@ -1,0 +1,14 @@
+{
+  "variables": [
+    {
+      "name": "ATOM_ROBOT_USERNAME",
+      "desc": "The robot username inside git configurations.",
+      "required": true
+    },
+    {
+      "name": "ATOM_ROBOT_EMAIL",
+      "desc": "The robot email inside git configurations.",
+      "required": true
+    }
+  ]
+}
