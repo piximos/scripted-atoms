@@ -1,0 +1,24 @@
+{
+  "variables": [
+    {
+      "name": "SA_REDIS_HOST",
+      "desc": "The Redis database host.",
+      "required": true
+    },
+    {
+      "name": "SA_REDIS_PORT",
+      "desc": "The Redis database port.",
+      "required": true
+    },
+    {
+      "name": "SA_REDIS_PASSWORD",
+      "desc": "The Redis database password.",
+      "required": false
+    },
+    {
+      "name": "SA_REDIS_CHANNEL",
+      "desc": "The Redis channel to subscribe to.",
+      "required": true
+    }
+  ]
+}

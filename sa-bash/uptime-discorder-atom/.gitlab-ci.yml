@@ -11,7 +11,7 @@ build-ssa-uptime-discorder:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-uptime-discorder"
+    IMAGE_NAME: "scriptedatom/uptime-discorder"
     DOCKER_IMAGE_PATH: "./sa-bash/uptime-discorder-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-bash/uptime-discorder-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-uptime-discorder-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-uptime-discorder"
+    IMAGE: "scriptedatom/uptime-discorder"
     TAGS: "latest"
   stage:
     post-flight

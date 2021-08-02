@@ -11,7 +11,7 @@ build-ssa-pipeline-slacker:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-pipeline-slacker"
+    IMAGE_NAME: "scriptedatom/pipeline-slacker"
     DOCKER_IMAGE_PATH: "./sa-bash/pipeline-slacker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-bash/pipeline-slacker-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-pipeline-slacker-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-pipeline-slacker"
+    IMAGE: "scriptedatom/pipeline-slacker"
     TAGS: "latest"
   stage:
     post-flight

@@ -11,7 +11,7 @@ build-saa-qr-code-s3:
   stage:
     build-sa-fastapi
   variables:
-    IMAGE_NAME: "scriptedatom/saa-qr-code-generator-s3"
+    IMAGE_NAME: "scriptedatom/qr-code-generator-s3"
     DOCKER_IMAGE_PATH: "./sa-fastapi/qr-code-s3-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-fastapi/qr-code-s3-atom/."
   script:
@@ -42,7 +42,7 @@ saa-qr-code-s3-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/saa-qr-code-generator-s3"
+    IMAGE: "scriptedatom/qr-code-generator-s3"
     TAGS: "latest"
   stage:
     post-flight

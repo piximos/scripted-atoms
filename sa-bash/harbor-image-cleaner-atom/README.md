@@ -5,7 +5,7 @@ This image launches inside your pipeline to delete obsolete images from your Har
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-harbor-image-cleaner:latest
+  docker pull scriptedatom/harbor-image-cleaner:latest
 ```
 
 ## Image configurations

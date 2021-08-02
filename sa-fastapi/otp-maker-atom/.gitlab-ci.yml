@@ -11,7 +11,7 @@ build-saa-otp-maker:
   stage:
     build-sa-fastapi
   variables:
-    IMAGE_NAME: "scriptedatom/saa-otp-maker"
+    IMAGE_NAME: "scriptedatom/otp-maker"
     DOCKER_IMAGE_PATH: "./sa-fastapi/otp-maker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-fastapi/otp-maker-atom/."
   script:
@@ -42,7 +42,7 @@ saa-otp-maker-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/saa-otp-maker"
+    IMAGE: "scriptedatom/otp-maker"
     TAGS: "latest"
   stage:
     post-flight

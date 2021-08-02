@@ -11,7 +11,7 @@ build-ssa-nexus-image-cleaner:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-nexus-image-cleaner"
+    IMAGE_NAME: "scriptedatom/nexus-image-cleaner"
     DOCKER_IMAGE_PATH: "./sa-bash/nexus-image-cleaner-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-bash/nexus-image-cleaner-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-nexus-image-cleaner-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-nexus-image-cleaner"
+    IMAGE: "scriptedatom/nexus-image-cleaner"
     TAGS: "latest"
   stage:
     post-flight

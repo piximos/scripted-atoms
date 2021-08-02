@@ -49,7 +49,7 @@ In order for the image to run, you need to specify the following environment var
 
 ## How does it work?
 
-Upon starting, the container exposes itself on the port `8420`. After which, in order to generate your QR code, run the
+Upon starting, the container exposes itself, by default and if the value of `ATOM_PORT` has not been changed, on port `8420`. After which, in order to generate your QR code, run the
 following API request :
 
 ```bash

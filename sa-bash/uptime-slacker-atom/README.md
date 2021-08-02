@@ -5,7 +5,7 @@ This image pings a website and sends a Slack message when a downtime is detected
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-uptime-slacker
+  docker pull scriptedatom/uptime-slacker
 ```
 
 ## Image configurations

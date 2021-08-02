@@ -1,0 +1,9 @@
+{
+  "variables": [
+    {
+      "name": "ADDITIONAL_SCRIPTS_DIR",
+      "desc": "The directory containing your additional scripts.",
+      "required": true
+    }
+  ]
+}

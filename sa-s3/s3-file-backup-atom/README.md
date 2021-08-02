@@ -5,7 +5,7 @@ This image mirrors a repository to another remote location.
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-git-mirror
+  docker pull scriptedatom/git-mirror
 ```
 
 ## Image configurations

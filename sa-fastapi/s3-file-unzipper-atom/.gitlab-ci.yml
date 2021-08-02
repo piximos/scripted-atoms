@@ -11,7 +11,7 @@ build-saa-s3-file-unzipper:
   stage:
     build-sa-fastapi
   variables:
-    IMAGE_NAME: "scriptedatom/saa-s3-unzipper"
+    IMAGE_NAME: "scriptedatom/s3-unzipper"
     DOCKER_IMAGE_PATH: "./sa-fastapi/s3-file-unzipper-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-fastapi/s3-file-unzipper-atom/."
   script:
@@ -42,7 +42,7 @@ saa-s3-file-unzipper-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/saa-s3-unzipper"
+    IMAGE: "scriptedatom/s3-unzipper"
     TAGS: "latest"
   stage:
     post-flight
