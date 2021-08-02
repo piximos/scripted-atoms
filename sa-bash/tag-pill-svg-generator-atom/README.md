@@ -5,7 +5,7 @@ Generates tag pills to be used inside web pages as an SVG file.
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-tag-pill-svg-generator
+  docker pull scriptedatom/tag-pill-svg-generator
 ```
 
 ## Image configurations

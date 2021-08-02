@@ -11,7 +11,7 @@ build-ssa-git-tagger:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-git-tagger"
+    IMAGE_NAME: "scriptedatom/git-tagger"
     DOCKER_IMAGE_PATH: "./sa-gitters/git-tagger-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-gitters/git-tagger-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-git-tagger-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-git-tagger"
+    IMAGE: "scriptedatom/git-tagger"
     TAGS: "latest"
   stage:
     post-flight

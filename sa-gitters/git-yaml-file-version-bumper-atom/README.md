@@ -5,7 +5,7 @@ This image bumps the version value inside a YAML file inside your repo then comm
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-git-yaml-file-version-bumper
+  docker pull scriptedatom/git-yaml-file-version-bumper
 ```
 
 ## Image configurations

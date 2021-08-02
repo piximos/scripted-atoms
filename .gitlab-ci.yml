@@ -12,6 +12,7 @@ include:
   - local: /sa-fastapi/qr-code-s3-atom/.gitlab-ci.yml
   - local: /sa-fastapi/s3-file-unzipper-atom/.gitlab-ci.yml
   - local: /sa-fastapi/thumbnail-generator-s3-atom/.gitlab-ci.yml
+  - local: /sa-fastapi/redis-publisher-atom/.gitlab-ci.yml
   # Scripted Simple Atoms
   #   SA Gitters
   - local: /sa-gitters/git-mirror-atom/.gitlab-ci.yml
@@ -27,12 +28,15 @@ include:
   - local: /sa-bash/tag-pill-svg-generator-atom/.gitlab-ci.yml
   #   SA S3
   - local: /sa-s3/s3-file-backup-atom/.gitlab-ci.yml
+  #   SA Python
+  - local: /sa-python/redis-subscriber-atom/.gitlab-ci.yml
 
 stages:
   - pre-flight
   - build-bases
   - build-sa-bash
   - build-sa-fastapi
+  - build-sa-python
   - build-sa-s3
   - post-flight
   - git-sync

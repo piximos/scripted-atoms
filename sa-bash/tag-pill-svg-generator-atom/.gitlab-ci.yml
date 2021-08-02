@@ -11,7 +11,7 @@ build-ssa-tag-pill-svg-generator:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-tag-pill-svg-generator"
+    IMAGE_NAME: "scriptedatom/tag-pill-svg-generator"
     DOCKER_IMAGE_PATH: "./sa-bash/tag-pill-svg-generator-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-bash/tag-pill-svg-generator-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-tag-pill-svg-generator-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-tag-pill-svg-generator"
+    IMAGE: "scriptedatom/tag-pill-svg-generator"
     TAGS: "latest"
   stage:
     post-flight

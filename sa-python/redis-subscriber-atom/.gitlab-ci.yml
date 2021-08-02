@@ -1,4 +1,4 @@
-build-saa-qr-code-fs:
+build-saa-redis-subscriber:
   tags:
     - piximos
   rules:
@@ -9,17 +9,17 @@ build-saa-qr-code-fs:
       variables:
         SA_BETA_BUILD: "true"
   stage:
-    build-sa-fastapi
+    build-sa-python
   variables:
-    IMAGE_NAME: "scriptedatom/qr-code-generator-fs"
-    DOCKER_IMAGE_PATH: "./sa-fastapi/qr-code-fs-atom/Dockerfile"
-    DOCKER_BUILD_CONTEXT: "./sa-fastapi/qr-code-fs-atom/."
+    IMAGE_NAME: "scriptedatom/redis-subscriber"
+    DOCKER_IMAGE_PATH: "./sa-python/redis-subscriber-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./sa-python/redis-subscriber-atom/."
   script:
     - ./ci-cd/scripts/build-public-image.sh
   needs:
-    - build-sa-fastapi
+    - build-sa-python
 
-saa-qr-code-fs-post-flight:
+saa-redis-subscriber-post-flight:
   tags:
     - piximos
   rules:
@@ -42,11 +42,11 @@ saa-qr-code-fs-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/qr-code-generator-fs"
+    IMAGE: "scriptedatom/redis-subscriber"
     TAGS: "latest"
   stage:
     post-flight
   needs:
-    - build-saa-qr-code-fs
+    - build-saa-redis-subscriber
   script:
     - ./ci-cd/scripts/pipeline-after-build.sh

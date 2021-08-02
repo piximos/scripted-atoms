@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [[ -z ${VALIDATE_VERBOSELY} ]]; then
+  VALIDATE_VERBOSELY="false"
+fi
+
+prompt_action() {
+  if [[ "$VALIDATE_VERBOSELY" == "true" ]]; then
+    echo -e "${1}"
+  fi
+}
+
 env_variable_value_validator() {
   values="$(echo "${1}" | jq -r '. | @sh' | tr -d \')"
   values=("$values")
@@ -19,10 +29,10 @@ env_variable_validator() {
   var_description="$(echo "${1}" | jq -r .desc)"
   var_values="$(echo "${1}" | jq -r .values)"
 
-  echo -e "\n Validating [${var_name}] :"
-  echo -e "\tRequired : $([[ ${var_required} != "null" && ${var_required} == "true" ]] && echo "true" || echo "false")"
+  prompt_action "\nValidating [${var_name}] :"
+  prompt_action "\tRequired : $([[ ${var_required} != "null" && ${var_required} == "true" ]] && echo "true" || echo "false")"
   [[ ${var_required_if} != "null" ]] && echo -e "\tRequired when [${var_required_if}] is set"
-  echo -e "\tDescription : ${var_description}"
+  prompt_action "\tDescription : ${var_description}"
 
   if [[ $var_required == "true" && -z "${!var_name}" ]]; then
     echo "The variable '$var_name' [$var_description] is not set. "
@@ -37,7 +47,7 @@ env_variable_validator() {
   if [[ -n "${var_values}" && "${var_values}" != "null" ]]; then
     env_variable_value_validator "$var_values" "$var_name"
   fi
-  echo -e "Validation for [${var_name}] passed!"
+  prompt_action "Validation for [${var_name}] passed!"
 }
 
 jq -c .variables[] <"$@" | while read -r variable; do

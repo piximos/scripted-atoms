@@ -11,7 +11,7 @@ build-ssa-pipeline-discorder:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-pipeline-discorder"
+    IMAGE_NAME: "scriptedatom/pipeline-discorder"
     DOCKER_IMAGE_PATH: "./sa-bash/pipeline-discorder-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-bash/pipeline-discorder-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-pipeline-discorder-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-pipeline-discorder"
+    IMAGE: "scriptedatom/pipeline-discorder"
     TAGS: "latest"
   stage:
     post-flight

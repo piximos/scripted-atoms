@@ -5,7 +5,7 @@ This image pings a website and sends a Discord message when a downtime is detect
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-uptime-discorder
+  docker pull scriptedatom/uptime-discorder
 ```
 
 ## Image configurations

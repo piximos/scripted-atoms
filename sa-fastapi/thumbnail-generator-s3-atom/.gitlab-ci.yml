@@ -11,7 +11,7 @@ build-saa-thumbnail-generator-s3:
   stage:
     build-sa-fastapi
   variables:
-    IMAGE_NAME: "scriptedatom/saa-thumbnail-generator"
+    IMAGE_NAME: "scriptedatom/thumbnail-generator"
     DOCKER_IMAGE_PATH: "./sa-fastapi/thumbnail-generator-s3-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-fastapi/thumbnail-generator-s3-atom/."
   script:
@@ -42,7 +42,7 @@ saa-thumbnail-generator-s3-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/saa-thumbnail-generator"
+    IMAGE: "scriptedatom/thumbnail-generator"
     TAGS: "latest"
   stage:
     post-flight

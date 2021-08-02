@@ -11,7 +11,7 @@ build-ssa-uptime-slacker:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-uptime-slacker"
+    IMAGE_NAME: "scriptedatom/uptime-slacker"
     DOCKER_IMAGE_PATH: "./sa-bash/uptime-slacker-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-bash/uptime-slacker-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-uptime-slacker-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-uptime-slacker"
+    IMAGE: "scriptedatom/uptime-slacker"
     TAGS: "latest"
   stage:
     post-flight

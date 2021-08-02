@@ -5,7 +5,7 @@ This image launches inside your pipeline to send Discord messages.
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-pipeline-discorder
+  docker pull scriptedatom/pipeline-discorder
 ```
 
 ## Image configurations

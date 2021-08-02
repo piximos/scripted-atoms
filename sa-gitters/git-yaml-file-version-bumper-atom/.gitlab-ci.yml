@@ -11,7 +11,7 @@ build-ssa-git-yaml-file-version-bumper:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-git-yaml-file-version-bumper"
+    IMAGE_NAME: "scriptedatom/git-yaml-file-version-bumper"
     DOCKER_IMAGE_PATH: "./sa-gitters/git-yaml-file-version-bumper-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-gitters/git-yaml-file-version-bumper-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-git-yaml-file-version-bumper-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-git-yaml-file-version-bumper"
+    IMAGE: "scriptedatom/git-yaml-file-version-bumper"
     TAGS: "latest"
   stage:
     post-flight

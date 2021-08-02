@@ -11,7 +11,7 @@ build-ssa-git-mirror:
   stage:
     build-sa-bash
   variables:
-    IMAGE_NAME: "scriptedatom/ssa-git-mirror"
+    IMAGE_NAME: "scriptedatom/git-mirror"
     DOCKER_IMAGE_PATH: "./sa-gitters/git-mirror-atom/Dockerfile"
     DOCKER_BUILD_CONTEXT: "./sa-gitters/git-mirror-atom/."
   script:
@@ -42,7 +42,7 @@ ssa-git-mirror-post-flight:
       variables:
         SUCCESS: "false"
   variables:
-    IMAGE: "scriptedatom/ssa-git-mirror"
+    IMAGE: "scriptedatom/git-mirror"
     TAGS: "latest"
   stage:
     post-flight

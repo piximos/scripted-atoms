@@ -5,7 +5,7 @@ This image bumps the tag of your git repository.
 ## Image pull
 
 ```bash
-  docker pull scriptedatom/ssa-git-tagger
+  docker pull scriptedatom/git-tagger
 ```
 
 ## Image configurations

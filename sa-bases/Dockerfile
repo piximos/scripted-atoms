@@ -9,6 +9,7 @@ RUN apk update \
  && rm -rf /var/cache/apk/*
 
 ENV VALIDATE_ENV_VARIABLES "true"
+ENV VALIDATE_VERBOSELY "false"
 ENV ENV_TEMPLATE_PATH "/env-variables-template.json"
 ENV WORKING_DIRECTORY "/scripted-atom"
 
@@ -75,10 +76,18 @@ ENTRYPOINT ["/docker-entrypoint.sh", "bash $PREFLIGHT_FILE_PATH bash $RUNNER_FIL
 FROM sa_base AS sa_python
 MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
 
+ENV SCRIPTS_DIR "$WORKING_DIRECTORY/scripts"
+ENV ADDITIONAL_SCRIPTS_DIR "/scripts"
+
+ENV PREFLIGHT_FILE_PATH "/preflight.sh"
+COPY sa-python/preflight.sh "$PREFLIGHT_FILE_PATH"
 ENV RUNNER_FILE_PATH "$WORKING_DIRECTORY/app.py"
 COPY sa-python/py-app.py $RUNNER_FILE_PATH
+ENV BASE_ENV_VARIABLES "/base-env-variables-template.json"
+COPY sa-python/base-env-variables-template.json "$BASE_ENV_VARIABLES"
 
-ENTRYPOINT ["/docker-entrypoint.sh", "python -u $RUNNER_FILE_PATH"]
+
+ENTRYPOINT ["/docker-entrypoint.sh", "bash $PREFLIGHT_FILE_PATH"]
 
 FROM sa_python AS sa_fastapi
 MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
