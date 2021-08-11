@@ -49,7 +49,23 @@ validate-branch-name:
   tags:
     - piximos
   allow_failure: false
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    on_stop: clear-docker-tags
   stage:
     pre-flight
   script:
     - ./ci-cd/scripts/validate-commit.sh
+
+clear-docker-tags:
+  tags:
+    - piximos
+  allow_failure: false
+  when: manual
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  stage:
+    pre-flight
+  script:
+    - ./ci-cd/scripts/delete-tags.sh
