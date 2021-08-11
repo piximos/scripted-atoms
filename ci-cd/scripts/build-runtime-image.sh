@@ -59,3 +59,7 @@ if [[ "$SA_BETA_BUILD" != "true" ]]; then
   re_tag_image "${REPO_VERSION}" "latest"
   push_image "latest"
 fi
+
+export SUCCESS="true"
+[ $? -eq 0 ] || export SUCCESS="false"
+./ci-cd/scripts/pipeline-after-build.sh
