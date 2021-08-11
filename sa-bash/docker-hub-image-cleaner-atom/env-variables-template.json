@@ -1,0 +1,38 @@
+{
+  "variables": [
+    {
+      "name": "DOCKER_USERNAME",
+      "desc": "Your Docker Hub username.",
+      "required": true
+    },
+    {
+      "name": "DOCKER_PASSWORD",
+      "desc": "Your Docker Hub password (not a personal access token!)",
+      "required": true
+    },
+    {
+      "name": "DOCKER_IMAGE_TAG",
+      "desc": "The tag to delete (or a prefix of a tag followed by '*')",
+      "required": true
+    },
+    {
+      "name": "DOCKER_NAMESPACE",
+      "desc": "The Docker Hub Namespace to delete the image from (defaults to your username)",
+      "required": false
+    },
+    {
+      "name": "DELETE_ACROSS_ALL_NAMESPACES",
+      "desc": "Whether to delete the tag from all the namespaces (if DOCKER_NAMESPACE is not specified)",
+      "required": false,
+      "values": [
+        "true",
+        "false"
+      ]
+    },
+    {
+      "name": "DOCKER_IMAGE_NAME",
+      "desc": "The Docker Image Name.",
+      "required": false
+    }
+  ]
+}

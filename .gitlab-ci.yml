@@ -21,6 +21,7 @@ include:
   #   SA Basics
   - local: /sa-bash/nexus-image-cleaner-atom/.gitlab-ci.yml
   - local: /sa-bash/harbor-image-cleaner-atom/.gitlab-ci.yml
+  - local: /sa-bash/docker-hub-image-cleaner-atom/.gitlab-ci.yml
   - local: /sa-bash/pipeline-slacker-atom/.gitlab-ci.yml
   - local: /sa-bash/pipeline-discorder-atom/.gitlab-ci.yml
   - local: /sa-bash/uptime-slacker-atom/.gitlab-ci.yml

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DISCORD_SUCCESS_EMOJI
-DISCORD_FAILURE_EMOJI
 LAST_DETECTED_DOWNTIME="none"
 
 send_discord_message() {

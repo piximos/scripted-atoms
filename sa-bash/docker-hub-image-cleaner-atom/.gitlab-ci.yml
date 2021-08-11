@@ -1,0 +1,52 @@
+build-ssa-docker-hub-image-cleaner:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+  stage:
+    build-sa-bash
+  variables:
+    IMAGE_NAME: "scriptedatom/docker-hub-image-cleaner"
+    DOCKER_IMAGE_PATH: "./sa-bash/docker-hub-image-cleaner-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./sa-bash/docker-hub-image-cleaner-atom/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-sa-fastapi
+
+ssa-docker-hub-image-cleaner-post-flight:
+  tags:
+    - piximos
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_success
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_success
+      variables:
+        SUCCESS: "true"
+    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
+      when: on_failure
+      variables:
+        SA_BETA_BUILD: "true"
+        SUCCESS: "false"
+    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
+      when: on_failure
+      variables:
+        SUCCESS: "false"
+  variables:
+    IMAGE: "scriptedatom/docker-hub-image-cleaner"
+    TAGS: "latest"
+  stage:
+    post-flight
+  needs:
+    - build-ssa-docker-hub-image-cleaner
+  script:
+    - ./ci-cd/scripts/pipeline-after-build.sh

@@ -1,0 +1,14 @@
+ARG SA_BASE_VERSION="latest"
+FROM scriptedatom/sa-bash:${SA_BASE_VERSION}
+
+MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
+
+ENV DELETE_ACROSS_ALL_NAMESPACES "false"
+ENV DOCKER_USERNAME ""
+ENV DOCKER_PASSWORD ""
+ENV DOCKER_IMAGE_NAME ""
+ENV DOCKER_IMAGE_TAG ""
+ENV DOCKER_NAMESPACE ""
+
+COPY env-variables-template.json $ENV_TEMPLATE_PATH
+COPY runner.sh $RUNNER_FILE_PATH
