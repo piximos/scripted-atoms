@@ -2,10 +2,10 @@ build-ssa-docker-hub-image-cleaner:
   tags:
     - piximos
   rules:
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
     - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
-      when: on_success
       variables:
         SA_BETA_BUILD: "true"
   stage:
@@ -19,34 +19,3 @@ build-ssa-docker-hub-image-cleaner:
   needs:
     - build-sa-fastapi
 
-ssa-docker-hub-image-cleaner-post-flight:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
-      when: on_success
-      variables:
-        SA_BETA_BUILD: "true"
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
-      when: on_failure
-      variables:
-        SA_BETA_BUILD: "true"
-        SUCCESS: "false"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/docker-hub-image-cleaner"
-    TAGS: "latest"
-  stage:
-    post-flight
-  needs:
-    - build-ssa-docker-hub-image-cleaner
-  script:
-    - ./ci-cd/scripts/pipeline-after-build.sh

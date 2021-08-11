@@ -4,7 +4,7 @@ if [[ "$SA_BETA_BUILD" == "true" ]]; then
   TAGS="$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}"
 else
   PUBLIC_VERSION="$(git describe | grep -Eo '^([0-9]+(\-|\.)[0-9]+((\-|\.)[0-9]+)?)' | tr '-' '.')"
-  TAGS="$TAGS $PUBLIC_VERSION sa-$PUBLIC_VERSION"
+  TAGS="latest $PUBLIC_VERSION sa-$PUBLIC_VERSION"
 fi
 
 if [[ "${SUCCESS}" == "true" ]]; then
@@ -19,8 +19,8 @@ fi
 
 slack_artifacts=""
 for tag in ${TAGS}; do
-  slack_artifacts="$slack_artifacts\\n- $IMAGE:\`$tag\`"
-  DISCORD_MSG="$DISCORD_MSG \\n > $IMAGE:\`$tag\`"
+  slack_artifacts="$slack_artifacts\\n- $IMAGE_NAME:\`$tag\`"
+  DISCORD_MSG="$DISCORD_MSG \\n > $IMAGE_NAME:\`$tag\`"
 done
 
 export SLACK_MSG="$SLACK_MSG"
@@ -35,6 +35,6 @@ echo "Sending Discord Message"
 
 echo "Cleaning pipeline"
 for tag in ${TAGS}; do
-  echo "Deleting the following image : ${IMAGE}:${tag}"
-  docker rmi "${IMAGE}:${tag}" || true
+  echo "Deleting the following image : ${IMAGE_NAME}:${tag}"
+  docker rmi "${IMAGE_NAME}:${tag}" || true
 done

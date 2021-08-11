@@ -2,10 +2,10 @@ build-sa-s3:
   tags:
     - piximos
   rules:
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
     - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
     - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
-      when: on_success
       variables:
         SA_BETA_BUILD: "true"
   stage:
@@ -21,34 +21,3 @@ build-sa-s3:
   needs:
     - validate-branch-name
 
-sa-s3-post-flight:
-  tags:
-    - piximos
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
-      when: on_success
-      variables:
-        SA_BETA_BUILD: "true"
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_success
-      variables:
-        SUCCESS: "true"
-    - if: $CI_COMMIT_REF_NAME =~ /^(ci|sa|ssa|saa|sta)\-?(\-.*)?$/
-      when: on_failure
-      variables:
-        SA_BETA_BUILD: "true"
-        SUCCESS: "false"
-    - if: $CI_COMMIT_REF_NAME =~ /^(master)$/
-      when: on_failure
-      variables:
-        SUCCESS: "false"
-  variables:
-    IMAGE: "scriptedatom/sa-s3"
-    TAGS: "latest"
-  stage:
-    post-flight
-  needs:
-    - build-sa-s3
-  script:
-    - ./ci-cd/scripts/pipeline-after-build.sh
