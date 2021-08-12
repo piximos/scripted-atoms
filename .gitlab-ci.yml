@@ -5,6 +5,7 @@ include:
   - local: /sa-bases/sa-gitter.gitlab-ci.yml
   - local: /sa-bases/sa-python.gitlab-ci.yml
   - local: /sa-bases/sa-fastapi.gitlab-ci.yml
+  - local: /sa-bases/sa-s3.gitlab-ci.yml
   # Scripted API Atoms
   #   SA FastApi
   - local: /sa-fastapi/otp-maker-atom/.gitlab-ci.yml
