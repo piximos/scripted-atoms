@@ -17,13 +17,13 @@ generate_new_version() {
   echo "$target_version"
 }
 
-switch_git_branch(){
+switch_git_branch() {
   git rev-parse --verify "$REPO_BRANCH" >/dev/null 2>/dev/null
   if [ $? -eq 0 ]; then
     git checkout "$REPO_BRANCH"
   else
     git checkout -b "$REPO_BRANCH"
-    fi
+  fi
 }
 
 # Compose git URL with basic auth
@@ -37,7 +37,7 @@ switch_git_branch
 # Retrieve latest version
 latest_version="$(yq eval "$VERSION_PATH" "$VERSION_FILE" 2>/dev/null)"
 if [[ -z $latest_version || "$latest_version" == "null" ]]; then
-    latest_version="0-0"
+  latest_version="0-0"
 fi
 # Bump version
 target_version=$(generate_new_version "$latest_version")
@@ -47,7 +47,7 @@ git add "$VERSION_FILE"
 
 if [[ "$ADD_GIT_LOG" == "true" ]]; then
   #Add git log
-  echo -e "## $target_version \n\n Commit : \`$(git rev-parse HEAD)\`\n\n Author : $(git log -1 --format='%an') <$(git log -1 --format='Author : %ae')> \n\n Date \t: $(git log -1 --format='%cd') \n" > "$GIT_LOG_PATH"
+  echo -e "## $target_version \n\n Commit : \`$(git rev-parse HEAD)\`\n\n Author : $(git log -1 --format='%an') <$(git log -1 --format='Author : %ae')> \n\n Date \t: $(git log -1 --format='%cd') \n" >"$GIT_LOG_PATH"
   git add "$GIT_LOG_PATH"
 fi
 

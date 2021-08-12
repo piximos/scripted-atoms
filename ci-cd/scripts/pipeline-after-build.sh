@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ -n ${CI_MERGE_REQUEST_IID} ]]; then
+  MESSAGE_PREFIX="\`!${CI_MERGE_REQUEST_IID}\`"
+else
+  MESSAGE_PREFIX="\`$CI_COMMIT_REF_NAME\`"
+fi
 if [[ "$SA_BETA_BUILD" == "true" ]]; then
   TAGS="$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}"
 else
@@ -8,13 +13,13 @@ else
 fi
 
 if [[ "${SUCCESS}" == "true" ]]; then
-  SLACK_MSG="Successfully deployed the following images :"
+  SLACK_MSG="${MESSAGE_PREFIX} Successfully deployed the following images :"
   SLACK_COLOR="#87ebaa"
-  DISCORD_MSG="Successfully deployed the following tags :"
+  DISCORD_MSG="${MESSAGE_PREFIX} Successfully deployed the following tags :"
 else
-  SLACK_MSG="Failed to build and deploy the following images :"
+  SLACK_MSG="${MESSAGE_PREFIX} Failed to build and deploy the following images :"
   SLACK_COLOR="#eb87b7"
-  DISCORD_MSG="Failed to build and deploy the following tags :"
+  DISCORD_MSG="${MESSAGE_PREFIX} Failed to build and deploy the following tags :"
 fi
 
 slack_artifacts=""

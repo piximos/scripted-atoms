@@ -1,0 +1,33 @@
+{
+  "variables": [
+    {
+      "name": "DOCKER_USERNAME",
+      "desc": "Your Docker Hub username.",
+      "required": true
+    },
+    {
+      "name": "DOCKER_PASSWORD",
+      "desc": "Your Docker Hub password (not a personal access token!)",
+      "required": true
+    },
+    {
+      "name": "DOCKER_IMAGE_NAME",
+      "desc": "The Docker Image Name.",
+      "required": true
+    },
+    {
+      "name": "README_FILE_PATH",
+      "desc": "The path for the README file.",
+      "required": true
+    },
+    {
+      "name": "EXIT_GRACEFULLY",
+      "desc": "Whether to exit gracefully (exit code 0) if the the README file is not found or to exit with code 1.",
+      "required": false,
+      "values": [
+        "true",
+        "false"
+      ]
+    }
+  ]
+}

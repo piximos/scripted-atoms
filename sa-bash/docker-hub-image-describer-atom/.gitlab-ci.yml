@@ -1,0 +1,14 @@
+build-ssa-docker-hub-image-describer:
+  tags:
+    - piximos
+  stage:
+    build-sa-bash
+  variables:
+    IMAGE_NAME: "scriptedatom/docker-hub-image-describer"
+    DOCKER_IMAGE_PATH: "./sa-bash/docker-hub-image-describer-atom/Dockerfile"
+    DOCKER_BUILD_CONTEXT: "./sa-bash/docker-hub-image-describer-atom/."
+  script:
+    - ./ci-cd/scripts/build-public-image.sh
+  needs:
+    - build-sa-fastapi
+

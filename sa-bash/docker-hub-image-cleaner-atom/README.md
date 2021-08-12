@@ -1,6 +1,6 @@
 # Scripted Simple Atoms : Docker Hub Image Cleaner
 
-This image launches inside your pipeline to delete obsolete images from your Nexus registry.
+This image launches inside your pipeline to delete obsolete image tags from the Docker Hub registry.
 
 ## Image pull
 

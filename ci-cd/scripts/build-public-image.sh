@@ -49,3 +49,13 @@ fi
 export SUCCESS="true"
 [ $? -eq 0 ] || export SUCCESS="false"
 ./ci-cd/scripts/pipeline-after-build.sh
+
+if [[ "$SA_BETA_BUILD" != "true" ]]; then
+  export DOCKER_USERNAME="${DOCKER_REGISTRY_USER}"
+  export DOCKER_PASSWORD="${DOCKER_REGISTRY_PASSWORD}"
+  export DOCKER_IMAGE_NAME="${IMAGE_NAME}"
+  export README_FILE_PATH="${DOCKER_IMAGE_PATH//Dockerfile/README.md}"
+  export EXIT_GRACEFULLY="true"
+
+  ./sa-bash/docker-hub-image-describer-atom/runner.sh
+fi
