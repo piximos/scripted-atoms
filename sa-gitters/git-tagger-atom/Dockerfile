@@ -11,10 +11,6 @@ ENV BUMP_TYPE "minor"
 ENV TAG_DELIMITER "-"
 ENV REPO_TARGET "/scripted-atom/repo"
 
-RUN apk update \
- && apk add git \
- && rm -rf /var/cache/apk/*
-
 RUN mkdir ~/.ssh
 
 COPY env-variables-template.json $ENV_TEMPLATE_PATH

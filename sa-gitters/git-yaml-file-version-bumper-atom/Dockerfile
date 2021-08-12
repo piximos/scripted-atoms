@@ -13,7 +13,6 @@ ENV VERSION_DELIMITER "-"
 ENV REPO_TARGET "/scripted-atom/repo"
 
 RUN apk update \
- && apk add git \
  && wget $(curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | grep browser_download_url | grep linux_amd64 | cut -d '"' -f 4) -O /usr/bin/yq \
  && chmod +x /usr/bin/yq \
  && rm -rf /var/cache/apk/*

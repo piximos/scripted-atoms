@@ -4,7 +4,7 @@ FROM scriptedatom/sa-s3:${SA_BASE_VERSION}
 MAINTAINER Youssef Dhraief (piximos) <dhraief.youssef@gmail.com>
 
 RUN apk update \
- && apk add zip \
+ && apk add --no-cache zip \
  && rm -rf /var/cache/apk/*
 
 ENV ZIP_FOLDERS "true"
